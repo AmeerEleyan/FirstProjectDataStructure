@@ -1,4 +1,4 @@
-package linkedList;
+package GUI;
 
 import javafx.scene.control.TextField;
 

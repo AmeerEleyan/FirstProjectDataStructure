@@ -1,3 +1,9 @@
+/**
+ * author: Amir Eleyan
+ * ID: 1191076
+ * Time:  17/3/2021  11:35 PM
+ */
+
 package linkedList;
 
 public interface Listable<T extends Comparable<T>> {
@@ -5,7 +11,7 @@ public interface Listable<T extends Comparable<T>> {
     /**
      * Add element in the first of the list
      */
-    void addFirst(T element);
+    void insertAtFirst(T element);
 
     /**
      * Return the first element
@@ -20,7 +26,7 @@ public interface Listable<T extends Comparable<T>> {
     /**
      * Add element in the last of the list
      */
-    void addLast(T element);
+    void insertAtLast(T element);
 
     /**
      * Return the last element
@@ -35,26 +41,23 @@ public interface Listable<T extends Comparable<T>> {
     /**
      * Add an element to the list with specific sort
      */
-    void insert(T element, int type);
-
+    void addBySort(T element, int type);
 
     /**
      * Add an element to the list with default sort
      */
-    void insert(T element);
-
+    // Overload
+    void addBySort(T element);
 
     /**
-     * Add element add specific index
+     * Add new element to the list after specific elementl
      */
-    void addAtIndex(int index, T element);
-
+    boolean insertAfter(T element, T afterObject);
 
     /**
      * Return and remove specific element
      */
-    T removeElement(T element);
-
+    T remove(T element);
 
     /**
      * Search for the specific element
@@ -70,7 +73,6 @@ public interface Listable<T extends Comparable<T>> {
      * Print the list as revers
      */
     void printListReverse(Node<T> current);
-
 
     /**
      * Return the length of the list

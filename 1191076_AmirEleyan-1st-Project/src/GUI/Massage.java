@@ -1,4 +1,4 @@
-package linkedList;
+package GUI;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,7 +24,7 @@ public abstract class Massage {
         Label lbl = new Label(massage);
         lbl.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff; -fx-font-size:15; -fx-font-family: 'Arial';");
 
-        ImageView imgWarning = new ImageView(new Image("warning.png"));
+        ImageView imgWarning = new ImageView(new Image("icons/warning.png"));
         imgWarning.setFitWidth(30);
         imgWarning.setFitHeight(30);
 

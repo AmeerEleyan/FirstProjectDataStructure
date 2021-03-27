@@ -1,5 +1,8 @@
-package linkedList;
+package GUI;
 
+import linkedList.LinkedList;
+import linkedList.Node;
+import linkedList.TRecord;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -41,8 +43,8 @@ public class TRecordGUI extends Application {
     private LinkedList<TRecord> lit = new LinkedList<>(), sec = new LinkedList<>();
 
     String btStyle = "-fx-background-color:f88f01; -fx-background-radius:25;" +
-            "-fx-font-size:18; -fx-border-radius:25;-fx-border-color: #000000;" +
-            " -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family:" +
+            "-fx-font-size:18; -fx-border-radius:25;" +
+            " -fx-border-width: 3; -fx-text-fill: #000000; -fx-font-family:" +
             " 'Calisto MT'; -fx-font-weight: BOLd; ";
 
     String styleHover = "-fx-background-color:#ffffff; -fx-background-radius:25;" +
@@ -69,7 +71,7 @@ public class TRecordGUI extends Application {
     private BorderPane RightBorderPane() {
         BorderPane RightPane = new BorderPane();
 
-        ImageView imgLocation = new ImageView(new Image("Location.png"));
+        ImageView imgLocation = new ImageView(new Image("icons/Location.png"));
         imgLocation.setFitWidth(20);
         imgLocation.setFitHeight(20);
 
@@ -254,7 +256,7 @@ public class TRecordGUI extends Application {
         vBox.setMargin(calculation, new Insets(50, 0, 0, 0));
 
         //***************************
-        ImageView imgAvg = new ImageView(new Image("calculate.png"));
+        ImageView imgAvg = new ImageView(new Image("icons/calculate.png"));
         imgAvg.setFitWidth(22);
         imgAvg.setFitHeight(22);
         btAvg = new Button("Calculate");
@@ -276,7 +278,7 @@ public class TRecordGUI extends Application {
 
 
         //*******************************************
-        ImageView imgMode = new ImageView(new Image("calculate.png"));
+        ImageView imgMode = new ImageView(new Image("icons/calculate.png"));
         imgMode.setFitWidth(22);
         imgMode.setFitHeight(22);
         btMode = new Button("Calculate");
@@ -297,7 +299,7 @@ public class TRecordGUI extends Application {
         //**************************************************
 
         //**************************************************
-        ImageView imgMedian = new ImageView(new Image("calculate.png"));
+        ImageView imgMedian = new ImageView(new Image("icons/calculate.png"));
         imgMedian.setFitWidth(22);
         imgMedian.setFitHeight(22);
         btMedian = new Button("Calculate");
@@ -318,7 +320,7 @@ public class TRecordGUI extends Application {
         //**************************************************
 
         //***************************************************
-        ImageView imgSD = new ImageView(new Image("calculate.png"));
+        ImageView imgSD = new ImageView(new Image("icons/calculate.png"));
         imgSD.setFitWidth(22);
         imgSD.setFitHeight(22);
         btSD = new Button("Calculate");
@@ -339,7 +341,7 @@ public class TRecordGUI extends Application {
         //**************************************************
 
         //**************************************************
-        ImageView imgVar = new ImageView(new Image("calculate.png"));
+        ImageView imgVar = new ImageView(new Image("icons/calculate.png"));
         imgVar.setFitWidth(22);
         imgVar.setFitHeight(22);
         btVar = new Button("Calculate");
@@ -360,7 +362,7 @@ public class TRecordGUI extends Application {
         //**************************************************
 
         //**************************************************
-        ImageView imgPer = new ImageView(new Image("calculate.png"));
+        ImageView imgPer = new ImageView(new Image("icons/calculate.png"));
         imgPer.setFitWidth(22);
         imgPer.setFitHeight(22);
         btPercentage = new Button("Calculate");
@@ -402,7 +404,7 @@ public class TRecordGUI extends Application {
     }
 
     private VBox addAndDelete() {
-        ImageView add = new ImageView(new Image("add.png"));
+        ImageView add = new ImageView(new Image("icons/add.png"));
         add.setFitWidth(22);
         add.setFitHeight(22);
         btAddNewRecord = new Button("   New Record");
@@ -412,7 +414,7 @@ public class TRecordGUI extends Application {
         btAddNewRecord.setMinWidth(170);
         btAddNewRecord.setOnAction(e -> NewRecord.addNewRecord());
 
-        ImageView remove = new ImageView(new Image("remove.png"));
+        ImageView remove = new ImageView(new Image("icons/remove.png"));
         remove.setFitHeight(22);
         remove.setFitWidth(22);
         btRemoveRecord = new Button("   Delete Record");
@@ -424,7 +426,7 @@ public class TRecordGUI extends Application {
         btRemoveRecord.setOnAction(e -> RemoveRecord.removeRecord());
 
 
-        ImageView imgStat = new ImageView(new Image("chart.png"));
+        ImageView imgStat = new ImageView(new Image("icons/chart.png"));
         imgStat.setFitHeight(24);
         imgStat.setFitWidth(24);
         btStatistic = new Button("     Statistic     ");
@@ -435,7 +437,7 @@ public class TRecordGUI extends Application {
         btStatistic.setOnAction(e -> Statistic.statAboveGrade());
 
 
-        ImageView imgTopTen = new ImageView(new Image("topTen.png"));
+        ImageView imgTopTen = new ImageView(new Image("icons/topTen.png"));
         imgTopTen.setFitHeight(24);
         imgTopTen.setFitWidth(24);
         btTopTen = new Button("Top Ten Students");
@@ -444,7 +446,7 @@ public class TRecordGUI extends Application {
         btTopTen.setStyle(btStyle);
         btTopTen.setContentDisplay(ContentDisplay.LEFT);
 
-        ImageView imgPrint = new ImageView(new Image("print.png"));
+        ImageView imgPrint = new ImageView(new Image("icons/print.png"));
         imgPrint.setFitHeight(22);
         imgPrint.setFitWidth(22);
         btPrintReport = new Button("    Print Report");
@@ -464,7 +466,7 @@ public class TRecordGUI extends Application {
         vBox.setStyle("-fx-background-color: #ffffff");
 
 
-        ImageView imgPer = new ImageView(new Image("calculate.png"));
+        ImageView imgPer = new ImageView(new Image("icons/calculate.png"));
         imgPer.setFitWidth(25);
         imgPer.setFitHeight(25);
 
@@ -507,7 +509,7 @@ public class TRecordGUI extends Application {
                 " -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:16; -fx-text-fill: #000000;");
 
         // to display search icon
-        ImageView imgSearch = new ImageView(new Image("search.png"));
+        ImageView imgSearch = new ImageView(new Image("icons/search.png"));
         imgSearch.setFitHeight(22);
         imgSearch.setFitWidth(22);
 
@@ -600,7 +602,7 @@ public class TRecordGUI extends Application {
         pane.setStyle("-fx-background-color: #ffffff;");
 
         // Palestinian Ministry Of Education Logo
-        ImageView logo = new ImageView(new Image("logo.jpg"));
+        ImageView logo = new ImageView(new Image("icons/logo.jpg"));
         logo.setFitHeight(400);
         logo.setFitWidth(400);
 
@@ -615,7 +617,7 @@ public class TRecordGUI extends Application {
         lblWelcome.setPadding(new Insets(5, 0, 15, 0));
         lblWelcome.setAlignment(Pos.CENTER);
         lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:35;" +
-                " -fx-background-radius:35; -fx-text-fill: #000000;");
+                " -fx-background-radius:35; -fx-text-fill: #000000; ");
         lblWelcome.setMinWidth(1200);
 
         // to set components of pane

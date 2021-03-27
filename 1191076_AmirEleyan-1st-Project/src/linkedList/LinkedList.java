@@ -1,10 +1,13 @@
+/**
+ * author: Amir Eleyan
+ * ID: 1191076
+ * Time:  18/3/2021  3:40 AM
+ */
 package linkedList;
 
 public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 
     private Node<T> head, tail;
-
-    private int length = 0;
 
     public LinkedList() {
         this.head = this.tail = null;
@@ -18,117 +21,113 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
         return this.tail;
     }
 
-    private void setHead(Node<T> head) {
+    public void setHead(Node<T> head) {
         this.head = head;
     }
 
-    private void setTail(Node<T> tail) {
+    public void setTail(Node<T> tail) {
         this.tail = tail;
     }
 
     @Override
-    public void addFirst(T element) {
+    public void insertAtFirst(T element) {
         Node<T> newNode = new Node<>(element);
         if (isEmpty()) {
+            // Head and tail on the same node(list empty)
             this.tail = newNode;
         } else {
-            newNode.setNext(this.head);
+            newNode.setNext(this.head); // set the next of newNode to tha head
         }
-        this.head = newNode;
+        this.head = newNode; // head point to the new node
     }
 
     @Override
     public T getFirst() {
-        if (isEmpty()) {
+        if (isEmpty()) { // there is no nodes in list
             System.out.println("The list is empty");
             return null;
         }
-        return this.head.getData();
+        return this.getHead().getData();
     }
 
     @Override
     public T removeFirst() {
-        return removeElement(this.head.getData());
+        if (isEmpty()) {
+            System.out.println("List is empty");
+            return null;
+        }
+        // if we not add the previous condition will be thread exception
+        // because the head is null thus head.getData thread exception
+        return remove(this.head.getData());
     }
 
+    /**
+     * Add new element for this list
+     */
     @Override
-    public void addLast(T element) {
+    public void insertAtLast(T element) {
         Node<T> newNode = new Node<>(element);
         if (isEmpty()) {
+            // Head and tail on the same node(list empty)
             this.head = newNode;
         } else {
-            this.tail.setNext(newNode);
+            // Tail on a specific node
+            this.tail.setNext(newNode); // next of the node point to new node
         }
-        this.tail = newNode;
+        this.tail = newNode; // Tail point to the new node
     }
 
+    /**
+     * Return tha first element for this list
+     */
     @Override
     public T getLast() {
-        if (isEmpty()) {
+        if (isEmpty()) { // there is no nodes in list
             System.out.println("The list is empty");
             return null;
         }
-        return this.tail.getData();
+        return this.getTail().getData();
     }
 
+    /**
+     * Remove last element of this list
+     */
     @Override
     public T removeLast() {
         if (isEmpty()) {
             System.out.println("The list is empty");
             return null;
         }
-        return removeElement(this.tail.getData());
+        // if we not add the previous condition will be thread exception
+        // because the tail is null thus tail.getData thread exception
+        return remove(this.tail.getData());
     }
 
-    @Override
-    public void insert(T element, int sortType) {
-
-        if (isEmpty()) {
-            addFirst(element);
-        } else {
-            Node<T> newNode = new Node<>(element);
-            Node<T> current = this.head;
-            Node<T> previous = null;
-            TRecord.setWhichSort(sortType);
-            if (element.compareTo(current.getData()) < 0) {
-                addFirst(element);
-            } else {
-                while ((current != null) && (element.compareTo(current.getData()) > 0)) {
-                    previous = current;
-                    current = current.getNext();
-                }
-                if (current == null) {
-                    this.tail = newNode;
-                } else {
-                    previous.setNext(newNode);
-                }
-                newNode.setNext(current);
-            }
-        }
-    }
 
     /**
-     * Insert element with a default sort depend on a compareTo methode implementation
+     * Insert element with a specific sort depend on a compareTo methode implementation
      */
     @Override
-    public void insert(T element) {
+    public void addBySort(T element, int sortType) {
         if (isEmpty()) { // list is empty
-            addFirst(element);
+            insertAtFirst(element);
         } else {
             if (element != null) {
                 Node<T> newNode = new Node<>(element);
                 Node<T> current = this.head;
                 Node<T> previous = null;
+                if (element instanceof TRecord) TRecord.setWhichSort(sortType);
                 if (element.compareTo(current.getData()) < 0) { // data for element less than data of head
-                    addFirst(element);
+                    insertAtFirst(element);
                 } else {
                     // data for element larger than data of head
                     while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
                         previous = current;
                         current = current.getNext();
                     }
+                    //The current reached the end of the list and the element larger than current
                     previous.setNext(newNode);
-                    if (current == null) {//The current reached the end of the list and the element larger than current
+                    if (current == null) {
                         this.tail = newNode;
                     }
                     newNode.setNext(current);
@@ -139,22 +138,58 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
         }
     }
 
+    /**
+     * Insert element with a default sort depend on a compareTo methode implementation
+     */
     @Override
-    public void addAtIndex(int index, T element) {
-        if (index >= length) {
-            addLast(element);
-        } else if (index < 0) {
-            addFirst(element);
+    public void addBySort(T element) {
+        if (isEmpty()) { // list is empty
+            insertAtFirst(element);
         } else {
-            Node<T> current = this.head;
-            for (int i = 0; i < index - 1; ++i) {
-                current = current.getNext();
+            if (element != null) {
+                Node<T> newNode = new Node<>(element);
+                Node<T> current = this.head;
+                Node<T> previous = null;
+                if (element.compareTo(current.getData()) < 0) { // data for element less than data of head
+                    insertAtFirst(element);
+                } else {
+                    // data for element larger than data of head
+                    while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
+                        previous = current;
+                        current = current.getNext();
+                    }
+                    //The current reached the end of the list and the element larger than current
+                    previous.setNext(newNode);
+                    if (current == null) {
+                        this.tail = newNode;
+                    }
+                    newNode.setNext(current);
+                }
             }
-            Node<T> newNode = new Node<>(element);
-            newNode.setNext(current.getNext());
-            current.setNext(newNode);
+
         }
-        length++;
+    }
+
+    @Override
+    public boolean insertAfter(T element, T afterObject) {
+        if (isEmpty()) return false;
+        Node<T> current = this.head;
+        Node<T> newNode = new Node<>(element);
+        while (current != null) {
+            if (current.getData().equals(afterObject)) {
+
+                // set next of the new node to the next of the current
+                newNode.setNext(current.getNext());
+
+                // list contains one node or current point to last node
+                if (current.getNext() == null) this.tail = newNode;
+
+                current.setNext(newNode); // set next of the current to the newNode
+                return true;
+            }
+            current = current.getNext();
+        }
+        return false;
     }
 
 
@@ -162,7 +197,7 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
      * To remove a specific element in the list
      */
     @Override
-    public T removeElement(T element) {
+    public T remove(T element) {
         if (isEmpty()) return null;
         Node<T> prevPrevious, previous = null, current = this.head;
         if (current.getData().equals(element)) { // if element is a first node
@@ -281,7 +316,7 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 
 
     /**
-     * tTo return tha data in the list as a string
+     * To return tha data in the list as a string
      */
     @Override
     public String toString() {

@@ -1,4 +1,4 @@
-package linkedList;
+package GUI;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -53,7 +53,7 @@ public abstract class Statistic {
         pane.add(lblGrade, 0, 0);
         pane.add(txtGrade, 1, 0);
 
-        ImageView img = new ImageView(new Image("calculate.png"));
+        ImageView img = new ImageView(new Image("icons/calculate.png"));
         img.setFitWidth(22);
         img.setFitHeight(22);
 

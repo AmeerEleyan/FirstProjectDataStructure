@@ -1,4 +1,8 @@
-package linkedList;
+package GUI;
+
+import linkedList.LinkedList;
+import linkedList.Node;
+import linkedList.TRecord;
 
 public class Main {
 
@@ -40,17 +44,14 @@ public class Main {
         tt.addWithSpecificSort(12);
         System.out.println(tt.toString());*/
 
-        LinkedList<Integer> toto = new LinkedList<>();
-        toto.insert(4);
-        toto.insert(3);
-        toto.insert(5);
-
-        LinkedList<Integer> tot = new LinkedList<>();
-       tot.insert(1);
-        tot.merge(toto);
-        System.out.println(toto.getFirst());
-
-        tot.printList();
+//        LinkedList<Integer> toto = new LinkedList<>();
+//        toto.insertAtFirst(3);
+//        toto.insertAtFirst(1);
+//        toto.insertAfter(2,3);
+//        System.out.println(toto.getLast());
+        //toto.printList();
+        Node<Integer> n = new Node<>(null);
+        System.out.println(n);
 
     }
 }

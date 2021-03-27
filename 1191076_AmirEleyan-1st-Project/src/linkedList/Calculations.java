@@ -1,6 +1,7 @@
 package linkedList;
 
 public abstract class Calculations {
+
     // WestBank Records
     LinkedList<TRecord> westBankLiterarySeatNumber = new LinkedList<>();
     LinkedList<TRecord> westBankLiteraryGrads = new LinkedList<>();
@@ -28,13 +29,12 @@ public abstract class Calculations {
             float sum = 0.0F;
             int counter = 0;
             Node<TRecord> currentRecord = TRecordLinkedList.getHead();
-            String branch = currentRecord.getData().getBranch();
             while (currentRecord != null) {
                 sum += currentRecord.getData().getGrade();
                 counter++;
                 currentRecord = currentRecord.getNext();
             }
-            //System.out.println("The average of " + branch + " students = " + String.format("%.2f", sum / counter));
+            // String.format("%.2f", sum / counter);
             return sum / counter;
         }
         return 0.0F;
@@ -47,8 +47,6 @@ public abstract class Calculations {
         if (TRecordLinkedList.getHead() != null) {
 
             Node<TRecord> current = TRecordLinkedList.getHead();
-
-            String branch = current.getData().getBranch();
 
             float mode = current.getData().getGrade();
 
@@ -79,9 +77,8 @@ public abstract class Calculations {
                 }
                 current = current.getNext();
             }
-            if (counter != 0) System.out.println("The Mode on the " + branch + " students is " + mode);
-            else System.out.println("There is no Mode in " + branch + " record!!");
-            return mode;
+            if (counter != 0) return mode;
+            else return 0;
         }
         return -1.0F;
     }
@@ -91,19 +88,23 @@ public abstract class Calculations {
      */
     public static float calculateMedian(LinkedList<TRecord> TRecordLinkedList) {
         if (TRecordLinkedList.getHead() != null) {
+
             int length = TRecordLinkedList.length();
             int indexOfMedian = length / 2;
+
             Node<TRecord> current = TRecordLinkedList.getHead();
             Node<TRecord> previous = null;
+
             for (int i = 0; (i < indexOfMedian && current.getNext() != null); ++i) {
                 previous = current;
                 current = current.getNext();
             }
+
             System.out.println(current.getData() + "\n");
             if (length % 2 != 0) {
                 return current.getData().getGrade();
             } else {
-                return ((previous.getData().getGrade() + current.getData().getGrade()) / (2));
+                return ((previous.getData().getGrade() + current.getData().getGrade()) / 2);
             }
         }
         return 0.0F;
@@ -114,14 +115,17 @@ public abstract class Calculations {
      */
     public static float calculateStandardDeviation(LinkedList<TRecord> TRecordLinkedList) {
         if (TRecordLinkedList.getHead() != null) {
+
             float average = calculateAverage(TRecordLinkedList);
             float sum = 0.0F;
+
             Node<TRecord> currentForSum = TRecordLinkedList.getHead();
             while (currentForSum != null) {
+
                 sum += (float) Math.pow((currentForSum.getData().getGrade() - average), 2.0D);
                 currentForSum = currentForSum.getNext();
             }
-            return ((float) Math.sqrt((sum / (TRecordLinkedList.length()-1))));
+            return ((float) Math.sqrt((sum / (TRecordLinkedList.length() - 1))));
         }
         return 0.0F;
     }
@@ -138,6 +142,9 @@ public abstract class Calculations {
         }
     }
 
+    /**
+     * Return top ten grades in the records
+     */
     public static void topTenGrads(LinkedList<TRecord> listOfData, LinkedList<TRecord> topTen) {
         topTen.clear();
         if (listOfData.getHead() != null) {
@@ -146,19 +153,24 @@ public abstract class Calculations {
             while (current != null) {
                 previous = current;
                 current = current.getNext();
-                topTen.addLast(previous.getData());
+                topTen.insertAtLast(previous.getData());
                 count++;
                 if (count >= 10 && (current.getData().getGrade() != previous.getData().getGrade())) break;
             }
         }
     }
 
+    /**
+     * Returns the number of students who obtained a certain grade or more
+     */
     public static int numberOfRecordAboveAGrade(LinkedList<TRecord> list, float grade) {
         if (list.getHead() != null) {
+
             Node<TRecord> current = list.getHead();
             int count = 0;
+
             while (current != null) {
-                if (current.getData().getGrade() < grade) break;
+                if (current.getData().getGrade() < grade) break; // because we read list descending
                 count++;
                 current = current.getNext();
             }
