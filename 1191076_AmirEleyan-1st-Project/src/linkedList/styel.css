@@ -1,0 +1,22 @@
+.btn{
+-fx-background-color:#f88f01;
+-fx-background-radius:25;
+-fx-font-size:16;
+-fx-border-radius:25;
+-fx-border-color: #000000;
+-fx-border-width: 1;
+-fx-text-fill: #000000;
+-fx-font-family:"Times New Roman";
+-fx-font-weight: BOLd;
+}
+.btn:hover{
+-fx-background-color:#ffffff;
+-fx-background-radius:25;
+-fx-font-size:16;
+-fx-border-radius:25;
+-fx-border-color: #000000;
+-fx-border-width: 1;
+-fx-text-fill: #000000;
+-fx-font-family:"Times New Roman";
+-fx-font-weight: BOLd;
+}
