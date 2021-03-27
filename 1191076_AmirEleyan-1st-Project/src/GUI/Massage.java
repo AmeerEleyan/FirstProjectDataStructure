@@ -1,3 +1,8 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * Time: 27/3/2021   7:35 PM
+ */
 package GUI;
 
 import javafx.geometry.Insets;
@@ -21,26 +26,47 @@ public abstract class Massage {
         window.setTitle(title);
         window.setMinWidth(250);
 
+        String btStyle = "-fx-background-color:f88f01; -fx-background-radius:25;" +
+                "-fx-font-size:15; -fx-border-radius:25;" +
+                " -fx-border-width: 1; -fx-border-color: 'black'; -fx-text-fill: #000000; -fx-font-family:" +
+                " 'Calisto MT'; -fx-font-weight: BOLd; ";
+
+        String styleHover = "-fx-background-color:#ffffff; -fx-background-radius:25;" +
+                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000;" +
+                " -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: " +
+                "'Calisto MT'; -fx-font-weight: BOLd;";
+
+
         Label lbl = new Label(massage);
         lbl.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff; -fx-font-size:15; -fx-font-family: 'Arial';");
+        lbl.setAlignment(Pos.CENTER);
 
         ImageView imgWarning = new ImageView(new Image("icons/warning.png"));
-        imgWarning.setFitWidth(30);
-        imgWarning.setFitHeight(30);
+        imgWarning.setFitWidth(32);
+        imgWarning.setFitHeight(32);
 
-        HBox hBox = new HBox(5);
+        HBox hBox = new HBox(8);
         hBox.setPadding(new Insets(5, 5, 5, 5));
         hBox.setAlignment(Pos.CENTER);
         hBox.setStyle("-fx-background-color: #ffffff;");
         hBox.getChildren().addAll(imgWarning, lbl);
 
         Button closeButton = new Button("OK");
-        closeButton.setStyle("-fx-background-color: #f88f01; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:15;" + "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ");
-        closeButton.setMinWidth(70);
+        closeButton.setStyle(btStyle);
+
+        // To change the design of the button when placing a mouse arrow on it
+        closeButton.setOnMouseEntered(e -> {
+            closeButton.setStyle(styleHover);
+        });
+        // To change the design of the button when the mouse arrow is removed from it
+        closeButton.setOnMouseExited(e -> {
+            closeButton.setStyle(btStyle);
+        });
+
+        closeButton.setMinWidth(75);
         closeButton.setOnAction(e -> window.close());
 
-        VBox vBox = new VBox(15);
+        VBox vBox = new VBox(12);
         vBox.getChildren().addAll(hBox, closeButton);
         vBox.setAlignment(Pos.CENTER);
         vBox.setStyle("-fx-background-color: #ffffff;");
@@ -49,7 +75,7 @@ public abstract class Massage {
 
         window.setScene(new Scene(vBox));
         window.setResizable(false);
-        window.showAndWait();
+        window.show();
     }
 
 }

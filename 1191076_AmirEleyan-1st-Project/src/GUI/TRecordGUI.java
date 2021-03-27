@@ -42,15 +42,15 @@ public class TRecordGUI extends Application {
     private ComboBox<String> calculation;
     private LinkedList<TRecord> lit = new LinkedList<>(), sec = new LinkedList<>();
 
-    String btStyle = "-fx-background-color:f88f01; -fx-background-radius:25;" +
-            "-fx-font-size:18; -fx-border-radius:25;" +
-            " -fx-border-width: 3; -fx-text-fill: #000000; -fx-font-family:" +
+    String btStyle = "-fx-background-color:#f88f01; -fx-background-radius:25;" +
+            "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:17; -fx-border-radius:25;" +
+            " -fx-text-fill: #000000; -fx-font-family:" +
             " 'Calisto MT'; -fx-font-weight: BOLd; ";
 
     String styleHover = "-fx-background-color:#ffffff; -fx-background-radius:25;" +
-            "-fx-font-size:18; -fx-border-radius:25;-fx-border-color: #000000;" +
-            " -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: " +
-            "'Calisto MT'; -fx-font-weight: BOLd;";
+            "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:17; -fx-border-radius:25;" +
+            " -fx-text-fill: #000000; -fx-font-family:" +
+            " 'Calisto MT'; -fx-font-weight: BOLd; ";
 
     public static void main(String[] args) {
         launch(args);
@@ -78,7 +78,7 @@ public class TRecordGUI extends Application {
         // compo box
         ComboBox<String> WestAndGaza = new ComboBox<>();
         WestAndGaza.getItems().addAll("West Bank", "Gaza");
-        WestAndGaza.setPromptText("Which Area?");
+        WestAndGaza.setPromptText("Select Region?");
         WestAndGaza.setEditable(false);
         WestAndGaza.setPadding(new Insets(0, 0, 2, 0));
         WestAndGaza.setMinWidth(130);
@@ -137,8 +137,6 @@ public class TRecordGUI extends Application {
                 }
             }
         });
-
-
 
 
         ToggleGroup group = new ToggleGroup();
@@ -434,7 +432,7 @@ public class TRecordGUI extends Application {
         btStatistic.setMinWidth(170);
         btStatistic.setStyle(btStyle);
         btStatistic.setContentDisplay(ContentDisplay.LEFT);
-        btStatistic.setOnAction(e -> Statistic.statAboveGrade());
+        btStatistic.setOnAction(e -> Statistic.statAboveGrade(sec));
 
 
         ImageView imgTopTen = new ImageView(new Image("icons/topTen.png"));
@@ -504,21 +502,21 @@ public class TRecordGUI extends Application {
         HBox hBox = new HBox(10);
         txtSearch = new TextField();
         txtSearch.setPromptText("Enter SetNumber");
-
         txtSearch.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
-                " -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:16; -fx-text-fill: #000000;");
+                " -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:15; -fx-text-fill: #000000;");
+        txtSearch.setMaxWidth(140);
 
         // to display search icon
         ImageView imgSearch = new ImageView(new Image("icons/search.png"));
-        imgSearch.setFitHeight(22);
-        imgSearch.setFitWidth(22);
+        imgSearch.setFitHeight(20);
+        imgSearch.setFitWidth(20);
 
         // To process searching for a specific student in the records
         btSearch = new Button("Search");
         btSearch.setMinWidth(50);
         btSearch.setContentDisplay(ContentDisplay.LEFT);
         btSearch.setGraphic(imgSearch);
-     //   btSearch.setOnAction(e -> SearchRecord.searchRecord());
+        //   btSearch.setOnAction(e -> SearchRecord.searchRecord());
         btSearch.setStyle(btStyle);
 
         // To change the design of the button when placing a mouse arrow on it
@@ -534,7 +532,7 @@ public class TRecordGUI extends Application {
         btSearch.setOnAction(e -> {
             if (!txtSearch.getText().isEmpty()) {
                 if (CheckTextFiled.isSeatNumber(txtSearch)) {
-                //    SearchRecord.searchRecord();
+                    //    SearchRecord.searchRecord();
                     Massage.displayMassage("", txtSearch + " Not exist in records");
                 } else {
                     Massage.displayMassage("Error Input", "Invalid Set Number");
@@ -616,8 +614,8 @@ public class TRecordGUI extends Application {
         lblWelcome.setFont(Font.font("Times New Roman", FontWeight.BOLD, 32));
         lblWelcome.setPadding(new Insets(5, 0, 15, 0));
         lblWelcome.setAlignment(Pos.CENTER);
-        lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:35;" +
-                " -fx-background-radius:35; -fx-text-fill: #000000; ");
+        lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:45;" +
+                " -fx-background-radius:45; -fx-text-fill: #000000; ");
         lblWelcome.setMinWidth(1200);
 
         // to set components of pane

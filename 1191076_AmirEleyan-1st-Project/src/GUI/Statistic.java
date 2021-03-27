@@ -1,26 +1,33 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * Time: 28/3/2021  2:55 AM
+ */
 package GUI;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import linkedList.Calculations;
+import linkedList.LinkedList;
+import linkedList.TRecord;
 
 public abstract class Statistic {
     private static Label lblGrade;
     private static TextField txtGrade;
     private static Text txtStat;
+    protected static float grade;
 
-    public static void statAboveGrade() {
+    public static void statAboveGrade(LinkedList<TRecord> list) {
 
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -53,24 +60,47 @@ public abstract class Statistic {
         pane.add(lblGrade, 0, 0);
         pane.add(txtGrade, 1, 0);
 
-        ImageView img = new ImageView(new Image("icons/calculate.png"));
-        img.setFitWidth(22);
-        img.setFitHeight(22);
 
+        HBox hBox = new HBox(30);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(5, 5, 5, 5));
+        hBox.setStyle("-fx-background-color: #ffffff;");
+
+        Button btCancel = new Button("Cancel");
+        btCancel.setMinWidth(90);
+        btCancel.setStyle(styleBt);
+        btCancel.setOnAction(e -> window.close());
 
         Button btCalculate = new Button("Calculate");
-        btCalculate.setMinWidth(60);
+        btCalculate.setMinWidth(90);
         btCalculate.setStyle(styleBt);
-        btCalculate.setOnAction(e -> txtStat.setText("Number of students achieving a mark 50 or more: 500 students\nPercentage: 85%"));
 
-        btCalculate.setContentDisplay(ContentDisplay.LEFT);
-        btCalculate.setGraphic(img);
+        hBox.getChildren().addAll(btCalculate, btCancel);
 
-        VBox vBox = new VBox(25);
+
+        btCalculate.setOnAction(e -> {
+            if (CheckTextFiled.isGrade(txtGrade)) {
+                if (!txtStat.getText().isEmpty()) {
+                    if (list.isEmpty()) {
+                        Massage.displayMassage("Warning", " There's no data to calculate ");
+                    } else {
+                        float total = Calculations.numberOfRecordAboveAGrade(list, Float.parseFloat(txtGrade.getText()));
+                        grade = total;
+                        txtStat.setText(" Number of students achieving a mark " + txtGrade.getText() +
+                                " or more: " + total + "And their percentage: "
+                                + String.format("%.2f", ((total / list.length()) * 100)) + "%");
+                    }
+                }
+            }
+
+        });
+
+
+        VBox vBox = new VBox(20);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPadding(new Insets(5, 5, 5, 5));
         vBox.setStyle("-fx-background-color: #ffffff;");
-        vBox.getChildren().addAll(pane, txtStat, btCalculate);
+        vBox.getChildren().addAll(pane, txtStat, hBox);
 
 
         window.setScene(new Scene(vBox));

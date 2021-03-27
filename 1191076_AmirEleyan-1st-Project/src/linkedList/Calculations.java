@@ -1,3 +1,8 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * Time: 26/3/2021 6:00 PM
+ */
 package linkedList;
 
 public abstract class Calculations {
@@ -34,7 +39,7 @@ public abstract class Calculations {
                 counter++;
                 currentRecord = currentRecord.getNext();
             }
-            // String.format("%.2f", sum / counter);
+
             return sum / counter;
         }
         return 0.0F;

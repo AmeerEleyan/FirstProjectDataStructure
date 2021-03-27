@@ -41,7 +41,7 @@ public abstract class NewRecord {
 
 
         txtSetNumber = new TextField();
-        txtSetNumber.setPromptText("Enter the set number\n");
+        txtSetNumber.setPromptText("Enter the set number");
         txtSetNumber.setMaxWidth(180);
         txtSetNumber.setStyle(styleTxt);
 
@@ -62,7 +62,7 @@ public abstract class NewRecord {
         lblGrade.setStyle(styleLbl);
 
         txtGrade = new TextField();
-        txtGrade.setPromptText("Enter the grade\n");
+        txtGrade.setPromptText("Enter the grade");
         txtGrade.setMaxWidth(180);
         txtGrade.setStyle(styleTxt);
 
@@ -102,7 +102,7 @@ public abstract class NewRecord {
         window.setMinWidth(360);
         window.setMinHeight(280);
         window.setResizable(false);
-        window.showAndWait();
+        window.show();
 
     }
 
