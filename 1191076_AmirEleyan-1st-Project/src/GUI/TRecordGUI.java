@@ -1,5 +1,6 @@
 package GUI;
 
+import linkedList.Calculations;
 import linkedList.LinkedList;
 import linkedList.Node;
 import linkedList.TRecord;
@@ -29,9 +30,6 @@ public class TRecordGUI extends Application {
     private Scene MainScene;
     private static File file;
     private static Scanner input;
-    private Button btAvg, btMode, btMedian, btVar, btSD, btPercentage;
-    private TextField txtAvg, txtMode, txtMedian, txtVar, txtSD, txtPercentage;
-    private Label lblAvg, lblMod, lblMedian, lblVar, lblSD, lblPercentage;
     private Button btAddNewRecord, btRemoveRecord, btStatistic, btTopTen, btPrintReport;
     private Button btSearch;
     private TextField txtSearch;
@@ -39,10 +37,10 @@ public class TRecordGUI extends Application {
     private TextField txtTotalNumber;
     private TableView<TRecord> recordTableView;
     private RadioButton rbScience, rbLiterary;
-    private ComboBox<String> calculation;
+    private ComboBox<String> WestAndGaza, calculation;
     private LinkedList<TRecord> lit = new LinkedList<>(), sec = new LinkedList<>();
 
-    String btStyle = "-fx-background-color:#f88f01; -fx-background-radius:25;" +
+    String btStyle = "-fx-background-color:#a4ebf3; -fx-background-radius:25;" +
             "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:19; -fx-border-radius:25;" +
             " -fx-text-fill: #000000; -fx-font-family:" +
             " 'Calisto MT'; -fx-font-weight: BOLd; ";
@@ -61,8 +59,7 @@ public class TRecordGUI extends Application {
         window = primaryStage;
         window.setTitle("Tawjihi Records");
         MainScene = new Scene(AllComponents());
-        MainScene.getStylesheets().add(getClass().getResource("styel.css").toExternalForm());
-
+        Controller();
         window.setScene(MainScene);
         window.setResizable(false);
         window.show();
@@ -76,7 +73,7 @@ public class TRecordGUI extends Application {
         imgLocation.setFitHeight(30);
 
         // compo box
-        ComboBox<String> WestAndGaza = new ComboBox<>();
+        WestAndGaza = new ComboBox<>();
         WestAndGaza.getItems().addAll("West Bank", "Gaza");
         WestAndGaza.setPromptText("Select Region: ");
         WestAndGaza.setEditable(false);
@@ -136,36 +133,6 @@ public class TRecordGUI extends Application {
         return RightPane;
     }
 
-
-    /**
-     * Methode to read data from file iteratively
-     */
-    public static void readDataFromFile(String fileName, LinkedList<TRecord> literaryLinkedList, LinkedList<TRecord> scientificLinkedList) throws IOException {
-        file = new File(fileName);
-        try {
-            input = new Scanner(file);
-            if (file.length() == 0) {
-                throw new IOException("There's No data in file ");
-            } else {
-                TRecord student;
-                int line = 1;
-                while (input.hasNext()) { // read line of data
-                    try {
-                        student = new TRecord(input.nextLine());
-                        // if (student.isLiterary()) literaryLinkedList.addWithSort(student);
-                        //else if (student.isScientific()) scientificLinkedList.addWithSort(student);
-                        line++;
-                    } catch (Exception ex) {
-                        System.out.println("Error reading in student info in line # " + line + " in file ");
-                    }
-                }
-                input.close();
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("The system can not find the file ");
-        }
-    }
 
     private TableView<TRecord> tRecordTableView() {
         recordTableView = new TableView<>();
@@ -281,9 +248,9 @@ public class TRecordGUI extends Application {
         calculation.setEditable(false);
         calculation.setMinWidth(250);
         calculation.setMinHeight(42);
-        calculation.setStyle("-fx-background-color: #f88f01; -fx-border-radius:25;" +
+        calculation.setStyle("-fx-background-color: #a4ebf3; -fx-border-radius:25;" +
                 " -fx-background-radius:25; -fx-font-weight: BOLd; -fx-font-size:17; -fx-border-color: #000000; " +
-                "-fx-border-width: 1;" + " -fx-text-fill:'red'; ");
+                "-fx-border-width: 1;" + " -fx-text-fill:#000000; ");
 
 
         lblCalculation = new Label();
@@ -333,18 +300,6 @@ public class TRecordGUI extends Application {
             btSearch.setStyle(btStyle);
         });
 
-        // Actions whe button search clicked
-        btSearch.setOnAction(e -> {
-            if (!txtSearch.getText().isEmpty()) {
-                if (CheckTextFiled.isSeatNumber(txtSearch)) {
-
-                    //    SearchRecord.searchRecord();
-                    Massage.displayMassage("", txtSearch + " Not exist in records");
-                } else {
-                    Massage.displayMassage("Error Input", "Invalid Set Number");
-                }
-            }
-        });
 
         // Set components of the hBox block
         hBox.getChildren().addAll(txtSearch, btSearch);
@@ -369,7 +324,8 @@ public class TRecordGUI extends Application {
         txtTotalNumber.setMaxWidth(125);
         txtTotalNumber.setEditable(false);
         txtTotalNumber.setStyle("-fx-background-color:#ffffff; -fx-font-size:15;" +
-                " -fx-border-width: 0px0px2px0px; -fx-border-color: #000000;");
+                " -fx-border-width: 0px0px2px0px; -fx-border-color: #000000;" +
+                " -fx-text-fill:#000000;  -fx-font-weight: BOLd;");
 
         // HBox to display total number
         HBox hBox = new HBox(15);
@@ -426,7 +382,7 @@ public class TRecordGUI extends Application {
         lblWelcome.setFont(Font.font("Times New Roman", FontWeight.BOLD, 36));
         lblWelcome.setPadding(new Insets(5, 0, 15, 0));
         lblWelcome.setAlignment(Pos.CENTER);
-        lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:50;" +
+        lblWelcome.setStyle("-fx-background-color: #a4ebf3; -fx-border-radius:50;" +
                 " -fx-background-radius:50; -fx-text-fill: #000000; ");
         lblWelcome.setMinWidth(1300);
 
@@ -459,5 +415,85 @@ public class TRecordGUI extends Application {
         } else {
             Massage.displayMassage("Data", "There is no data to display");
         }
+    }
+
+    /**
+     * Methode to read data from file iteratively
+     */
+    public static void readDataFromFile(String fileName, LinkedList<TRecord> literaryLinkedList,
+                                        LinkedList<TRecord> scientificLinkedList) throws IOException {
+        file = new File(fileName);
+        try {
+            input = new Scanner(file);
+            if (file.length() == 0) {
+                throw new IOException("There's No data in file " + fileName);
+            } else {
+                TRecord student;
+                int line = 1;
+                while (input.hasNext()) { // read line of data
+                    try {
+                        student = new TRecord(input.nextLine());
+                        if (student.isLiterary()) literaryLinkedList.addBySort(student);
+                        else if (student.isScientific()) scientificLinkedList.addBySort(student);
+                        line++;
+                    } catch (Exception ex) {
+                        Massage.displayMassage("Warning", "Error reading in student info in line # " + line + " in file " + fileName);
+                    }
+                }
+                input.close();
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("The system can not find the file " + fileName);
+        }
+    }
+
+    private void Controller() {
+
+        // Actions on ComboBox region
+        WestAndGaza.setOnAction(e -> {
+            recordTableView.getItems().clear();
+            rbScience.setSelected(false);
+            rbLiterary.setSelected(false);
+            txtTotalNumber.setText("");
+
+            // Read data from westBank file
+            if (WestAndGaza.getValue().equals("West Bank")) {
+                Calculations.literaryList = new LinkedList<>();
+                Calculations.scientificList = new LinkedList<>();
+                try {
+                    readDataFromFile("WestBank_2019.txt", Calculations.literaryList, Calculations.scientificList);
+                } catch (IOException ex) {
+                    Massage.displayMassage("Error", ex.getMessage());
+                }
+
+            }// Read data from Gaza file
+            else if (WestAndGaza.getValue().equals("Gaza")) {
+                Calculations.literaryList = new LinkedList<>();
+                Calculations.scientificList = new LinkedList<>();
+                try {
+                    readDataFromFile("Gaza_2019.txt", Calculations.literaryList, Calculations.scientificList);
+                } catch (IOException ex) {
+                    Massage.displayMassage("Error", ex.getMessage());
+                }
+            }
+        });
+
+        // Actions on radio button branch
+
+        rbLiterary.setOnAction(e -> {
+            if (!WestAndGaza.getValue().isEmpty()) {
+                uploadListToTable(Calculations.literaryList);
+                System.out.println(Calculations.literaryList.length());
+            }
+        });
+
+        rbScience.setOnAction(e -> {
+            if (!WestAndGaza.getValue().isEmpty()) {
+                uploadListToTable(Calculations.scientificList);
+            }
+        });
+
+
     }
 }

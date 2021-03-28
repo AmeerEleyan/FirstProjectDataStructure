@@ -20,8 +20,6 @@ public class TRecord implements Comparable<TRecord> {
 
     private String branch; // branch name (scientific or literary)
 
-    // Sort by the seat number or mark
-    private static int whichSort;
 
     // No arg constructor
     public TRecord() {
@@ -93,10 +91,7 @@ public class TRecord implements Comparable<TRecord> {
     // Compare two object with them depends on the set number or grade
     @Override
     public int compareTo(TRecord o) {
-        if (whichSort == 1) // sort depends on a setNumber
-            return ((this.seatNum < o.seatNum) ? -1 : (this.seatNum == o.seatNum) ? 0 : 1);
-        else //sort depends on a grade
-            return ((this.grade > o.grade) ? -1 : (this.grade == o.grade) ? 0 : 1);
+        return ((this.grade > o.grade) ? -1 : (this.grade == o.grade) ? 0 : 1);
     }
 
     // return data of this record as string
@@ -104,11 +99,7 @@ public class TRecord implements Comparable<TRecord> {
     public String toString() {
         return "Student: " + this.seatNum + " ," + this.grade + " ," + this.branch + '\n';
     }
-
-    // Set a type sort(sort by grade or by setNumber)
-    public static void setWhichSort(int whichSort) {
-        TRecord.whichSort = whichSort;
-    }
+    
 
     // if two obj has a same set number
     @Override

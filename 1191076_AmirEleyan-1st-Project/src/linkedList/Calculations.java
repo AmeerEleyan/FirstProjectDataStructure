@@ -8,8 +8,8 @@ package linkedList;
 public abstract class Calculations {
 
     // WestBank Records
-   public LinkedList<TRecord> literary;
-    public LinkedList<TRecord> scientific;
+   public static LinkedList<TRecord> literaryList;
+    public static LinkedList<TRecord> scientificList;
 
 
 

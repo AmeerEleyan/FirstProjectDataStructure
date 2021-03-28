@@ -117,7 +117,6 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 Node<T> newNode = new Node<>(element);
                 Node<T> current = this.head;
                 Node<T> previous = null;
-                if (element instanceof TRecord) TRecord.setWhichSort(sortType);
                 if (element.compareTo(current.getData()) < 0) { // data for element less than data of head
                     insertAtFirst(element);
                 } else {
@@ -156,7 +155,6 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 } else {
                     // data for element larger than data of head
                     while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
-                        if (element.compareTo(current.getData()) == 0) return -1;
                         previous = current;
                         current = current.getNext();
                     }
