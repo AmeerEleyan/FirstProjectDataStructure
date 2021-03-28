@@ -72,71 +72,37 @@ public class TRecordGUI extends Application {
         BorderPane RightPane = new BorderPane();
 
         ImageView imgLocation = new ImageView(new Image("icons/Location.png"));
-        imgLocation.setFitWidth(20);
-        imgLocation.setFitHeight(20);
+        imgLocation.setFitWidth(30);
+        imgLocation.setFitHeight(30);
 
         // compo box
         ComboBox<String> WestAndGaza = new ComboBox<>();
         WestAndGaza.getItems().addAll("West Bank", "Gaza");
-        WestAndGaza.setPromptText("Select Region?");
+        WestAndGaza.setPromptText("Select Region: ");
         WestAndGaza.setEditable(false);
-        WestAndGaza.setPadding(new Insets(0, 0, 2, 0));
-        WestAndGaza.setMinWidth(130);
-        WestAndGaza.setMinHeight(20);
-        WestAndGaza.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000;-fx-font-weight: BOLd;-fx-font-size:14;");
+        WestAndGaza.setPadding(new Insets(0, 0, 5, 0));
+        WestAndGaza.setMinWidth(220);
+        WestAndGaza.setMinHeight(45);
+        WestAndGaza.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
+                " -fx-border-color: #000000;-fx-font-weight: BOLd;-fx-font-size:16;");
 
         HBox hBoxLocation = new HBox(8);
-        hBoxLocation.setPadding(new Insets(0, 5, 5, 5));
+        hBoxLocation.setPadding(new Insets(0, 5, 5, 10));
         hBoxLocation.setStyle("-fx-background-color: #ffffff;");
         hBoxLocation.getChildren().addAll(imgLocation, WestAndGaza);
         hBoxLocation.setAlignment(Pos.CENTER);
-        hBoxLocation.setMargin(imgLocation, new Insets(6, 0, 0, 0));
-        hBoxLocation.setMargin(WestAndGaza, new Insets(0, 0, 5, 0));
+        hBoxLocation.setMargin(imgLocation, new Insets(7, 0, 0, 0));
+        hBoxLocation.setMargin(WestAndGaza, new Insets(0, 0, 6, 0));
 
 
         // RadioButton
         rbLiterary = new RadioButton("Literary");
-        rbLiterary.setStyle("fx-border-width: 1px;-fx-border-color: #000000;-fx-background-color: transparent;" +
-                "-fx-border-radius: 15px;-fx-padding: 4px; -fx-font-size:12; -fx-font-weight: BOLd;");
+        rbLiterary.setStyle("-fx-background-color: #ffffff;" + "-fx-border-radius: 15px;" +
+                "-fx-padding: 6px; -fx-font-size:17; -fx-font-weight: BOLd;");
 
         rbScience = new RadioButton("Science");
-        rbScience.setStyle("fx-border-width: 1px;-fx-border-color: #000000;-fx-background-color: transparent;" +
-                "-fx-border-radius: 15px;-fx-padding: 4px; -fx-font-size:12; -fx-font-weight: BOLd;");
-
-        rbLiterary.setOnAction(e -> {
-            if (rbLiterary.isSelected()) {
-                uploadListToTable(lit);
-            }
-        });
-        rbScience.setOnAction(e -> {
-            if (rbScience.isSelected()) {
-                uploadListToTable(sec);
-            }
-        });
-
-        WestAndGaza.setOnAction(e -> {
-            if (WestAndGaza.getValue().equals("West Bank")) {
-                rbScience.setSelected(false);
-                rbLiterary.setSelected(false);
-                try {
-                    System.out.println("Start");
-                    readDataFromFile("WestBank_2019.txt", lit, sec);
-                    System.out.println("West upoded");
-                } catch (Exception ex) {
-
-                }
-            } else if (WestAndGaza.getValue().equals("Gaza")) {
-                rbScience.setSelected(false);
-                rbLiterary.setSelected(false);
-                try {
-                    System.out.println("Start");
-                    readDataFromFile("Gaza_2019.txt", lit, sec);
-                    System.out.println("Gaza");
-                } catch (Exception ex) {
-
-                }
-            }
-        });
+        rbScience.setStyle("-fx-background-color: #ffffff;" + "-fx-border-radius: 15px;" +
+                "-fx-padding: 6px; -fx-font-size:17; -fx-font-weight: BOLd;");
 
 
         ToggleGroup group = new ToggleGroup();
@@ -144,12 +110,11 @@ public class TRecordGUI extends Application {
         rbLiterary.setToggleGroup(group);
 
 
-        HBox paneRadio = new HBox(15);
+        HBox paneRadio = new HBox(45);
         paneRadio.getChildren().addAll(rbLiterary, rbScience);
         paneRadio.setAlignment(Pos.CENTER);
         paneRadio.setPadding(new Insets(5, 5, 5, 0));
         paneRadio.setStyle("-fx-background-color: #ffffff;");
-        // end RadioButton
 
 
         // VBox
@@ -158,21 +123,16 @@ public class TRecordGUI extends Application {
         rightController.setPadding(new Insets(5, 5, 5, 5));
         rightController.setStyle("-fx-background-color: #ffffff;");
         rightController.setMargin(hBoxLocation, new Insets(55, 0, 0, 0));
-       /* btUpload.setOnAction(e -> {
-            if ((t.getText() != null && !t.getText().isEmpty())){
-                System.out.println("Done");
-            }
-        });*/
+
+
         rightController.getChildren().addAll(hBoxLocation, paneRadio, addAndDelete());
-        // end VBox
 
         RightPane.setRight(rightController);
-
-
         RightPane.setCenter(centerLeftPane());
 
         RightPane.setPadding(new Insets(10, 10, 10, 10));
         RightPane.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px0px4px; -fx-border-color: #000000;");
+
         return RightPane;
     }
 
@@ -289,7 +249,7 @@ public class TRecordGUI extends Application {
         btTopTen = new Button("Top Ten Students");
         btTopTen.setGraphic(imgTopTen);
         btTopTen.setMinWidth(250);
-        btTopTen.setMinHeight(40);
+        btTopTen.setMinHeight(42);
         btTopTen.setStyle(btStyle);
         btTopTen.setContentDisplay(ContentDisplay.LEFT);
         btTopTen.setOnMouseEntered(e -> btTopTen.setStyle(styleHover));
@@ -309,38 +269,30 @@ public class TRecordGUI extends Application {
         btPrintReport.setOnMouseExited(e -> btPrintReport.setStyle(btStyle));
 
 
-        VBox vBox = new VBox(15);
+        VBox vBox = new VBox(14);
         vBox.setPadding(new Insets(5, 5, 5, 5));
         vBox.setAlignment(Pos.CENTER);
         vBox.setStyle("-fx-background-color: #ffffff");
 
 
-        ImageView imgCalculate = new ImageView(new Image("icons/calculate.png"));
-        imgCalculate.setFitWidth(24);
-        imgCalculate.setFitHeight(24);
-
         calculation = new ComboBox<>();
         calculation.getItems().addAll("Average", "Mode", "Median", "Standard Deviation", "Variance");
-        calculation.setPromptText("Select one");
+        calculation.setPromptText("Select one to calculate:");
         calculation.setEditable(false);
-        calculation.setPadding(new Insets(0, 0, 2, 0));
-        calculation.setMaxWidth(185);
-        calculation.setMinHeight(25);
-        calculation.setStyle("-fx-background-color: #f88f01; -fx-border-radius:25; -fx-background-radius:25; -fx-border-width: 1; -fx-font-weight: BOLd;-fx-font-size:14;");
+        calculation.setMinWidth(250);
+        calculation.setMinHeight(42);
+        calculation.setStyle("-fx-background-color: #f88f01; -fx-border-radius:25;" +
+                " -fx-background-radius:25; -fx-font-weight: BOLd; -fx-font-size:17; -fx-border-color: #000000; " +
+                "-fx-border-width: 1;" + " -fx-text-fill:'red'; ");
 
-        HBox hBoxCalculation = new HBox(8);
-        hBoxCalculation.setPadding(new Insets(0, 5, 5, 5));
-        hBoxCalculation.setStyle("-fx-background-color: #ffffff;");
-        hBoxCalculation.getChildren().addAll(imgCalculate, calculation);
-        hBoxCalculation.setAlignment(Pos.CENTER);
-        hBoxCalculation.setMargin(imgCalculate, new Insets(6, 0, 0, 0));
-        hBoxCalculation.setMargin(calculation, new Insets(0, 0, 5, 0));
 
         lblCalculation = new Label();
-        lblCalculation.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;  -fx-border-color:#000000; -fx-font-weight: BOLd;-fx-font-size:14; ");
-        lblCalculation.setMaxWidth(200);
+        lblCalculation.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px3px0px; " +
+                " -fx-border-color:#000000; -fx-font-weight: BOLd;-fx-font-size:16; ");
+        lblCalculation.setMaxWidth(250);
 
-        vBox.getChildren().addAll(btAddNewRecord, btRemoveRecord, btPrintReport, btStatistic, btTopTen, hBoxCalculation, lblCalculation);
+        vBox.getChildren().addAll(btAddNewRecord, btRemoveRecord, btPrintReport,
+                btStatistic, btTopTen, calculation, lblCalculation);
 
         return vBox;
     }
@@ -351,21 +303,22 @@ public class TRecordGUI extends Application {
     private HBox search() {
 
         // HBox to display block search
-        HBox hBox = new HBox(10);
+        HBox hBox = new HBox(15);
         txtSearch = new TextField();
         txtSearch.setPromptText("Enter SetNumber");
         txtSearch.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
-                " -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:15; -fx-text-fill: #000000;");
-        txtSearch.setMaxWidth(140);
+                " -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:15;" +
+                "-fx-text-fill: #000000;");
+        txtSearch.setMaxWidth(170);
 
         // to display search icon
         ImageView imgSearch = new ImageView(new Image("icons/search.png"));
-        imgSearch.setFitHeight(20);
-        imgSearch.setFitWidth(20);
+        imgSearch.setFitHeight(23);
+        imgSearch.setFitWidth(23);
 
         // To process searching for a specific student in the records
         btSearch = new Button("Search");
-        btSearch.setMinWidth(50);
+        btSearch.setMinWidth(45);
         btSearch.setContentDisplay(ContentDisplay.LEFT);
         btSearch.setGraphic(imgSearch);
         //   btSearch.setOnAction(e -> SearchRecord.searchRecord());
@@ -475,7 +428,7 @@ public class TRecordGUI extends Application {
         lblWelcome.setAlignment(Pos.CENTER);
         lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:50;" +
                 " -fx-background-radius:50; -fx-text-fill: #000000; ");
-        lblWelcome.setMinWidth(1200);
+        lblWelcome.setMinWidth(1300);
 
         hBox.getChildren().addAll(lblWelcome);
         hBox.setMargin(lblWelcome, new Insets(2, 0, 10, 0));
