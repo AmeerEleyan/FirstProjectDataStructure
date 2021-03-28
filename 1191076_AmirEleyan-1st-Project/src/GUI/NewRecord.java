@@ -88,28 +88,24 @@ public abstract class NewRecord {
 
         btAdd.setOnAction(e -> {
             if (!txtSetNumber.getText().isEmpty() && !txtGrade.getText().isEmpty() && !bxBranch.getValue().isEmpty()) {
-                if (list.isEmpty()) {
-                    Massage.displayMassage("Error", "There is no data to add this record to them");
-                } else {
-                    if (CheckTextFiled.isGrade(txtSetNumber)) {
-                        if (CheckTextFiled.isGrade(txtGrade)) {
-                            TRecord record = new TRecord();
-                            record.setSeatNum(Long.parseLong(txtSetNumber.getText()));
-                            if (list.search(record) != null)
-                                Massage.displayMassage("Warning", txtSetNumber.getText() + " is exists in records. Try again");
-                            else {
-                                record.setBranch(bxBranch.getValue());
-                                record.setGrade(Float.parseFloat(txtGrade.getText()));
-                                list.addBySort(record);
-                            }
 
-                        } else {
-                            Massage.displayMassage("Warning", "Invalid Grade");
-                        }
+                if (CheckTextFiled.isGrade(txtSetNumber)) { // setNumber is true
+                    if (CheckTextFiled.isGrade(txtGrade)) { // grade is true
+
+                        TRecord record = new TRecord();
+                        record.setSeatNum(Long.parseLong(txtSetNumber.getText()));
+                        record.setBranch(bxBranch.getValue());
+                        record.setGrade(Float.parseFloat(txtGrade.getText()));
+
+                        if (list.addBySort(record) == -1) // -1 means that set number is exist in records
+                            Massage.displayMassage("Warning", txtSetNumber.getText() + " is already exists in records. Try again");
 
                     } else {
-                        Massage.displayMassage("Warning", "Invalid Set Number");
+                        Massage.displayMassage("Warning", "Invalid Grade");
                     }
+
+                } else {
+                    Massage.displayMassage("Warning", "Invalid Set Number");
                 }
 
             } else {

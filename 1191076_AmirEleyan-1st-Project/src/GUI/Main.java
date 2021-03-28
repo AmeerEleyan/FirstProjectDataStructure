@@ -45,10 +45,11 @@ public class Main {
         System.out.println(tt.toString());*/
 
         LinkedList<Integer> toto = new LinkedList<>();
-        toto.insertAtFirst(10);
-        toto.insertAtFirst(12);
-        toto.addBySort(11);
-       System.out.println(toto.getFirst());
+
+       System.out.println(toto.addBySort(5));
+        System.out.println(toto.addBySort(6));
+        System.out.println(toto.addBySort(6));
+        System.out.println(toto.addBySort(null));
         toto.printList();
 
 

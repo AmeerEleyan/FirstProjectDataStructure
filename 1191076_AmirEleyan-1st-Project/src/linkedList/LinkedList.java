@@ -108,9 +108,10 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
      * Insert element with a specific sort depend on a compareTo methode implementation
      */
     @Override
-    public void addBySort(T element, int sortType) {
-        if (isEmpty()) { // list is empty
+    public int addBySort(T element, int sortType) {
+        if (isEmpty() && element != null) { // list is empty
             insertAtFirst(element);
+            return 1;
         } else {
             if (element != null) {
                 Node<T> newNode = new Node<>(element);
@@ -122,7 +123,7 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 } else {
                     // data for element larger than data of head
                     while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
-                        if (element.compareTo(current.getData()) == 0) return;
+                        if (element.compareTo(current.getData()) == 0) return -1;
                         previous = current;
                         current = current.getNext();
                     }
@@ -130,9 +131,10 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                     previous.setNext(newNode);
                     if (current == null) this.tail = newNode;
                     newNode.setNext(current);
-
                 }
+                return 1;
             }
+            return 0;
         }
     }
 
@@ -140,9 +142,10 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
      * Insert element with a default sort depend on a compareTo methode implementation
      */
     @Override
-    public void addBySort(T element) {
-        if (isEmpty()) { // list is empty
+    public int addBySort(T element) {
+        if (isEmpty() && element != null) { // list is empty
             insertAtFirst(element);
+            return 1;
         } else {
             if (element != null) {
                 Node<T> newNode = new Node<>(element);
@@ -153,7 +156,7 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 } else {
                     // data for element larger than data of head
                     while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
-                        if (element.compareTo(current.getData()) == 0) return;
+                        if (element.compareTo(current.getData()) == 0) return -1;
                         previous = current;
                         current = current.getNext();
                     }
@@ -162,8 +165,9 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                     if (current == null) this.tail = newNode;
                     newNode.setNext(current);
                 }
+                return 1;
             }
-
+            return 0;
         }
     }
 

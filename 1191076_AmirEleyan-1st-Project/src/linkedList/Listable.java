@@ -41,13 +41,13 @@ public interface Listable<T extends Comparable<T>> {
     /**
      * Add an element to the list with specific sort
      */
-    void addBySort(T element, int type);
+    int addBySort(T element, int type);
 
     /**
      * Add an element to the list with default sort
      */
     // Overload
-    void addBySort(T element);
+    int addBySort(T element);
 
     /**
      * Add new element to the list after specific elementl
