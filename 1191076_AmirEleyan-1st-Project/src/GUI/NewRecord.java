@@ -12,13 +12,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import linkedList.LinkedList;
+import linkedList.TRecord;
 
 public abstract class NewRecord {
 
     private static TextField txtSetNumber, txtGrade;
     private static Label lblSetNumber, lblBranch, lblGrade;
 
-    public static void addNewRecord() {
+    public static void addNewRecord(LinkedList<TRecord> list) {
 
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -83,6 +85,38 @@ public abstract class NewRecord {
         Button btAdd = new Button("Add");
         btAdd.setMinWidth(60);
         btAdd.setStyle(styleBt);
+
+        btAdd.setOnAction(e -> {
+            if (!txtSetNumber.getText().isEmpty() && !txtGrade.getText().isEmpty() && !bxBranch.getValue().isEmpty()) {
+                if (list.isEmpty()) {
+                    Massage.displayMassage("Error", "There is no data to add this record to them");
+                } else {
+                    if (CheckTextFiled.isGrade(txtSetNumber)) {
+                        if (CheckTextFiled.isGrade(txtGrade)) {
+                            TRecord record = new TRecord();
+                            record.setSeatNum(Long.parseLong(txtSetNumber.getText()));
+                            if (list.search(record) != null)
+                                Massage.displayMassage("Warning", txtSetNumber.getText() + " is exists in records. Try again");
+                            else {
+                                record.setBranch(bxBranch.getValue());
+                                record.setGrade(Float.parseFloat(txtGrade.getText()));
+                                list.addBySort(record);
+                            }
+
+                        } else {
+                            Massage.displayMassage("Warning", "Invalid Grade");
+                        }
+
+                    } else {
+                        Massage.displayMassage("Warning", "Invalid Set Number");
+                    }
+                }
+
+            } else {
+                Massage.displayMassage("Warning", "   There is a field that is empty " +
+                        "please fill it   ");
+            }
+        });
 
         Button btCancel = new Button("Cancel");
         btCancel.setMinWidth(60);

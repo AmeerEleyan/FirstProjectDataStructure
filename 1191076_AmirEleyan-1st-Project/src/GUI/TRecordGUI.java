@@ -410,7 +410,7 @@ public class TRecordGUI extends Application {
         btAddNewRecord.setStyle(btStyle);
         btAddNewRecord.setContentDisplay(ContentDisplay.LEFT);
         btAddNewRecord.setMinWidth(170);
-        btAddNewRecord.setOnAction(e -> NewRecord.addNewRecord());
+       // btAddNewRecord.setOnAction(e -> NewRecord.addNewRecord());
 
         ImageView remove = new ImageView(new Image("icons/remove.png"));
         remove.setFitHeight(22);

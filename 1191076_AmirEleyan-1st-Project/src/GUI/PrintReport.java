@@ -16,7 +16,7 @@ public class PrintReport {
      */
     public static void writeDataInFile(LinkedList<TRecord> list, LinkedList<TRecord> topTen, String region, String branch) {
         //List is Empty
-        if (list.isEmpty() && topTen.isEmpty()) {
+        if (list.isEmpty()) {
             Massage.displayMassage("Error", "There is no data to print it in file");
         } else {
             File file;

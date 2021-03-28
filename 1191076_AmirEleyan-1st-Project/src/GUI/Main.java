@@ -44,14 +44,14 @@ public class Main {
         tt.addWithSpecificSort(12);
         System.out.println(tt.toString());*/
 
-//        LinkedList<Integer> toto = new LinkedList<>();
-//        toto.insertAtFirst(3);
-//        toto.insertAtFirst(1);
-//        toto.insertAfter(2,3);
-//        System.out.println(toto.getLast());
-        //toto.printList();
-        Node<Integer> n = new Node<>(null);
-        System.out.println(n);
+        LinkedList<Integer> toto = new LinkedList<>();
+        toto.addBySort(3);
+        toto.addBySort(1);
+        toto.addBySort(2);
+        toto.addBySort(2);
+     //   System.out.println(toto.getLast());
+        toto.printList();
+
 
     }
 }

@@ -79,8 +79,8 @@ public abstract class Statistic {
 
 
         btCalculate.setOnAction(e -> {
-            if (CheckTextFiled.isGrade(txtGrade)) {
-                if (!txtStat.getText().isEmpty()) {
+            if (!txtStat.getText().isEmpty()) {
+                if (CheckTextFiled.isGrade(txtGrade)) {
                     if (list.isEmpty()) {
                         Massage.displayMassage("Warning", " There's no data to calculate ");
                     } else {
@@ -90,6 +90,8 @@ public abstract class Statistic {
                                 " or more: " + total + "And their percentage: "
                                 + String.format("%.2f", ((total / list.length()) * 100)) + "%");
                     }
+                } else {
+                    Massage.displayMassage("Warning", " Invalid Grade");
                 }
             }
 
