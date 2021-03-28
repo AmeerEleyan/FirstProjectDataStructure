@@ -121,22 +121,18 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                     insertAtFirst(element);
                 } else {
                     // data for element larger than data of head
-                    while ((current != null)) {
-
+                    while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
+                        if (element.compareTo(current.getData()) == 0) return;
                         previous = current;
                         current = current.getNext();
-
                     }
                     //The current reached the end of the list and the element larger than current
                     previous.setNext(newNode);
-                    if (current == null) {
-                        this.tail = newNode;
-                    }
+                    if (current == null) this.tail = newNode;
                     newNode.setNext(current);
 
                 }
             }
-
         }
     }
 
@@ -156,21 +152,15 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                     insertAtFirst(element);
                 } else {
                     // data for element larger than data of head
-                    while ((current != null)) {
-                        if (element.compareTo(current.getData()) > 0) break;
+                    while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
+                        if (element.compareTo(current.getData()) == 0) return;
                         previous = current;
                         current = current.getNext();
-                        if (element.compareTo(current.getData()) == 0) continue;
                     }
                     //The current reached the end of the list and the element larger than current
-
-                    if (current == null) {
-                        this.tail = newNode;
-                    }else{
-                        previous.setNext(newNode);
-                        newNode.setNext(current);
-                    }
-
+                    previous.setNext(newNode);
+                    if (current == null) this.tail = newNode;
+                    newNode.setNext(current);
                 }
             }
 
