@@ -43,12 +43,12 @@ public class TRecordGUI extends Application {
     private LinkedList<TRecord> lit = new LinkedList<>(), sec = new LinkedList<>();
 
     String btStyle = "-fx-background-color:#f88f01; -fx-background-radius:25;" +
-            "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:17; -fx-border-radius:25;" +
+            "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:19; -fx-border-radius:25;" +
             " -fx-text-fill: #000000; -fx-font-family:" +
             " 'Calisto MT'; -fx-font-weight: BOLd; ";
 
     String styleHover = "-fx-background-color:#ffffff; -fx-background-radius:25;" +
-            "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:17; -fx-border-radius:25;" +
+            "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:19; -fx-border-radius:25;" +
             " -fx-text-fill: #000000; -fx-font-family:" +
             " 'Calisto MT'; -fx-font-weight: BOLd; ";
 
@@ -207,28 +207,28 @@ public class TRecordGUI extends Application {
         }
     }
 
-    private TableView<TRecord> tRecordTableView(LinkedList<TRecord> s, LinkedList<TRecord> l) {
+    private TableView<TRecord> tRecordTableView() {
         recordTableView = new TableView<>();
         recordTableView.setEditable(false);
-        recordTableView.setMinWidth(500);
-        recordTableView.setMinHeight(400);
+        recordTableView.setMinWidth(580);
+        recordTableView.setMinHeight(487);
         recordTableView.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width:2; -fx-font-family: 'Times New Roman'; -fx-font-size:17; -fx-text-fill: #000000; -fx-font-weight: BOLd; ");
         TableColumn<TRecord, Long> setNumber = new TableColumn<>("Set Number");
-        setNumber.setMinWidth(200);
+        setNumber.setMinWidth(280);
         setNumber.setEditable(false);
         setNumber.setSortable(true);
         setNumber.setResizable(false);
         setNumber.setCellValueFactory(new PropertyValueFactory<>("seatNum"));
 
         TableColumn<TRecord, String> branch = new TableColumn<>("Branch");
-        branch.setMinWidth(100);
+        branch.setMinWidth(150);
         branch.setEditable(false);
         branch.setSortable(false);
         branch.setResizable(false);
         branch.setCellValueFactory(new PropertyValueFactory<>("branch"));
 
         TableColumn<TRecord, Float> grade = new TableColumn<>("Grade");
-        grade.setMinWidth(100);
+        grade.setMinWidth(150);
         grade.setEditable(false);
         grade.setSortable(true);
         grade.setResizable(false);
@@ -240,222 +240,73 @@ public class TRecordGUI extends Application {
     }
 
 
-    private VBox buttons() {
-        VBox vBox = new VBox();
-        vBox.setPadding(new Insets(5, 5, 5, 5));
-        vBox.setStyle("-fx-background-color: #ffffff;");
-
-        GridPane calculation = new GridPane();
-        calculation.setStyle("-fx-background-color: #ffffff;");
-        calculation.setVgap(20);
-        calculation.setHgap(15);
-        calculation.setPadding(new Insets(5, 5, 5, 5));
-        vBox.getChildren().addAll(calculation);
-        vBox.setMargin(calculation, new Insets(50, 0, 0, 0));
-
-        //***************************
-        ImageView imgAvg = new ImageView(new Image("icons/calculate.png"));
-        imgAvg.setFitWidth(22);
-        imgAvg.setFitHeight(22);
-        btAvg = new Button("Calculate");
-        btAvg.setGraphic(imgAvg);
-        btAvg.setStyle("-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000; -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: Times New Roman; -fx-font-weight: BOLd; ");
-        btAvg.setContentDisplay(ContentDisplay.LEFT);
-        btAvg.setMinWidth(50);
-
-        txtAvg = new TextField();
-        txtAvg.setPromptText("Average");
-        txtAvg.setMaxWidth(120);
-        txtAvg.setEditable(false);
-        txtAvg.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:14;");
-
-        lblAvg = new Label("Average");
-        lblAvg.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:16; ");
-        //**************************************************
-
-
-        //*******************************************
-        ImageView imgMode = new ImageView(new Image("icons/calculate.png"));
-        imgMode.setFitWidth(22);
-        imgMode.setFitHeight(22);
-        btMode = new Button("Calculate");
-        btMode.setGraphic(imgMode);
-        btMode.setStyle("-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000; -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: Times New Roman; -fx-font-weight: BOLd; ");
-        btMode.setContentDisplay(ContentDisplay.LEFT);
-        btMode.setMinWidth(50);
-
-        txtMode = new TextField();
-        txtMode.setPromptText("Mode");
-        txtMode.setMaxWidth(120);
-        txtMode.setEditable(false);
-        txtMode.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:14;");
-
-        lblMod = new Label("Mode");
-        lblMod.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:16; ");
-        //**************************************************
-
-        //**************************************************
-        ImageView imgMedian = new ImageView(new Image("icons/calculate.png"));
-        imgMedian.setFitWidth(22);
-        imgMedian.setFitHeight(22);
-        btMedian = new Button("Calculate");
-        btMedian.setGraphic(imgMedian);
-        btMedian.setStyle("-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000; -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: Times New Roman; -fx-font-weight: BOLd; ");
-        btMedian.setContentDisplay(ContentDisplay.LEFT);
-        btMedian.setMinWidth(50);
-
-        txtMedian = new TextField();
-        txtMedian.setPromptText("Median");
-        txtMedian.setMaxWidth(120);
-        txtMedian.setEditable(false);
-        txtMedian.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:14;");
-
-        lblMedian = new Label("Median");
-        lblMedian.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:16; ");
-        //**************************************************
-
-        //***************************************************
-        ImageView imgSD = new ImageView(new Image("icons/calculate.png"));
-        imgSD.setFitWidth(22);
-        imgSD.setFitHeight(22);
-        btSD = new Button("Calculate");
-        btSD.setGraphic(imgSD);
-        btSD.setStyle("-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000; -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: Times New Roman; -fx-font-weight: BOLd; ");
-        btSD.setContentDisplay(ContentDisplay.LEFT);
-        btSD.setMinWidth(50);
-
-        txtSD = new TextField();
-        txtSD.setPromptText("Standard Deviation");
-        txtSD.setMaxWidth(120);
-        txtSD.setEditable(false);
-        txtSD.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:14;");
-
-        lblSD = new Label("Standard Deviation");
-        lblSD.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:16; ");
-        //**************************************************
-
-        //**************************************************
-        ImageView imgVar = new ImageView(new Image("icons/calculate.png"));
-        imgVar.setFitWidth(22);
-        imgVar.setFitHeight(22);
-        btVar = new Button("Calculate");
-        btVar.setGraphic(imgVar);
-        btVar.setStyle("-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000; -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: Times New Roman; -fx-font-weight: BOLd; ");
-        btVar.setContentDisplay(ContentDisplay.LEFT);
-        btVar.setMinWidth(50);
-
-        txtVar = new TextField();
-        txtVar.setPromptText("Variance");
-        txtVar.setMaxWidth(120);
-        txtVar.setEditable(false);
-        txtVar.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:14;");
-
-        lblVar = new Label("Variance");
-        lblVar.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:16; ");
-        //**************************************************
-
-        //**************************************************
-        ImageView imgPer = new ImageView(new Image("icons/calculate.png"));
-        imgPer.setFitWidth(22);
-        imgPer.setFitHeight(22);
-        btPercentage = new Button("Calculate");
-        btPercentage.setGraphic(imgPer);
-        btPercentage.setStyle("-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000; -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: Times New Roman; -fx-font-weight: BOLd; ");
-        btPercentage.setContentDisplay(ContentDisplay.LEFT);
-        btPercentage.setMinWidth(50);
-
-        txtPercentage = new TextField();
-        txtPercentage.setPromptText("Enter the grade");
-        txtPercentage.setMaxWidth(120);
-        txtPercentage.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-weight: BOLd; -fx-font-size:14;");
-
-        lblPercentage = new Label("Percentage Above\nSpecific Grade");
-        lblPercentage.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:16; ");
-        //**************************************************
-
-        calculation.add(lblAvg, 0, 0);
-        calculation.add(txtAvg, 1, 0);
-        calculation.add(btAvg, 2, 0);
-        calculation.add(lblMod, 0, 1);
-        calculation.add(txtMode, 1, 1);
-        calculation.add(btMode, 2, 1);
-        calculation.add(lblMedian, 0, 2);
-        calculation.add(txtMedian, 1, 2);
-        calculation.add(btMedian, 2, 2);
-        calculation.add(lblSD, 0, 3);
-        calculation.add(txtSD, 1, 3);
-        calculation.add(btSD, 2, 3);
-        calculation.add(lblVar, 0, 4);
-        calculation.add(txtVar, 1, 4);
-        calculation.add(btVar, 2, 4);
-        calculation.add(lblPercentage, 0, 5);
-        calculation.add(txtPercentage, 1, 5);
-        calculation.add(btPercentage, 2, 5);
-
-        return vBox;
-    }
-
     private VBox addAndDelete() {
+
         ImageView add = new ImageView(new Image("icons/add.png"));
-        add.setFitWidth(22);
-        add.setFitHeight(22);
+        add.setFitWidth(24);
+        add.setFitHeight(24);
+
         btAddNewRecord = new Button("   New Record");
         btAddNewRecord.setGraphic(add);
-        btAddNewRecord.setStyle(btStyle);
         btAddNewRecord.setContentDisplay(ContentDisplay.LEFT);
-        btAddNewRecord.setMinWidth(170);
-       // btAddNewRecord.setOnAction(e -> NewRecord.addNewRecord());
+        btAddNewRecord.setMinWidth(250);
+        btAddNewRecord.setMinHeight(40);
+        btAddNewRecord.setStyle(btStyle);
+        btAddNewRecord.setOnMouseEntered(e -> btAddNewRecord.setStyle(styleHover));
+        btAddNewRecord.setOnMouseExited(e -> btAddNewRecord.setStyle(btStyle));
 
         ImageView remove = new ImageView(new Image("icons/remove.png"));
-        remove.setFitHeight(22);
-        remove.setFitWidth(22);
+        remove.setFitHeight(24);
+        remove.setFitWidth(24);
         btRemoveRecord = new Button("   Delete Record");
         btRemoveRecord.setGraphic(remove);
-        btRemoveRecord.setMinWidth(170);
+        btRemoveRecord.setMinWidth(250);
+        btRemoveRecord.setMinHeight(40);
         btRemoveRecord.setStyle(btStyle);
-
         btRemoveRecord.setContentDisplay(ContentDisplay.LEFT);
-        btRemoveRecord.setOnAction(e -> RemoveRecord.removeRecord());
+        btRemoveRecord.setOnMouseEntered(e -> btRemoveRecord.setStyle(styleHover));
+        btRemoveRecord.setOnMouseExited(e -> btRemoveRecord.setStyle(btStyle));
 
 
         ImageView imgStat = new ImageView(new Image("icons/chart.png"));
         imgStat.setFitHeight(24);
         imgStat.setFitWidth(24);
+
         btStatistic = new Button("     Statistic     ");
         btStatistic.setGraphic(imgStat);
-        btStatistic.setMinWidth(170);
+        btStatistic.setMinWidth(250);
+        btStatistic.setMinHeight(40);
         btStatistic.setStyle(btStyle);
         btStatistic.setContentDisplay(ContentDisplay.LEFT);
-        btStatistic.setOnAction(e -> Statistic.statAboveGrade(sec));
+        btStatistic.setOnMouseEntered(e -> btStatistic.setStyle(styleHover));
+        btStatistic.setOnMouseExited(e -> btStatistic.setStyle(btStyle));
 
 
         ImageView imgTopTen = new ImageView(new Image("icons/topTen.png"));
         imgTopTen.setFitHeight(24);
         imgTopTen.setFitWidth(24);
+
         btTopTen = new Button("Top Ten Students");
         btTopTen.setGraphic(imgTopTen);
-        btTopTen.setMinWidth(170);
+        btTopTen.setMinWidth(250);
+        btTopTen.setMinHeight(40);
         btTopTen.setStyle(btStyle);
         btTopTen.setContentDisplay(ContentDisplay.LEFT);
+        btTopTen.setOnMouseEntered(e -> btTopTen.setStyle(styleHover));
+        btTopTen.setOnMouseExited(e -> btTopTen.setStyle(btStyle));
 
         ImageView imgPrint = new ImageView(new Image("icons/print.png"));
-        imgPrint.setFitHeight(22);
-        imgPrint.setFitWidth(22);
+        imgPrint.setFitHeight(24);
+        imgPrint.setFitWidth(24);
+
         btPrintReport = new Button("    Print Report");
         btPrintReport.setGraphic(imgPrint);
-        btPrintReport.setMinWidth(170);
+        btPrintReport.setMaxWidth(250);
+        btPrintReport.setMinHeight(40);
         btPrintReport.setStyle(btStyle);
         btPrintReport.setContentDisplay(ContentDisplay.LEFT);
-        btPrintReport.setOnAction(e -> {
-            if (!CheckTextFiled.isSeatNumber(txtSearch))
-                Massage.displayMassage("Error", "Set Number Invalid");
-        });
+        btPrintReport.setOnMouseEntered(e -> btPrintReport.setStyle(styleHover));
+        btPrintReport.setOnMouseExited(e -> btPrintReport.setStyle(btStyle));
 
 
         VBox vBox = new VBox(15);
@@ -464,9 +315,9 @@ public class TRecordGUI extends Application {
         vBox.setStyle("-fx-background-color: #ffffff");
 
 
-        ImageView imgPer = new ImageView(new Image("icons/calculate.png"));
-        imgPer.setFitWidth(25);
-        imgPer.setFitHeight(25);
+        ImageView imgCalculate = new ImageView(new Image("icons/calculate.png"));
+        imgCalculate.setFitWidth(24);
+        imgCalculate.setFitHeight(24);
 
         calculation = new ComboBox<>();
         calculation.getItems().addAll("Average", "Mode", "Median", "Standard Deviation", "Variance");
@@ -480,10 +331,11 @@ public class TRecordGUI extends Application {
         HBox hBoxCalculation = new HBox(8);
         hBoxCalculation.setPadding(new Insets(0, 5, 5, 5));
         hBoxCalculation.setStyle("-fx-background-color: #ffffff;");
-        hBoxCalculation.getChildren().addAll(imgPer, calculation);
+        hBoxCalculation.getChildren().addAll(imgCalculate, calculation);
         hBoxCalculation.setAlignment(Pos.CENTER);
-        hBoxCalculation.setMargin(imgPer, new Insets(6, 0, 0, 0));
+        hBoxCalculation.setMargin(imgCalculate, new Insets(6, 0, 0, 0));
         hBoxCalculation.setMargin(calculation, new Insets(0, 0, 5, 0));
+
         lblCalculation = new Label();
         lblCalculation.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;  -fx-border-color:#000000; -fx-font-weight: BOLd;-fx-font-size:14; ");
         lblCalculation.setMaxWidth(200);
@@ -532,6 +384,7 @@ public class TRecordGUI extends Application {
         btSearch.setOnAction(e -> {
             if (!txtSearch.getText().isEmpty()) {
                 if (CheckTextFiled.isSeatNumber(txtSearch)) {
+
                     //    SearchRecord.searchRecord();
                     Massage.displayMassage("", txtSearch + " Not exist in records");
                 } else {
@@ -578,13 +431,13 @@ public class TRecordGUI extends Application {
         hBox.setMargin(txtTotalNumber, new Insets(0, 0, 10, 0));
 
         // Vbox to display search block and table view and total number records
-        VBox vBox = new VBox(10);
+        VBox vBox = new VBox(7);
         vBox.setPadding(new Insets(10, 10, 10, 10));
         vBox.setAlignment(Pos.CENTER_LEFT);
         vBox.setStyle("-fx-background-color: #ffffff;");
 
         // to set components of the vBox
-        vBox.getChildren().addAll(search(), tRecordTableView(lit, sec), hBox);
+        vBox.getChildren().addAll(search(), tRecordTableView(), hBox);
 
         return vBox;
     }
@@ -609,19 +462,28 @@ public class TRecordGUI extends Application {
         VLogo.getChildren().addAll(logo);
         VLogo.setMargin(logo, new Insets(125, 0, 0, 0));
 
+        HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(5, 5, 5, 5));
+        hBox.setStyle("-fx-background-color: #ffffff;");
+
+
         // welcome label
         Label lblWelcome = new Label("Welcome To The Academic Record For Tawjihi\n    In The Palestinian Ministry Of Education");
-        lblWelcome.setFont(Font.font("Times New Roman", FontWeight.BOLD, 32));
+        lblWelcome.setFont(Font.font("Times New Roman", FontWeight.BOLD, 36));
         lblWelcome.setPadding(new Insets(5, 0, 15, 0));
         lblWelcome.setAlignment(Pos.CENTER);
-        lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:45;" +
-                " -fx-background-radius:45; -fx-text-fill: #000000; ");
+        lblWelcome.setStyle("-fx-background-color: #f88f01; -fx-border-radius:50;" +
+                " -fx-background-radius:50; -fx-text-fill: #000000; ");
         lblWelcome.setMinWidth(1200);
+
+        hBox.getChildren().addAll(lblWelcome);
+        hBox.setMargin(lblWelcome, new Insets(2, 0, 10, 0));
 
         // to set components of pane
         pane.setRight(RightBorderPane());
         pane.setCenter(VLogo);
-        pane.setTop(lblWelcome);
+        pane.setTop(hBox);
 
         return pane;
     }

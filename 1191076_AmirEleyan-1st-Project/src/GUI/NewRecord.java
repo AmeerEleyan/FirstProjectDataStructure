@@ -99,6 +99,7 @@ public abstract class NewRecord {
 
                         if (list.addBySort(record) == -1) // -1 means that set number is exist in records
                             Massage.displayMassage("Warning", txtSetNumber.getText() + " is already exists in records. Try again");
+                        else Massage.displayMassage("Success", txtSetNumber.getText() + " Added successfully");
 
                     } else {
                         Massage.displayMassage("Warning", "Invalid Grade");

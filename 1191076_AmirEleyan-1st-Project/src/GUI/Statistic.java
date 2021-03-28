@@ -109,6 +109,6 @@ public abstract class Statistic {
         window.setMinWidth(500);
         window.setMinHeight(280);
         window.setResizable(false);
-        window.showAndWait();
+        window.show();
     }
 }

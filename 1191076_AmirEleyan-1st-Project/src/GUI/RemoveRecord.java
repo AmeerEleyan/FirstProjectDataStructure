@@ -10,12 +10,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import linkedList.LinkedList;
+import linkedList.TRecord;
 
 public abstract class RemoveRecord {
     private static Label lblSetNumber;
     private static TextField txtSetNumber;
 
-    public static void removeRecord() {
+    public static void removeRecord(LinkedList<TRecord> list) {
 
         String styleLbl = "-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:14; ";
         String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-size:15; -fx-text-fill: #000000;";
@@ -44,6 +46,26 @@ public abstract class RemoveRecord {
         Button btRemove = new Button("Delete");
         btRemove.setStyle(styleBt);
         btRemove.setMinWidth(60);
+        btRemove.setOnAction(e -> {
+            if (!txtSetNumber.getText().isEmpty()) {
+                if (list.isEmpty()) {
+                    Massage.displayMassage("Error", "There are no records to remove from them");
+                } else {
+                    if (CheckTextFiled.isSeatNumber(txtSetNumber)) {
+                        TRecord tRecord = new TRecord();
+                        tRecord.setSeatNum(Long.parseLong(txtSetNumber.getText()));
+
+                        if (list.remove(tRecord) != null) {
+                            Massage.displayMassage("Success", txtSetNumber.getText() + "Removed successfully");
+                        } else {
+                            Massage.displayMassage("Warning", txtSetNumber.getText() + " Does not exist in records");
+                        }
+                    } else {
+                        Massage.displayMassage("Error", "Invalid Set Number");
+                    }
+                }
+            }
+        });
 
         VBox vBox = new VBox(15);
         vBox.setAlignment(Pos.CENTER);
@@ -56,7 +78,7 @@ public abstract class RemoveRecord {
         window.setMinWidth(300);
         window.setMinHeight(180);
         window.setResizable(false);
-        window.showAndWait();
+        window.show();
 
     }
 }

@@ -18,7 +18,7 @@ public abstract class SearchRecord {
     private static TextField txtSetNumber, txtBranch, txtGrade;
     private static Label lblSetNumber, lblBranch, lblGrade;
 
-    public static void searchRecord(LinkedList<TRecord> list) {
+    public static void searchRecord(TRecord record) {
 
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -40,7 +40,7 @@ public abstract class SearchRecord {
         lblSetNumber.setStyle(styleLbl);
 
 
-        txtSetNumber = new TextField();
+        txtSetNumber = new TextField(record.getSeatNum() + "");
         txtSetNumber.setMaxWidth(150);
         txtSetNumber.setStyle(styleTxt);
         txtSetNumber.setEditable(false);
@@ -49,7 +49,7 @@ public abstract class SearchRecord {
         lblBranch = new Label("Branch");
         lblBranch.setStyle(styleLbl);
 
-        txtBranch = new TextField();
+        txtBranch = new TextField(record.getBranch());
         txtBranch.setMaxWidth(150);
         txtBranch.setStyle(styleTxt);
         txtBranch.setEditable(false);
@@ -58,7 +58,7 @@ public abstract class SearchRecord {
         lblGrade = new Label("Grade");
         lblGrade.setStyle(styleLbl);
 
-        txtGrade = new TextField();
+        txtGrade = new TextField(record.getGrade() + "");
         txtGrade.setMaxWidth(150);
         txtGrade.setStyle(styleTxt);
         txtGrade.setEditable(false);
@@ -78,18 +78,6 @@ public abstract class SearchRecord {
         btOk.setStyle(styleBt);
         btOk.setOnAction(e -> window.close());
 
-        btOk.setOnAction(e -> {
-            if(CheckTextFiled.isSeatNumber(txtSetNumber)){
-                if(CheckTextFiled.isGrade(txtGrade)){
-                   // if(list.search())
-                }else{
-                    Massage.displayMassage("Error Input","The  Set Number Invalid");
-                }
-            }else{
-                Massage.displayMassage("Error Input","The Grade Invalid ");
-            }
-        });
-
 
         VBox vBox = new VBox(25);
         vBox.setAlignment(Pos.CENTER);
@@ -102,7 +90,7 @@ public abstract class SearchRecord {
         window.setMinWidth(300);
         window.setMinHeight(280);
         window.setResizable(false);
-        window.showAndWait();
+        window.show();
 
     }
 }

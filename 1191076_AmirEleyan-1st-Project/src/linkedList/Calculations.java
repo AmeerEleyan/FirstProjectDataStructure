@@ -8,19 +8,11 @@ package linkedList;
 public abstract class Calculations {
 
     // WestBank Records
-    LinkedList<TRecord> westBankLiterarySeatNumber = new LinkedList<>();
-    LinkedList<TRecord> westBankLiteraryGrads = new LinkedList<>();
-    LinkedList<TRecord> westBankScientificSeatNumber = new LinkedList<>();
-    LinkedList<TRecord> westBankScientificGrads = new LinkedList<>();
+   public LinkedList<TRecord> literary;
+    public LinkedList<TRecord> scientific;
 
-    // Gaza Records
-    LinkedList<TRecord> gazaLiterarySeatNumber = new LinkedList<>();
-    LinkedList<TRecord> gazaLiteraryGrads = new LinkedList<>();
-    LinkedList<TRecord> gazaScientificSeatNumber = new LinkedList<>();
-    LinkedList<TRecord> gazaScientificGrads = new LinkedList<>();
 
-    // Utility list
-    LinkedList<TRecord> utility = new LinkedList<>();
+
 
     // Top Ten Grads
     static LinkedList<TRecord> topTen = new LinkedList<>();
