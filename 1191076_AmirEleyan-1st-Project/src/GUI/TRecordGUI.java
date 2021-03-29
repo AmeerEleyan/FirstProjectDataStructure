@@ -59,10 +59,12 @@ public class TRecordGUI extends Application {
         window = primaryStage;
         window.setTitle("Tawjihi Records");
         MainScene = new Scene(AllComponents());
+        uploadData();
         Controller();
         window.setScene(MainScene);
         window.setResizable(false);
         window.show();
+        Massage.displayMassage("Success", "The data has been uploaded successfully");
     }
 
     private BorderPane RightBorderPane() {
@@ -426,7 +428,7 @@ public class TRecordGUI extends Application {
         try {
             input = new Scanner(file);
             if (file.length() == 0) {
-                throw new IOException("There's No data in file " + fileName);
+                throw new IOException("  There's No data in file " + fileName + "  ");
             } else {
                 TRecord student;
                 int line = 1;
@@ -437,63 +439,84 @@ public class TRecordGUI extends Application {
                         else if (student.isScientific()) scientificLinkedList.addBySort(student);
                         line++;
                     } catch (Exception ex) {
-                        Massage.displayMassage("Warning", "Error reading in student info in line # " + line + " in file " + fileName);
+                        Massage.displayMassage("Warning", " Error reading in student info in line # " + line + " in file " + fileName + "  ");
                     }
                 }
                 input.close();
             }
 
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("The system can not find the file " + fileName);
+            throw new FileNotFoundException(" The system can not find the file " + fileName + "  ");
         }
     }
 
     private void Controller() {
 
         // Actions on ComboBox region
+
         WestAndGaza.setOnAction(e -> {
-            recordTableView.getItems().clear();
+            recordTableView.getItems().clear();  // clear all data in table view
+            txtTotalNumber.setText(""); // clear data in textFiled totalNumber
             rbScience.setSelected(false);
             rbLiterary.setSelected(false);
-            txtTotalNumber.setText("");
-
-            // Read data from westBank file
-            if (WestAndGaza.getValue().equals("West Bank")) {
-                Calculations.literaryList = new LinkedList<>();
-                Calculations.scientificList = new LinkedList<>();
-                try {
-                    readDataFromFile("WestBank_2019.txt", Calculations.literaryList, Calculations.scientificList);
-                } catch (IOException ex) {
-                    Massage.displayMassage("Error", ex.getMessage());
-                }
-
-            }// Read data from Gaza file
-            else if (WestAndGaza.getValue().equals("Gaza")) {
-                Calculations.literaryList = new LinkedList<>();
-                Calculations.scientificList = new LinkedList<>();
-                try {
-                    readDataFromFile("Gaza_2019.txt", Calculations.literaryList, Calculations.scientificList);
-                } catch (IOException ex) {
-                    Massage.displayMassage("Error", ex.getMessage());
-                }
-            }
         });
+
 
         // Actions on radio button branch
 
         rbLiterary.setOnAction(e -> {
-            if (!WestAndGaza.getValue().isEmpty()) {
-                uploadListToTable(Calculations.literaryList);
-                System.out.println(Calculations.literaryList.length());
+            if (WestAndGaza.getValue() == null) {
+                Massage.displayMassage("", "Pleas select the region");
+                rbLiterary.setSelected(false);
+            } else if (WestAndGaza.getValue() != null &&
+                    WestAndGaza.getValue().equals("West Bank")) {
+
+                recordTableView.getItems().clear();// clear all data in table view
+                txtTotalNumber.setText("");// clear data in textFiled totalNumber
+                uploadListToTable(Calculations.westBankLiteraryList);
+
+            } else if (WestAndGaza.getValue() != null &&
+                    WestAndGaza.getValue().equals("Gaza")) {
+
+                recordTableView.getItems().clear();// clear all data in table view
+                txtTotalNumber.setText("");// clear data in textFiled totalNumber
+                uploadListToTable(Calculations.gazaLiterary);
+
             }
         });
 
         rbScience.setOnAction(e -> {
-            if (!WestAndGaza.getValue().isEmpty()) {
-                uploadListToTable(Calculations.scientificList);
+            if (WestAndGaza.getValue() == null) {
+                Massage.displayMassage("", "Pleas select the region");
+                rbScience.setSelected(false);
+
+            } else if (WestAndGaza.getValue() != null
+                    && WestAndGaza.getValue().equals("West Bank")) {
+
+                recordTableView.getItems().clear(); // clear all data in table view
+                txtTotalNumber.setText("");// clear data in textFiled totalNumber
+                uploadListToTable(Calculations.westBankScientificList);
+
+            } else if (WestAndGaza.getValue() != null
+                    && WestAndGaza.getValue().equals("Gaza")) {
+
+                recordTableView.getItems().clear(); // clear all data in table view
+                txtTotalNumber.setText("");// clear data in textFiled totalNumber
+                uploadListToTable(Calculations.gazaScientific);
+
             }
         });
 
+
+    }
+
+    public void uploadData() {
+        try {
+            readDataFromFile("Gaza_2019.txt", Calculations.gazaLiterary, Calculations.gazaScientific);
+            readDataFromFile("WestBank_2019.txt", Calculations.westBankLiteraryList, Calculations.westBankScientificList);
+        } catch (IOException ex) {
+            Massage.displayMassage("Error", ex.getMessage());
+        }
 
     }
 }
