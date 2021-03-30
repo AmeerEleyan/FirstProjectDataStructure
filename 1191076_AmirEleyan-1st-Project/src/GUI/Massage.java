@@ -39,7 +39,8 @@ public abstract class Massage {
 
         // label for display massage
         Label lbl = new Label(massage);
-        lbl.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff; -fx-font-size:15; -fx-font-family: 'Arial';");
+        lbl.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff; -fx-font-size:17;" +
+                " -fx-font-family: 'Arial';");
         lbl.setAlignment(Pos.CENTER);
 
         // icon
@@ -55,7 +56,7 @@ public abstract class Massage {
 
         // button for close window
         Button closeButton = new Button("OK");
-        closeButton.setMinWidth(80);
+        closeButton.setMinWidth(75);
         closeButton.setStyle(styleBt);
 
         // To change the design of the button when placing a mouse arrow on it
