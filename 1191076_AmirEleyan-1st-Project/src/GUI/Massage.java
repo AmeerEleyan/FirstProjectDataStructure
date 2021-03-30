@@ -26,21 +26,23 @@ public abstract class Massage {
         window.setTitle(title);
         window.setMinWidth(250);
 
-        String btStyle = "-fx-background-color:f88f01; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;" +
-                " -fx-border-width: 1; -fx-border-color: 'black'; -fx-text-fill: #000000; -fx-font-family:" +
-                " 'Calisto MT'; -fx-font-weight: BOLd; ";
+        // Style for buttons
+        String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
+                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:15;" +
+                "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
-        String styleHover = "-fx-background-color:#ffffff; -fx-background-radius:25;" +
-                "-fx-font-size:15; -fx-border-radius:25;-fx-border-color: #000000;" +
-                " -fx-border-width: 1; -fx-text-fill: #000000; -fx-font-family: " +
-                "'Calisto MT'; -fx-font-weight: BOLd;";
+        // Style for hover buttons
+        String styleHoverBt = "-fx-background-color: #ffffff; -fx-border-radius:25; -fx-background-radius:25; " +
+                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:15;" +
+                "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
 
+        // label for display massage
         Label lbl = new Label(massage);
         lbl.setStyle("-fx-text-fill:#000000; -fx-background-color:#ffffff; -fx-font-size:15; -fx-font-family: 'Arial';");
         lbl.setAlignment(Pos.CENTER);
 
+        // icon
         ImageView imgWarning = new ImageView(new Image("icons/warning.png"));
         imgWarning.setFitWidth(32);
         imgWarning.setFitHeight(32);
@@ -51,31 +53,30 @@ public abstract class Massage {
         hBox.setStyle("-fx-background-color: #ffffff;");
         hBox.getChildren().addAll(imgWarning, lbl);
 
+        // button for close window
         Button closeButton = new Button("OK");
-        closeButton.setStyle(btStyle);
+        closeButton.setMinWidth(80);
+        closeButton.setStyle(styleBt);
 
         // To change the design of the button when placing a mouse arrow on it
         closeButton.setOnMouseEntered(e -> {
-            closeButton.setStyle(styleHover);
+            closeButton.setStyle(styleHoverBt);
         });
         // To change the design of the button when the mouse arrow is removed from it
         closeButton.setOnMouseExited(e -> {
-            closeButton.setStyle(btStyle);
+            closeButton.setStyle(styleBt);
         });
-
-        closeButton.setMinWidth(75);
         closeButton.setOnAction(e -> window.close());
 
         VBox vBox = new VBox(12);
         vBox.getChildren().addAll(hBox, closeButton);
         vBox.setAlignment(Pos.CENTER);
         vBox.setStyle("-fx-background-color: #ffffff;");
-        vBox.setMinWidth(400);
-        vBox.setMinHeight(100);
+        vBox.setMinWidth(420);
+        vBox.setMinHeight(120);
 
         window.setScene(new Scene(vBox));
         window.setResizable(false);
         window.show();
     }
-
 }
