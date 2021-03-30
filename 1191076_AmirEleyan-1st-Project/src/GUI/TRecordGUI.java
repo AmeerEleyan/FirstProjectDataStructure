@@ -466,17 +466,15 @@ public class TRecordGUI extends Application {
 
         rbLiterary.setOnAction(e -> {
             if (WestAndGaza.getValue() == null) {
-                Massage.displayMassage("", "Pleas select the region");
+                Massage.displayMassage("", "Please select the region");
                 rbLiterary.setSelected(false);
-            } else if (WestAndGaza.getValue() != null &&
-                    WestAndGaza.getValue().equals("West Bank")) {
+            } else if (WestAndGaza.getValue().equals("West Bank")) {
 
                 recordTableView.getItems().clear();// clear all data in table view
                 txtTotalNumber.setText("");// clear data in textFiled totalNumber
                 uploadListToTable(Calculations.westBankLiteraryList);
 
-            } else if (WestAndGaza.getValue() != null &&
-                    WestAndGaza.getValue().equals("Gaza")) {
+            } else if (WestAndGaza.getValue().equals("Gaza")) {
 
                 recordTableView.getItems().clear();// clear all data in table view
                 txtTotalNumber.setText("");// clear data in textFiled totalNumber
@@ -487,18 +485,16 @@ public class TRecordGUI extends Application {
 
         rbScience.setOnAction(e -> {
             if (WestAndGaza.getValue() == null) {
-                Massage.displayMassage("", "Pleas select the region");
+                Massage.displayMassage("", "Please select the region");
                 rbScience.setSelected(false);
 
-            } else if (WestAndGaza.getValue() != null
-                    && WestAndGaza.getValue().equals("West Bank")) {
+            } else if (WestAndGaza.getValue().equals("West Bank")) {
 
                 recordTableView.getItems().clear(); // clear all data in table view
                 txtTotalNumber.setText("");// clear data in textFiled totalNumber
                 uploadListToTable(Calculations.westBankScientificList);
 
-            } else if (WestAndGaza.getValue() != null
-                    && WestAndGaza.getValue().equals("Gaza")) {
+            } else if (WestAndGaza.getValue().equals("Gaza")) {
 
                 recordTableView.getItems().clear(); // clear all data in table view
                 txtTotalNumber.setText("");// clear data in textFiled totalNumber
@@ -507,13 +503,81 @@ public class TRecordGUI extends Application {
             }
         });
 
+        btSearch.setOnAction(e -> {
+            if (WestAndGaza.getValue() == null) {
+                Massage.displayMassage("", "Please select the region");
+            } else {
+                if (!rbScience.isSelected() && !rbLiterary.isSelected()) {
+
+                    Massage.displayMassage("", "Please select the the branch");
+                    // search in branch scientific on west bank
+                } else if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+
+                    if (!txtSearch.getText().trim().isEmpty()) { // txtSearch not empty
+
+                        if (CheckTextFiled.isSeatNumber(txtSearch)) { // valid seat number
+
+                            if (Calculations.westBankScientificList.isEmpty()) { // no data in list west bank scientific
+                                Massage.displayMassage("Error", " There is no records to search from them ");
+                            } else {
+                                // Search for this records in list scientific in west bank
+                                TRecord temp = Calculations.westBankScientificList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
+                                if (temp == null) { // this records does not exist
+                                    Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nscientific on West Bank ");
+                                } else {
+                                    SearchRecord.searchRecord(temp);
+                                }
+                            }
+                        } else {
+                            Massage.displayMassage("Error", " Invalid set number ");
+                        }
+                    }
+
+                } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    if (!txtSearch.getText().trim().isEmpty()) { // txtSearch not empty
+
+                        if (CheckTextFiled.isSeatNumber(txtSearch)) { // valid seat number
+
+                            if (Calculations.westBankLiteraryList.isEmpty()) { // no data in list west bank scientific
+                                Massage.displayMassage("Error", " There is no records to search from them ");
+                            } else {
+                                // Search for this records in list scientific in west bank
+                                TRecord temp = Calculations.westBankLiteraryList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
+                                if (temp == null) { // this records does not exist
+                                    Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nliterary on West Bank ");
+                                } else {
+                                    SearchRecord.searchRecord(temp);
+                                }
+                            }
+                        } else {
+                            Massage.displayMassage("Error", " Invalid set number ");
+                        }
+                    }
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    if (CheckTextFiled.isSeatNumber(txtSearch)) {
+
+                    } else {
+                        Massage.displayMassage("Error", " Invalid set number ");
+                    }
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    if (CheckTextFiled.isSeatNumber(txtSearch)) {
+
+                    } else {
+                        Massage.displayMassage("Error", " Invalid set number ");
+                    }
+
+                }
+            }
+        });
 
     }
 
     public void uploadData() {
         try {
-            readDataFromFile("Gaza_2019.txt", Calculations.gazaLiterary, Calculations.gazaScientific);
-            readDataFromFile("WestBank_2019.txt", Calculations.westBankLiteraryList, Calculations.westBankScientificList);
+            readDataFromFile("Gaza_2019.csv", Calculations.gazaLiterary, Calculations.gazaScientific);
+            readDataFromFile("WestBank_2019.csv", Calculations.westBankLiteraryList, Calculations.westBankScientificList);
         } catch (IOException ex) {
             Massage.displayMassage("Error", ex.getMessage());
         }

@@ -25,6 +25,10 @@ public class TRecord implements Comparable<TRecord> {
     public TRecord() {
     }
 
+    public TRecord(long seatNum) {
+        this.seatNum = seatNum;
+    }
+
     // Constructor with specific values
     public TRecord(String line) {
         // 33090802,scientific,80.6
@@ -99,7 +103,7 @@ public class TRecord implements Comparable<TRecord> {
     public String toString() {
         return "Student: " + this.seatNum + " ," + this.grade + " ," + this.branch + '\n';
     }
-    
+
 
     // if two obj has a same set number
     @Override
