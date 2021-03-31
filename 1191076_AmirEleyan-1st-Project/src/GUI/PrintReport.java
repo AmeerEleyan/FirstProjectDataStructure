@@ -14,14 +14,17 @@ public class PrintReport {
     /**
      * Writing data from List to file
      */
-    public static void writeDataInFile(LinkedList<TRecord> list, LinkedList<TRecord> topTen, String region, String branch) {
+    public static void writeDataInFile(LinkedList<TRecord> list, String region, String branch) {
         //List is Empty
         if (list.isEmpty()) {
-            Massage.displayMassage("Error", "There is no data to print it in file");
+            Massage.displayMassage("Error", " There is no data to print it in file ");
         } else {
             File file;
             PrintWriter printData;
+            LinkedList<TRecord> topTen = new LinkedList<>();
             try {
+
+                Calculations.topTenGrads(list, topTen);
                 Statistic.statAboveGrade(list);
 
                 /* constructor of File class having file as argument */
@@ -29,8 +32,9 @@ public class PrintReport {
 
                 /* file to writing data */
                 printData = new PrintWriter(file);
-                printData.println("\n\t\t******Report on " + branch + " students in " + region + "******");
-                printData.println("The top ten grads are:");
+                printData.println("\n\t\t\t******Report on " + branch + " students in " + region + "******\n");
+                printData.println("The top ten students are:");
+
                 Node<TRecord> current = topTen.getHead();
                 while (current != null) {
                     printData.println(current);
@@ -43,15 +47,15 @@ public class PrintReport {
                 float median = Calculations.calculateMedian(list);
                 float sd = Calculations.calculateStandardDeviation(list);
                 float variance = Calculations.calculateVariance(list);
-                int stat = Calculations.numberOfRecordAboveAGrade(list, Statistic.grade);
+                int stat = Calculations.numberOfRecordAboveAGrade(list, Statistic.totalGrade);
 
-                printData.println("The average is: " + String.format("%.2f", avg));
-                printData.println("The Mode is: " + ((mode == 0) ? "There's no mode" : String.format("%.2f", mode)));
-                printData.println("The median is: " + String.format("%.2f", median));
-                printData.println("The stander deviation is: " + String.format("%.2f", sd));
-                printData.println("The variance is: " + String.format("%.2f", variance));
-                printData.println("The number of students who obtained a " + Statistic.grade + " or more: " + stat +
-                        "\nAnd their percentage: " + String.format("%.2f", (stat / list.length()) * 100) + "%");
+                printData.println("\nThe average is: " + String.format("%.2f", avg));
+                printData.println("\nThe Mode is: " + ((mode == 0) ? "There's no mode" : String.format("%.2f", mode)));
+                printData.println("\nThe median is: " + String.format("%.2f", median));
+                printData.println("\nThe stander deviation is: " + String.format("%.2f", sd));
+                printData.println("\nThe variance is: " + String.format("%.2f", variance));
+                printData.println("\nThe number of students who obtained a " + Statistic.totalGrade + " or more: " + stat +
+                        "\nAnd their percentage: " + String.format("%.2f", ((float) stat / list.length()) * 100) + "%");
 
                 printData.close(); // close file
 

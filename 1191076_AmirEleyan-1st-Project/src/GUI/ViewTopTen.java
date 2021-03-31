@@ -42,7 +42,7 @@ public abstract class ViewTopTen {
 
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Remove Record");
+        window.setTitle("TOP TEN STUDENTS");
 
         //VBox
         VBox vBox = new VBox(15);

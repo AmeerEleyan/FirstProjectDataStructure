@@ -5,6 +5,8 @@
  */
 package linkedList;
 
+import GUI.Massage;
+
 public abstract class Calculations {
 
     // WestBank Records
@@ -36,6 +38,7 @@ public abstract class Calculations {
 
             return sum / counter;
         }
+        Massage.displayMassage("Error", " There are no data to calculate its Average ");
         return 0.0F;
     }
 
@@ -77,8 +80,12 @@ public abstract class Calculations {
                 current = current.getNext();
             }
             if (counter != 0) return mode;
-            else return 0;
+            else {
+                Massage.displayMassage("", " There is no Mode in this data ");
+                return 0;
+            }
         }
+        Massage.displayMassage("Error", " There are no data to calculate its Mode ");
         return -1.0F;
     }
 
@@ -106,6 +113,7 @@ public abstract class Calculations {
                 return ((previous.getData().getGrade() + current.getData().getGrade()) / 2);
             }
         }
+        Massage.displayMassage("Error", " There are no data to calculate its Median ");
         return 0.0F;
     }
 
@@ -126,6 +134,7 @@ public abstract class Calculations {
             }
             return ((float) Math.sqrt((sum / (TRecordLinkedList.length() - 1))));
         }
+        Massage.displayMassage("Error", " There are no data to calculate its Stander Deviation ");
         return 0.0F;
     }
 
@@ -137,6 +146,7 @@ public abstract class Calculations {
             float var = calculateStandardDeviation(TRecordLinkedList);
             return (float) Math.pow(var, 2);
         } else {
+            Massage.displayMassage("Error", " There are no data to calculate its Variance ");
             return 0.0F;
         }
     }
@@ -157,6 +167,7 @@ public abstract class Calculations {
                 if (count >= 10 && (current.getData().getGrade() != previous.getData().getGrade())) break;
             }
         }
+        Massage.displayMassage("Error", " There are no records to display Top Ten Grads ");
     }
 
     /**
@@ -175,6 +186,7 @@ public abstract class Calculations {
             }
             return count;
         }
+        Massage.displayMassage("Error", " There is no data to statistic ");
         return 0;
     }
 

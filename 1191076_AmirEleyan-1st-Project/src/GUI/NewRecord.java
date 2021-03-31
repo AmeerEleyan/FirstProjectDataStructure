@@ -101,7 +101,7 @@ public abstract class NewRecord {
         //  Actions on add button
         btAdd.setOnAction(e -> {
             // There is an empty text between the textFields
-            if (!txtSetNumber.getText().isEmpty() && !txtGrade.getText().isEmpty() && !txtBranch.getText().isEmpty()) {
+            if (!txtSetNumber.getText().trim().isEmpty() && !txtGrade.getText().isEmpty() && !txtBranch.getText().isEmpty()) {
 
                 if (CheckTextFiled.isSeatNumber(txtSetNumber)) { // setNumber is valid
                     if (CheckTextFiled.isGrade(txtGrade)) { // grade is valid

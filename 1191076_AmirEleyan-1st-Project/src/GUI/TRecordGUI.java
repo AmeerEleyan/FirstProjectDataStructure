@@ -467,6 +467,7 @@ public class TRecordGUI extends Application {
 
             // Uploading data from WestBank_2019.csv file and add them to the lists
             readDataFromFile("WestBank_2019.csv", Calculations.westBankLiteraryList, Calculations.westBankScientificList);
+
         } catch (IOException ex) {
             Massage.displayMassage("Error: \n", ex.getMessage());
         }
@@ -493,6 +494,10 @@ public class TRecordGUI extends Application {
         PrintReportButton(); // Actions for print report button
 
         TopTenButton(); // Actions for top ten button
+
+        StatisticButton();// Actions for statistic button
+
+        ComboBoxCalculations(); // Actions for ComboBox calculations
     }
 
 
@@ -713,7 +718,28 @@ public class TRecordGUI extends Application {
      * Actions for print report button
      */
     private void PrintReportButton() {
+        btPrintReport.setOnAction(e -> {
+            if (WestAndGaza.getValue() == null) { // The region has not been selected
+                Massage.displayMassage("", " Please select the region ");
 
+            } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
+                Massage.displayMassage("", " Please select the the branch ");
+            } else {
+                if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    PrintReport.writeDataInFile(Calculations.westBankScientificList, "West Bank", "Scientific");
+
+                } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    PrintReport.writeDataInFile(Calculations.westBankLiteraryList, "West Bank", "Literary");
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    PrintReport.writeDataInFile(Calculations.gazaScientific, "Gaza", "Scientific");
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    PrintReport.writeDataInFile(Calculations.gazaLiterary, "Gaza", "Literary");
+                }
+                Massage.displayMassage("Success", " The report has been successfully printed ");
+            }
+        });
     }
 
     /**
@@ -727,7 +753,6 @@ public class TRecordGUI extends Application {
             } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
                 Massage.displayMassage("", " Please select the the branch ");
             } else {
-                // Checking whether the record to be deleted exists  or not, and removing it from the records if it exists
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                     ViewTopTen.TopTenRecords(Calculations.westBankScientificList);
 
@@ -740,6 +765,131 @@ public class TRecordGUI extends Application {
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                     ViewTopTen.TopTenRecords(Calculations.gazaLiterary);
                 }
+            }
+        });
+    }
+
+    /**
+     * Actions for statistic button
+     */
+    private void StatisticButton() {
+        btStatistic.setOnAction(e -> {
+            if (WestAndGaza.getValue() == null) { // The region has not been selected
+                Massage.displayMassage("", " Please select the region ");
+
+            } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
+                Massage.displayMassage("", " Please select the the branch ");
+            } else {
+                if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    Statistic.statAboveGrade(Calculations.westBankScientificList);
+
+                } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    Statistic.statAboveGrade(Calculations.westBankLiteraryList);
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    Statistic.statAboveGrade(Calculations.gazaScientific);
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    Statistic.statAboveGrade(Calculations.gazaLiterary);
+                }
+            }
+        });
+    }
+
+    /**
+     * Actions on CompoBox calculations
+     */
+    private void ComboBoxCalculations() {
+        calculation.setOnAction(e -> {
+            lblCalculation.setText("");
+            if (WestAndGaza.getValue() == null) { // The region has not been selected
+                Massage.displayMassage("", " Please select the region ");
+
+            } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
+                Massage.displayMassage("", " Please select the the branch ");
+            } else {
+                if (calculation.getValue().equals("Average")) {
+                    float avg = 0.0F;
+                    if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                        avg = Calculations.calculateAverage(Calculations.westBankScientificList);
+
+                    } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                        avg = Calculations.calculateAverage(Calculations.westBankLiteraryList);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                        avg = Calculations.calculateAverage(Calculations.gazaScientific);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                        avg = Calculations.calculateAverage(Calculations.gazaLiterary);
+                    }
+                    if (avg != 0.0F) lblCalculation.setText(String.format("%.2f", avg));
+
+                } else if (calculation.getValue().equals("Mode")) {
+                    float mode = 0.0F;
+                    if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                        mode = Calculations.calculateMode(Calculations.westBankScientificList);
+
+                    } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                        mode = Calculations.calculateMode(Calculations.westBankLiteraryList);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                        mode = Calculations.calculateMode(Calculations.gazaScientific);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                        mode = Calculations.calculateMode(Calculations.gazaLiterary);
+                    }
+                    if (mode != 0.0F) lblCalculation.setText(String.format("%.2f", mode));
+
+                } else if (calculation.getValue().equals("Median")) {
+                    float median = 0.0F;
+                    if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                        median = Calculations.calculateMedian(Calculations.westBankScientificList);
+
+                    } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                        median = Calculations.calculateMedian(Calculations.westBankLiteraryList);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                        median = Calculations.calculateMedian(Calculations.gazaScientific);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                        median = Calculations.calculateMedian(Calculations.gazaLiterary);
+                    }
+                    if (median != 0.0F) lblCalculation.setText(String.format("%.2f", median));
+
+                } else if (calculation.getValue().equals("Standard Deviation")) {
+                    float sd = 0.0F;
+                    if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                        sd = Calculations.calculateStandardDeviation(Calculations.westBankScientificList);
+
+                    } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                        sd = Calculations.calculateStandardDeviation(Calculations.westBankLiteraryList);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                        sd = Calculations.calculateStandardDeviation(Calculations.gazaScientific);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                        sd = Calculations.calculateStandardDeviation(Calculations.gazaLiterary);
+                    }
+                    if (sd != 0.0F) lblCalculation.setText(String.format("%.2f", sd));
+
+                } else if (calculation.getValue().equals("Variance")) {
+                    float variance = 0.0F;
+                    if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                        variance = Calculations.calculateVariance(Calculations.westBankScientificList);
+
+                    } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                        variance = Calculations.calculateVariance(Calculations.westBankLiteraryList);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                        variance = Calculations.calculateVariance(Calculations.gazaScientific);
+
+                    } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                        variance = Calculations.calculateVariance(Calculations.gazaLiterary);
+                    }
+                    if (variance != 0.0F) lblCalculation.setText(String.format("%.2f", variance));
+
+                }
+
             }
         });
     }

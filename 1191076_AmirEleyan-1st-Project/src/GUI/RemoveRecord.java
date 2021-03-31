@@ -66,7 +66,7 @@ public abstract class RemoveRecord {
         btRemove.setOnMouseExited(e -> btRemove.setStyle(styleBt));
 
         btRemove.setOnAction(e -> {
-            if (!txtSetNumber.getText().isEmpty()) { // the textFiled has data
+            if (!txtSetNumber.getText().trim().isEmpty()) { // the textFiled has data
                 if (list.isEmpty()) { // list is empty (does not have records)
                     Massage.displayMassage("Error", "There are no records to remove from them");
                 } else {
