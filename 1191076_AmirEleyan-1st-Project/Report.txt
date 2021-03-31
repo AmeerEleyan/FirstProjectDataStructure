@@ -1,0 +1,43 @@
+
+			******Report on Literary students in West Bank******
+
+
+The top ten students are:
+
+1- Student: 26007281 ,99.5 ,Literary
+
+2- Student: 18015705 ,99.3 ,Literary
+
+3- Student: 12022709 ,99.3 ,Literary
+
+4- Student: 18016165 ,99.2 ,Literary
+
+5- Student: 26006768 ,99.1 ,Literary
+
+6- Student: 18015743 ,99.1 ,Literary
+
+7- Student: 14029778 ,99.1 ,Literary
+
+8- Student: 14029634 ,99.1 ,Literary
+
+9- Student: 14029516 ,99.1 ,Literary
+
+10- Student: 13019616 ,99.1 ,Literary
+
+11- Student: 12024187 ,99.1 ,Literary
+
+
+
+
+The average is: 73.33
+
+The Mode is: 73.60
+
+The median is: 72.90
+
+The stander deviation is: 12.06
+
+The variance is: 145.44
+
+The number of students who obtained an mark 65.2 or more: 13236
+And their percentage: 70.76%

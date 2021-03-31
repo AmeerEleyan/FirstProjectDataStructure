@@ -366,13 +366,17 @@ public class TRecordGUI extends Application {
 
         // Palestinian Ministry Of Education Logo
         ImageView logo = new ImageView(new Image("icons/logo.png"));
-        logo.setFitHeight(450);
-        logo.setFitWidth(520);
+        logo.setFitHeight(370);
+        logo.setFitWidth(450);
+
+        ImageView graduate = new ImageView(new Image("icons/graduates.png"));
+        graduate.setFitHeight(280);
+        graduate.setFitWidth(480);
 
         // VBox for Main Logo
         VBox VLogo = new VBox();
-        VLogo.getChildren().addAll(logo);
-        VLogo.setMargin(logo, new Insets(115, 0, 0, 0));
+        VLogo.getChildren().addAll(logo, graduate);
+        VLogo.setAlignment(Pos.CENTER);
 
         HBox hBox = new HBox(10);
         hBox.setAlignment(Pos.CENTER);
