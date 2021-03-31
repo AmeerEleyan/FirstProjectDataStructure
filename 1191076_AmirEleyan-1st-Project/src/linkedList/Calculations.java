@@ -17,7 +17,7 @@ public abstract class Calculations {
 
 
     // Top Ten Grads
-    static LinkedList<TRecord> topTen = new LinkedList<>();
+    public static LinkedList<TRecord> topTen = new LinkedList<>();
 
 
     /**

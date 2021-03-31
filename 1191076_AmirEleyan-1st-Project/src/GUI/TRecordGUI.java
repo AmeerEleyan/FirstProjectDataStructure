@@ -58,7 +58,7 @@ public class TRecordGUI extends Application {
         window = primaryStage;
         window.setTitle("Tawjihi Records");
         MainScene = new Scene(AllComponents());
-        uploadData();
+        uploadDataFromFile();
         Controllers();
         window.setScene(MainScene);
         window.setResizable(false);
@@ -135,7 +135,7 @@ public class TRecordGUI extends Application {
     }
 
 
-    private TableView<TRecord> tRecordTableView() {
+    public static TableView<TRecord> tRecordTableView() {
         recordTableView = new TableView<>();
         recordTableView.setEditable(false);
         recordTableView.setMinWidth(580);
@@ -144,7 +144,7 @@ public class TRecordGUI extends Application {
         TableColumn<TRecord, Long> setNumber = new TableColumn<>("Set Number");
         setNumber.setMinWidth(280);
         setNumber.setEditable(false);
-        setNumber.setSortable(true);
+        setNumber.setSortable(false);
         setNumber.setResizable(false);
         setNumber.setCellValueFactory(new PropertyValueFactory<>("seatNum"));
 
@@ -158,11 +158,10 @@ public class TRecordGUI extends Application {
         TableColumn<TRecord, Float> grade = new TableColumn<>("Grade");
         grade.setMinWidth(150);
         grade.setEditable(false);
-        grade.setSortable(true);
+        grade.setSortable(false);
         grade.setResizable(false);
         grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
         recordTableView.getColumns().addAll(setNumber, branch, grade);
-
 
         return recordTableView;
     }
@@ -461,7 +460,7 @@ public class TRecordGUI extends Application {
     /**
      * Upload date to table view
      */
-    public void uploadData() {
+    public void uploadDataFromFile() {
         try {
             // Uploading data from Gaza_2019.csv file and add them to the lists
             readDataFromFile("Gaza_2019.csv", Calculations.gazaLiterary, Calculations.gazaScientific);
@@ -490,6 +489,10 @@ public class TRecordGUI extends Application {
         NewRecordButton(); // Action on newRecord button
 
         RemoveRecordButton(); // Actions for remove exist record
+
+        PrintReportButton(); // Actions for print report button
+
+        TopTenButton(); // Actions for top ten button
     }
 
 
@@ -701,6 +704,41 @@ public class TRecordGUI extends Application {
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                     RemoveRecord.removeRecord(Calculations.gazaLiterary);
+                }
+            }
+        });
+    }
+
+    /**
+     * Actions for print report button
+     */
+    private void PrintReportButton() {
+
+    }
+
+    /**
+     * Actions for top ten button
+     */
+    private void TopTenButton() {
+        btTopTen.setOnAction(e -> {
+            if (WestAndGaza.getValue() == null) { // The region has not been selected
+                Massage.displayMassage("", " Please select the region ");
+
+            } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
+                Massage.displayMassage("", " Please select the the branch ");
+            } else {
+                // Checking whether the record to be deleted exists  or not, and removing it from the records if it exists
+                if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    ViewTopTen.TopTenRecords(Calculations.westBankScientificList);
+
+                } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    ViewTopTen.TopTenRecords(Calculations.westBankLiteraryList);
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    ViewTopTen.TopTenRecords(Calculations.gazaScientific);
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    ViewTopTen.TopTenRecords(Calculations.gazaLiterary);
                 }
             }
         });
