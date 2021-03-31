@@ -33,12 +33,14 @@ public class PrintReport {
                 /* file to writing data */
                 printData = new PrintWriter(file);
                 printData.println("\n\t\t\t******Report on " + branch + " students in " + region + "******\n");
-                printData.println("The top ten students are:");
+                printData.println("\nThe top ten students are:\n");
 
                 Node<TRecord> current = topTen.getHead();
+                int count = 1;
                 while (current != null) {
-                    printData.println(current);
+                    printData.println(count + "- " + current);
                     current = current.getNext();
+                    count++;
                 }
                 printData.println("\n");
 

@@ -25,6 +25,7 @@ public class TRecord implements Comparable<TRecord> {
     public TRecord() {
     }
 
+     // Constructor with set number argument
     public TRecord(long seatNum) {
         this.seatNum = seatNum;
     }

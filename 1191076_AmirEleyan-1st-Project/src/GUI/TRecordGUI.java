@@ -362,14 +362,14 @@ public class TRecordGUI extends Application {
         pane.setStyle("-fx-background-color: #ffffff;");
 
         // Palestinian Ministry Of Education Logo
-        ImageView logo = new ImageView(new Image("icons/logo.jpg"));
-        logo.setFitHeight(400);
-        logo.setFitWidth(400);
+        ImageView logo = new ImageView(new Image("icons/logo.png"));
+        logo.setFitHeight(450);
+        logo.setFitWidth(520);
 
         // VBox for Main Logo
         VBox VLogo = new VBox();
         VLogo.getChildren().addAll(logo);
-        VLogo.setMargin(logo, new Insets(125, 0, 0, 0));
+        VLogo.setMargin(logo, new Insets(115, 0, 0, 0));
 
         HBox hBox = new HBox(10);
         hBox.setAlignment(Pos.CENTER);
@@ -384,7 +384,7 @@ public class TRecordGUI extends Application {
         lblWelcome.setAlignment(Pos.CENTER);
         lblWelcome.setStyle("-fx-background-color: #05dfd7; -fx-border-radius:50;" +
                 " -fx-background-radius:50; -fx-text-fill: #000000; ");
-        lblWelcome.setMinWidth(1300);
+        lblWelcome.setMinWidth(1400);
 
         hBox.getChildren().addAll(lblWelcome);
         hBox.setMargin(lblWelcome, new Insets(2, 0, 10, 0));
