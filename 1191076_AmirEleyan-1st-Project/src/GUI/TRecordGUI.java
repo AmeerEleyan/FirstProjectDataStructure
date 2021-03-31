@@ -748,7 +748,6 @@ public class TRecordGUI extends Application {
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                     PrintReport.writeDataInFile(Calculations.gazaLiterary, "Gaza", "Literary");
                 }
-                Massage.displayMassage("Success", " The report has been successfully printed ");
             }
         });
     }

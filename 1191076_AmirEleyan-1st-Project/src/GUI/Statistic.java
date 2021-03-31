@@ -23,9 +23,9 @@ import linkedList.TRecord;
 
 public abstract class Statistic {
     private static Label lblGrade;
-    private static TextField txtGrade;
-    private static Text txtStat;
-    protected static int totalGrade;
+    protected static TextField txtGrade;
+    protected static Text txtStat;
+    protected static int total;
 
     public static void statAboveGrade(LinkedList<TRecord> list) {
 
@@ -59,6 +59,7 @@ public abstract class Statistic {
         pane.setHgap(8);
         pane.setPadding(new Insets(5, 5, 5, 5));
 
+        //Arrange components
         lblGrade = new Label("\nGrade ");
         lblGrade.setStyle(styleLbl);
 
@@ -103,11 +104,9 @@ public abstract class Statistic {
                         Massage.displayMassage("Warning", " There's no data to calculate ");
                     } else {
                         // the calculations
-                        int total = Calculations.numberOfRecordAboveAGrade(list, Float.parseFloat(txtGrade.getText().trim()));
-                        totalGrade = total;
-                        txtStat.setText("Number of students achieving\na mark " + txtGrade.getText() +
-                                " or more: " + total + "\nAnd their percentage: "
-                                + String.format("%.2f", (((float) total / list.length()) * 100)) + "%");
+                        total = Calculations.numberOfRecordAboveAGrade(list, Float.parseFloat(txtGrade.getText().trim()));
+                        txtStat.setText("The number of students who obtained an mark\n" + txtGrade.getText() + " or more: " + total +
+                                ", and their percentage: " + String.format("%.2f", ((float) total / list.length()) * 100) + "%");
                     }
                 } else {
                     Massage.displayMassage("Warning", " The grade is invalid ");
