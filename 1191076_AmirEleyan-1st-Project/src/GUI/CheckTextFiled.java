@@ -38,7 +38,7 @@ public abstract class CheckTextFiled {
     public static boolean isGrade(TextField txt) {
         try {
             // To check the entered grade, that it consists of only fractions and positive value
-            if (Float.parseFloat(txt.getText().trim()) >= 0.0F)
+            if (Float.parseFloat(txt.getText().trim()) >= 0.0F && Float.parseFloat(txt.getText().trim()) <= 100.0F)
                 return true;
         } catch (Exception e) {
             return false;

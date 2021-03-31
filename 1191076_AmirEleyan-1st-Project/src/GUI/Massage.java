@@ -28,12 +28,12 @@ public abstract class Massage {
 
         // Style for buttons
         String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:15;" +
+                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +
                 "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
         // Style for hover buttons
         String styleHoverBt = "-fx-background-color: #ffffff; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:15;" +
+                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +
                 "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
 
@@ -69,6 +69,7 @@ public abstract class Massage {
         });
         closeButton.setOnAction(e -> window.close());
 
+        // VBox
         VBox vBox = new VBox(12);
         vBox.getChildren().addAll(hBox, closeButton);
         vBox.setAlignment(Pos.CENTER);

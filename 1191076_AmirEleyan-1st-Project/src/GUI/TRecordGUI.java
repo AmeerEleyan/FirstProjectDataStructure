@@ -34,11 +34,10 @@ public class TRecordGUI extends Application {
     private Button btSearch;
     private TextField txtSearch;
     private Label lblTotalNumber, lblCalculation;
-    private TextField txtTotalNumber;
-    private TableView<TRecord> recordTableView;
+    private static TextField txtTotalNumber;
+    private static TableView<TRecord> recordTableView;
     private RadioButton rbScience, rbLiterary;
     private ComboBox<String> WestAndGaza, calculation;
-    private LinkedList<TRecord> lit = new LinkedList<>(), sec = new LinkedList<>();
     //05dfd7  12cad6 32e0c4
     String btStyle = "-fx-background-color:#05dfd7 ; -fx-background-radius:25;" +
             "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:19; -fx-border-radius:25;" +
@@ -403,7 +402,7 @@ public class TRecordGUI extends Application {
     /**
      * to view data in table view
      */
-    private void uploadListToTable(LinkedList<TRecord> list) {
+    public static void uploadListToTable(LinkedList<TRecord> list) {
         if (!list.isEmpty()) {
             recordTableView.getItems().clear();
             Node<TRecord> curr = list.getHead();
@@ -464,7 +463,10 @@ public class TRecordGUI extends Application {
      */
     public void uploadData() {
         try {
+            // Uploading data from Gaza_2019.csv file and add them to the lists
             readDataFromFile("Gaza_2019.csv", Calculations.gazaLiterary, Calculations.gazaScientific);
+
+            // Uploading data from WestBank_2019.csv file and add them to the lists
             readDataFromFile("WestBank_2019.csv", Calculations.westBankLiteraryList, Calculations.westBankScientificList);
         } catch (IOException ex) {
             Massage.displayMassage("Error: \n", ex.getMessage());
@@ -486,6 +488,8 @@ public class TRecordGUI extends Application {
         SearchButtonController(); // Actions on Search button
 
         NewRecordButton(); // Action on newRecord button
+
+        RemoveRecordButton(); // Actions for remove exist record
     }
 
 
@@ -646,26 +650,59 @@ public class TRecordGUI extends Application {
         });
     }
 
+    /**
+     * Actions for add new record
+     */
     private void NewRecordButton() {
         btAddNewRecord.setOnAction(e -> {
             if (WestAndGaza.getValue() == null) { // The region has not been selected
-                Massage.displayMassage("", "Please select the region");
+                Massage.displayMassage("", " Please select the region ");
 
             } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
-                Massage.displayMassage("", "Please select the the branch");
+                Massage.displayMassage("", " Please select the the branch ");
             } else {
+                // checking if the  new record exists if not, and add it to the records
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                     NewRecord.addNewRecord(Calculations.westBankScientificList, "Scientific");
+
                 } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
                     NewRecord.addNewRecord(Calculations.westBankLiteraryList, "Literary");
+
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
                     NewRecord.addNewRecord(Calculations.gazaScientific, "Scientific");
+
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                     NewRecord.addNewRecord(Calculations.gazaLiterary, "Literary");
                 }
             }
         });
+    }
 
+    /**
+     * Actions for remove exist record
+     */
+    private void RemoveRecordButton() {
+        btRemoveRecord.setOnAction(e -> {
+            if (WestAndGaza.getValue() == null) { // The region has not been selected
+                Massage.displayMassage("", " Please select the region ");
 
+            } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
+                Massage.displayMassage("", " Please select the the branch ");
+            } else {
+                // Checking whether the record to be deleted exists  or not, and removing it from the records if it exists
+                if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    RemoveRecord.removeRecord(Calculations.westBankScientificList);
+
+                } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    RemoveRecord.removeRecord(Calculations.westBankLiteraryList);
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    RemoveRecord.removeRecord(Calculations.gazaScientific);
+
+                } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    RemoveRecord.removeRecord(Calculations.gazaLiterary);
+                }
+            }
+        });
     }
 }

@@ -29,7 +29,8 @@ public abstract class NewRecord {
         String styleLbl = "-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:14; ";
 
         //style for textFields
-        String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color: #000000; -fx-font-size:15; -fx-text-fill: #000000;";
+        String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
+                " -fx-border-color: #000000; -fx-font-size:16; -fx-text-fill: #000000;";
 
         // Style for buttons
         String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
@@ -89,11 +90,6 @@ public abstract class NewRecord {
         pane.add(lblGrade, 0, 2);
         pane.add(txtGrade, 1, 2);
 
-        HBox hBox = new HBox(50);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(5, 5, 5, 5));
-        hBox.setStyle("-fx-background-color: #ffffff;");
-
         // button for add new record
         Button btAdd = new Button("Add");
         btAdd.setMinWidth(65);
@@ -107,7 +103,7 @@ public abstract class NewRecord {
             // There is an empty text between the textFields
             if (!txtSetNumber.getText().isEmpty() && !txtGrade.getText().isEmpty() && !txtBranch.getText().isEmpty()) {
 
-                if (CheckTextFiled.isGrade(txtSetNumber)) { // setNumber is valid
+                if (CheckTextFiled.isSeatNumber(txtSetNumber)) { // setNumber is valid
                     if (CheckTextFiled.isGrade(txtGrade)) { // grade is valid
 
                         TRecord record = new TRecord(); // instance of TRecord to add the list
@@ -123,6 +119,7 @@ public abstract class NewRecord {
                         else {
                             list.addBySort(record); //  This record does not exist in the records and has been added to the records
                             Massage.displayMassage("Success", txtSetNumber.getText() + " Added successfully");
+                            TRecordGUI.uploadListToTable(list); // upDate the table view
                             txtSetNumber.clear();// clear data from setNumber textField
                             txtGrade.clear();// clear data from grade textField
                         }
@@ -149,8 +146,14 @@ public abstract class NewRecord {
         btCancel.setOnMouseExited(e -> btCancel.setStyle(styleBt));
         btCancel.setOnAction(e -> window.close());
 
+        // HBox for button
+        HBox hBox = new HBox(50);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(5, 5, 5, 5));
+        hBox.setStyle("-fx-background-color: #ffffff;");
         hBox.getChildren().addAll(btAdd, btCancel);
 
+        // VBox
         VBox vBox = new VBox(25);
         vBox.setAlignment(Pos.CENTER);
         vBox.setPadding(new Insets(5, 5, 5, 5));
