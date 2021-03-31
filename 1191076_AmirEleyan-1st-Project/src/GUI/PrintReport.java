@@ -1,7 +1,7 @@
 /**
  * @author: Amir Eleyan
  * ID: 1191076
- * Time: 30/3/2021  5:45 PM
+ * At: 30/3/2021  5:50 PM
  */
 package GUI;
 
@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class PrintReport {
+public abstract class PrintReport {
 
     /**
      * Writing data from List to file

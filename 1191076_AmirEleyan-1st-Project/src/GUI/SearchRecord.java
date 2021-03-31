@@ -1,6 +1,10 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * At: 28/3/2021  2:55 AM
+ */
 package GUI;
 
-import linkedList.LinkedList;
 import linkedList.TRecord;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

@@ -1,3 +1,8 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * At:  30/3/2021  9:23 PM
+ */
 package GUI;
 
 import javafx.geometry.Insets;
@@ -66,15 +71,14 @@ public abstract class RemoveRecord {
         btRemove.setOnMouseExited(e -> btRemove.setStyle(styleBt));
 
         btRemove.setOnAction(e -> {
-            if (!txtSetNumber.getText().trim().isEmpty()) { // the textFiled has data
-                if (list.isEmpty()) { // list is empty (does not have records)
-                    Massage.displayMassage("Error", "There are no records to remove from them");
-                } else {
+            if (list.isEmpty()) { // list is empty (does not have records)
+                Massage.displayMassage("Error", " There are no records to remove from them ");
+            } else {
+                if (!txtSetNumber.getText().trim().isEmpty()) {// the textFiled has data
                     if (CheckTextFiled.isSeatNumber(txtSetNumber)) { // valid setNumber
+
                         // instance of TRecord to remove it from the list
-                        TRecord tRecord = new TRecord();
-                        // set the set number for this records to search for
-                        tRecord.setSeatNum(Long.parseLong(txtSetNumber.getText().trim()));
+                        TRecord tRecord = new TRecord(Long.parseLong(txtSetNumber.getText().trim()));
 
                         if (list.remove(tRecord) != null) { // this record exist in records
                             Massage.displayMassage("Success", txtSetNumber.getText() + " Removed successfully ");
@@ -85,7 +89,7 @@ public abstract class RemoveRecord {
                             Massage.displayMassage("Warning", txtSetNumber.getText() + " Does not exist in records ");
                         }
                     } else {
-                        Massage.displayMassage("Error", "Invalid Set Number");
+                        Massage.displayMassage("Error", "The set number is invalid");
                         txtSetNumber.clear();//clear data from textField
                     }
                 }

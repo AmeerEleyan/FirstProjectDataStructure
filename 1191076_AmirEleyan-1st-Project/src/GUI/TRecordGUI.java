@@ -1,3 +1,8 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * At: 31/3/2021  7:45 PM
+ */
 package GUI;
 
 import linkedList.Calculations;
@@ -26,24 +31,24 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class TRecordGUI extends Application {
-    private Stage window;
-    private Scene MainScene;
-    private static File file;
-    private static Scanner input;
+    private File file;
+    private Scanner input;
     private Button btAddNewRecord, btRemoveRecord, btStatistic, btTopTen, btPrintReport;
     private Button btSearch;
     private TextField txtSearch;
     private Label lblTotalNumber, lblCalculation;
     private static TextField txtTotalNumber;
     private static TableView<TRecord> recordTableView;
-    private RadioButton rbScience, rbLiterary;
+    private static RadioButton rbScience, rbLiterary;
     private ComboBox<String> WestAndGaza, calculation;
-    //05dfd7  12cad6 32e0c4
+
+    // style for button
     String btStyle = "-fx-background-color:#05dfd7 ; -fx-background-radius:25;" +
             "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:19; -fx-border-radius:25;" +
             " -fx-text-fill: #000000; -fx-font-family:" +
             " 'Calisto MT'; -fx-font-weight: BOLd; ";
 
+    // style for button hover
     String styleHover = "-fx-background-color:#ffffff; -fx-background-radius:25;" +
             "-fx-border-width: 1; -fx-border-color: 'black'; -fx-font-size:19; -fx-border-radius:25;" +
             " -fx-text-fill: #000000; -fx-font-family:" +
@@ -55,15 +60,13 @@ public class TRecordGUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        window = primaryStage;
-        window.setTitle("Tawjihi Records");
-        MainScene = new Scene(AllComponents());
+        primaryStage.setTitle("Tawjihi Records");
+        primaryStage.setScene(new Scene(AllComponents()));
+        primaryStage.setResizable(false);
         uploadDataFromFile();
         Controllers();
-        window.setScene(MainScene);
-        window.setResizable(false);
-        window.show();
-        Massage.displayMassage("Success", "The data has been uploaded successfully");
+        primaryStage.show();
+        Massage.displayMassage("Success", " The data has been uploaded successfully ");
     }
 
     private BorderPane RightBorderPane() {
@@ -414,6 +417,9 @@ public class TRecordGUI extends Application {
             txtTotalNumber.setText(count + "");
         } else {
             Massage.displayMassage("Data", " There is no data to display ");
+            rbLiterary.setSelected(false);
+            rbScience.setSelected(false);
+
         }
     }
 
@@ -422,8 +428,8 @@ public class TRecordGUI extends Application {
     /**
      * Methode to read data from file iteratively
      */
-    public static void readDataFromFile(String fileName, LinkedList<TRecord> literaryLinkedList,
-                                        LinkedList<TRecord> scientificLinkedList) throws IOException {
+    public void readDataFromFile(String fileName, LinkedList<TRecord> literaryLinkedList,
+                                 LinkedList<TRecord> scientificLinkedList) throws IOException {
         file = new File(fileName); // instance of file
         try {
             input = new Scanner(file); // instance of scanner for read data from file

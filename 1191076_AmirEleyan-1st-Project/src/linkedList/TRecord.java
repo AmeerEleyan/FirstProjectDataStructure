@@ -1,7 +1,7 @@
 /**
  * @authore: Amir Eleyan
  * ID: 1191076
- * Time:  10/3/2021  7:10 PM
+ * At:  10/3/2021  7:10 PM
  */
 package linkedList;
 
