@@ -46,11 +46,11 @@ public class Main {
 
         LinkedList<Integer> toto = new LinkedList<>();
 
-       System.out.println(toto.addBySort(5));
-        System.out.println(toto.addBySort(6));
-        System.out.println(toto.addBySort(6));
-        System.out.println(toto.addBySort(null));
-        toto.printList();
+//       System.out.println(toto.addBySort(5));
+//        System.out.println(toto.addBySort(6));
+//        System.out.println(toto.addBySort(6));
+//        System.out.println(toto.addBySort(null));
+//        toto.printList();
 
 
     }

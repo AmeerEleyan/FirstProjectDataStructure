@@ -25,7 +25,7 @@ public class TRecord implements Comparable<TRecord> {
     public TRecord() {
     }
 
-     // Constructor with set number argument
+    // Constructor with set number argument
     public TRecord(long seatNum) {
         this.seatNum = seatNum;
     }
@@ -93,7 +93,7 @@ public class TRecord implements Comparable<TRecord> {
     }
 
 
-    // Compare two object with them depends on the set number or grade
+    // Compare two object with them depends on the grade descending
     @Override
     public int compareTo(TRecord o) {
         return ((this.grade > o.grade) ? -1 : (this.grade == o.grade) ? 0 : 1);

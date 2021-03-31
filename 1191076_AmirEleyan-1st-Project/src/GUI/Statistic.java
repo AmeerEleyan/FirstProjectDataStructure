@@ -103,7 +103,7 @@ public abstract class Statistic {
                         Massage.displayMassage("Warning", " There's no data to calculate ");
                     } else {
                         // the calculations
-                        int total = Calculations.numberOfRecordAboveAGrade(list, Float.parseFloat(txtGrade.getText()));
+                        int total = Calculations.numberOfRecordAboveAGrade(list, Float.parseFloat(txtGrade.getText().trim()));
                         totalGrade = total;
                         txtStat.setText("Number of students achieving\na mark " + txtGrade.getText() +
                                 " or more: " + total + "\nAnd their percentage: "

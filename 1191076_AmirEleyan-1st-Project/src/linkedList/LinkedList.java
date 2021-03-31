@@ -105,13 +105,12 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
 
 
     /**
-     * Insert element with a specific sort depend on a compareTo methode implementation
+     * Insert element with a default sort depend on a compareTo methode implementation
      */
     @Override
-    public int addBySort(T element, int sortType) {
+    public void addBySort(T element) {
         if (isEmpty() && element != null) { // list is empty
             insertAtFirst(element);
-            return 1;
         } else {
             if (element != null) {
                 Node<T> newNode = new Node<>(element);
@@ -122,7 +121,6 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 } else {
                     // data for element larger than data of head
                     while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
-                        if (element.compareTo(current.getData()) == 0) return -1;
                         previous = current;
                         current = current.getNext();
                     }
@@ -131,44 +129,13 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                     if (current == null) this.tail = newNode;
                     newNode.setNext(current);
                 }
-                return 1;
             }
-            return 0;
         }
     }
 
     /**
-     * Insert element with a default sort depend on a compareTo methode implementation
+     * Inset new element after specific element
      */
-    @Override
-    public int addBySort(T element) {
-        if (isEmpty() && element != null) { // list is empty
-            insertAtFirst(element);
-            return 1;
-        } else {
-            if (element != null) {
-                Node<T> newNode = new Node<>(element);
-                Node<T> current = this.head;
-                Node<T> previous = null;
-                if (element.compareTo(current.getData()) < 0) { // data for element less than data of head
-                    insertAtFirst(element);
-                } else {
-                    // data for element larger than data of head
-                    while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
-                        previous = current;
-                        current = current.getNext();
-                    }
-                    //The current reached the end of the list and the element larger than current
-                    previous.setNext(newNode);
-                    if (current == null) this.tail = newNode;
-                    newNode.setNext(current);
-                }
-                return 1;
-            }
-            return 0;
-        }
-    }
-
     @Override
     public boolean insertAfter(T element, T afterObject) {
         if (isEmpty()) return false;
@@ -198,15 +165,15 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
     @Override
     public T remove(T element) {
         if (isEmpty()) return null;
-        Node<T> prevPrevious, previous = null, current = this.head;
+        Node<T> prevPrevious = null, previous = null, current = this.head;
         if (current.getData().equals(element)) { // if element is a first node
             this.head = head.getNext();
             return current.getData();
         } else {
             boolean ok = false;
             while (current != null) {
-                if (ok) prevPrevious = previous.getNext();
-                else prevPrevious = previous;
+                if (ok) prevPrevious = previous;
+                else ok = true;
 
                 previous = current;
                 current = current.getNext();
@@ -214,14 +181,13 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 if (current == null && previous.getData().equals(element)) { // if element it is a last node
                     prevPrevious.setNext(null);
                     return previous.getData();
-                } else if (current == null) //The current reached the end of the list and the element does not exist
+                } else if (current == null && !previous.getData().equals(element)) {//The current reached the end of the list and the element does not exist
                     return null;
-                else if (current.getData().equals(element)) { // the element is found
+                } else if (current.getData().equals(element)) { // the element is found
                     previous.setNext(current.getNext());
                     return current.getData();
                 }
-                current = current.getNext();
-                ok = true;
+
             }
             return null;
         }
@@ -278,7 +244,7 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
         if (isEmpty()) System.out.println("List is empty");
         else if (current == null) {
         } else {
-            printListReverse(current.getNext());
+            printListReverse(current.getNext()); //  calling the function itself(recursion)
             System.out.print(current);
         }
     }
@@ -291,15 +257,19 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
         if (isEmpty()) return 0; // list is empty and return 0
         else {
             Node<T> current = this.head;
-            int count = 0;
+            int length = 0; // length of the list
             while (current != null) {
-                count++;
+                length++;
                 current = current.getNext();
             }
-            return count; // return the length if the list is not empty
+            return length; // return the length if the list is not empty
         }
     }
 
+    /**
+     * Set head equal null, thus we cannot access to another nodes,
+     * thus JVM convert them to the garbage
+     */
     @Override
     public boolean isEmpty() {
         return (this.head == null);

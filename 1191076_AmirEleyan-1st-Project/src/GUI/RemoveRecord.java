@@ -74,7 +74,7 @@ public abstract class RemoveRecord {
                         // instance of TRecord to remove it from the list
                         TRecord tRecord = new TRecord();
                         // set the set number for this records to search for
-                        tRecord.setSeatNum(Long.parseLong(txtSetNumber.getText()));
+                        tRecord.setSeatNum(Long.parseLong(txtSetNumber.getText().trim()));
 
                         if (list.remove(tRecord) != null) { // this record exist in records
                             Massage.displayMassage("Success", txtSetNumber.getText() + " Removed successfully ");

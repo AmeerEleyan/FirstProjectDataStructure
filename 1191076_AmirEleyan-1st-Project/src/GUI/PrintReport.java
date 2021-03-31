@@ -1,3 +1,8 @@
+/**
+ * @author: Amir Eleyan
+ * ID: 1191076
+ * Time: 30/3/2021  5:45 PM
+ */
 package GUI;
 
 import linkedList.Calculations;

@@ -33,7 +33,7 @@ public class Node<T extends Comparable<T>> {
 
     // Return the next node
     public Node<T> getNext() {
-        return next;
+        return this.next;
     }
 
 
