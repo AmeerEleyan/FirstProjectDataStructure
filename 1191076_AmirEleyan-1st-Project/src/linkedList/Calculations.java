@@ -166,8 +166,8 @@ public abstract class Calculations {
                 count++;
                 if (count >= 10 && (current.getData().getGrade() != previous.getData().getGrade())) break;
             }
-        }
-        Massage.displayMassage("Error", " There are no records to display Top Ten Grads ");
+        } else
+            Massage.displayMassage("Error", " There are no records to display Top Ten Grads ");
     }
 
     /**

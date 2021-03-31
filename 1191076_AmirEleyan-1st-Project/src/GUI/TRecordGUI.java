@@ -255,8 +255,8 @@ public class TRecordGUI extends Application {
 
         lblCalculation = new Label();
         lblCalculation.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px3px0px; " +
-                " -fx-border-color:#000000; -fx-font-weight: BOLd;-fx-font-size:16; ");
-        lblCalculation.setMaxWidth(250);
+                " -fx-border-color:#000000; -fx-font-weight: BOLd;-fx-font-size:17; ");
+        lblCalculation.setMaxWidth(240);
 
         vBox.getChildren().addAll(btAddNewRecord, btRemoveRecord, btPrintReport,
                 btStatistic, btTopTen, calculation, lblCalculation);
@@ -513,6 +513,7 @@ public class TRecordGUI extends Application {
             txtTotalNumber.clear(); // clear data in textFiled totalNumber
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+            calculation.setPromptText("Select one to calculate:"); // return to the promptText
             rbScience.setSelected(false); // set radioButton scientific false
             rbLiterary.setSelected(false);// set radioButton literary false
         });
@@ -537,6 +538,7 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear();// clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.westBankLiteraryList); // upload west bank literary list to table view to display
 
             }// Select Gaza and literary
@@ -545,6 +547,7 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear();// clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.gazaLiterary);// upload gaza literary list to table view to display
 
             }
@@ -562,6 +565,7 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear(); // clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.westBankScientificList);// upload gaza scientific list to table view to display
 
             }// Select Gaza and scientific
@@ -570,6 +574,7 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear(); // clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.gazaScientific);// upload gaza scientific list to table view to display
 
             }
@@ -804,9 +809,10 @@ public class TRecordGUI extends Application {
             lblCalculation.setText("");
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
-
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
             } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
                 Massage.displayMassage("", " Please select the the branch ");
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
             } else {
                 if (calculation.getValue().equals("Average")) {
                     float avg = 0.0F;
@@ -822,7 +828,7 @@ public class TRecordGUI extends Application {
                     } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                         avg = Calculations.calculateAverage(Calculations.gazaLiterary);
                     }
-                    if (avg != 0.0F) lblCalculation.setText(String.format("%.2f", avg));
+                    if (avg != 0.0F) lblCalculation.setText(" " + String.format("%.2f", avg));
 
                 } else if (calculation.getValue().equals("Mode")) {
                     float mode = 0.0F;
@@ -838,7 +844,7 @@ public class TRecordGUI extends Application {
                     } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                         mode = Calculations.calculateMode(Calculations.gazaLiterary);
                     }
-                    if (mode != 0.0F) lblCalculation.setText(String.format("%.2f", mode));
+                    if (mode != 0.0F) lblCalculation.setText(" " + String.format("%.2f", mode));
 
                 } else if (calculation.getValue().equals("Median")) {
                     float median = 0.0F;
@@ -854,7 +860,7 @@ public class TRecordGUI extends Application {
                     } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                         median = Calculations.calculateMedian(Calculations.gazaLiterary);
                     }
-                    if (median != 0.0F) lblCalculation.setText(String.format("%.2f", median));
+                    if (median != 0.0F) lblCalculation.setText(" " + String.format("%.2f", median));
 
                 } else if (calculation.getValue().equals("Standard Deviation")) {
                     float sd = 0.0F;
@@ -870,7 +876,7 @@ public class TRecordGUI extends Application {
                     } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                         sd = Calculations.calculateStandardDeviation(Calculations.gazaLiterary);
                     }
-                    if (sd != 0.0F) lblCalculation.setText(String.format("%.2f", sd));
+                    if (sd != 0.0F) lblCalculation.setText(" " + String.format("%.2f", sd));
 
                 } else if (calculation.getValue().equals("Variance")) {
                     float variance = 0.0F;
@@ -886,10 +892,10 @@ public class TRecordGUI extends Application {
                     } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
                         variance = Calculations.calculateVariance(Calculations.gazaLiterary);
                     }
-                    if (variance != 0.0F) lblCalculation.setText(String.format("%.2f", variance));
+                    if (variance != 0.0F) lblCalculation.setText(" " + String.format("%.2f", variance));
 
                 }
-
+                calculation.setPromptText("Select one to calculate:"); // return to the promptText
             }
         });
     }
