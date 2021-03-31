@@ -69,9 +69,17 @@ public class TRecordGUI extends Application {
         Massage.displayMassage("Success", " The data has been uploaded successfully ");
     }
 
+    //************************************************************************************************
+
+    /**
+     * Pane for main components
+     */
     private BorderPane RightBorderPane() {
+
+        // Pane
         BorderPane RightPane = new BorderPane();
 
+        // icon for region
         ImageView imgLocation = new ImageView(new Image("icons/Location.png"));
         imgLocation.setFitWidth(30);
         imgLocation.setFitHeight(30);
@@ -87,6 +95,7 @@ public class TRecordGUI extends Application {
         WestAndGaza.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
                 " -fx-border-color: #000000;-fx-font-weight: BOLd;-fx-font-size:16;");
 
+        // HBox for location
         HBox hBoxLocation = new HBox(8);
         hBoxLocation.setPadding(new Insets(0, 5, 5, 10));
         hBoxLocation.setStyle("-fx-background-color: #ffffff;");
@@ -106,11 +115,13 @@ public class TRecordGUI extends Application {
                 "-fx-padding: 6px; -fx-font-size:17; -fx-font-weight: BOLd;");
 
 
+        // set the radio button as group
         ToggleGroup group = new ToggleGroup();
         rbScience.setToggleGroup(group);
         rbLiterary.setToggleGroup(group);
 
 
+        // HBox for radioButton
         HBox paneRadio = new HBox(45);
         paneRadio.getChildren().addAll(rbLiterary, rbScience);
         paneRadio.setAlignment(Pos.CENTER);
@@ -126,7 +137,7 @@ public class TRecordGUI extends Application {
         rightController.setMargin(hBoxLocation, new Insets(55, 0, 0, 0));
 
 
-        rightController.getChildren().addAll(hBoxLocation, paneRadio, addAndDelete());
+        rightController.getChildren().addAll(hBoxLocation, paneRadio, leftButtons());
 
         RightPane.setRight(rightController);
         RightPane.setCenter(centerLeftPane());
@@ -137,13 +148,21 @@ public class TRecordGUI extends Application {
         return RightPane;
     }
 
+    //************************************************************************************************
 
+    /**
+     * Table view to display records
+     */
     public static TableView<TRecord> tRecordTableView() {
+
+        // Table view to putting the columns in
         recordTableView = new TableView<>();
         recordTableView.setEditable(false);
         recordTableView.setMinWidth(580);
         recordTableView.setMinHeight(487);
         recordTableView.setStyle("-fx-background-color: #ffffff; -fx-border-color: #000000; -fx-border-width:2; -fx-font-family: 'Times New Roman'; -fx-font-size:17; -fx-text-fill: #000000; -fx-font-weight: BOLd; ");
+
+        // first column -> setNumber
         TableColumn<TRecord, Long> setNumber = new TableColumn<>("Set Number");
         setNumber.setMinWidth(280);
         setNumber.setEditable(false);
@@ -151,6 +170,7 @@ public class TRecordGUI extends Application {
         setNumber.setResizable(false);
         setNumber.setCellValueFactory(new PropertyValueFactory<>("seatNum"));
 
+        //Second column -> branch
         TableColumn<TRecord, String> branch = new TableColumn<>("Branch");
         branch.setMinWidth(150);
         branch.setEditable(false);
@@ -158,6 +178,7 @@ public class TRecordGUI extends Application {
         branch.setResizable(false);
         branch.setCellValueFactory(new PropertyValueFactory<>("branch"));
 
+        //third column -> grade
         TableColumn<TRecord, Float> grade = new TableColumn<>("Grade");
         grade.setMinWidth(150);
         grade.setEditable(false);
@@ -170,12 +191,19 @@ public class TRecordGUI extends Application {
     }
 
 
-    private VBox addAndDelete() {
+    //************************************************************************************************
 
+    /**
+     * Left button
+     */
+    private VBox leftButtons() {
+
+        // icon add
         ImageView add = new ImageView(new Image("icons/add.png"));
         add.setFitWidth(24);
         add.setFitHeight(24);
 
+        // button for add new record
         btAddNewRecord = new Button("   New Record");
         btAddNewRecord.setGraphic(add);
         btAddNewRecord.setContentDisplay(ContentDisplay.LEFT);
@@ -185,9 +213,12 @@ public class TRecordGUI extends Application {
         btAddNewRecord.setOnMouseEntered(e -> btAddNewRecord.setStyle(styleHover));
         btAddNewRecord.setOnMouseExited(e -> btAddNewRecord.setStyle(btStyle));
 
+        // icon remove
         ImageView remove = new ImageView(new Image("icons/remove.png"));
         remove.setFitHeight(24);
         remove.setFitWidth(24);
+
+        // button for remove record
         btRemoveRecord = new Button("   Delete Record");
         btRemoveRecord.setGraphic(remove);
         btRemoveRecord.setMinWidth(250);
@@ -198,10 +229,12 @@ public class TRecordGUI extends Application {
         btRemoveRecord.setOnMouseExited(e -> btRemoveRecord.setStyle(btStyle));
 
 
+        // icon for statistic
         ImageView imgStat = new ImageView(new Image("icons/chart.png"));
         imgStat.setFitHeight(24);
         imgStat.setFitWidth(24);
 
+        //button to get the number of students achieving a specific mark and their percentage
         btStatistic = new Button("     Statistic     ");
         btStatistic.setGraphic(imgStat);
         btStatistic.setMinWidth(250);
@@ -212,10 +245,12 @@ public class TRecordGUI extends Application {
         btStatistic.setOnMouseExited(e -> btStatistic.setStyle(btStyle));
 
 
+        // icon topTen
         ImageView imgTopTen = new ImageView(new Image("icons/topTen.png"));
         imgTopTen.setFitHeight(24);
         imgTopTen.setFitWidth(24);
 
+        // button to display topTen grades
         btTopTen = new Button("Top Ten Students");
         btTopTen.setGraphic(imgTopTen);
         btTopTen.setMinWidth(250);
@@ -225,10 +260,12 @@ public class TRecordGUI extends Application {
         btTopTen.setOnMouseEntered(e -> btTopTen.setStyle(styleHover));
         btTopTen.setOnMouseExited(e -> btTopTen.setStyle(btStyle));
 
+        // icon print
         ImageView imgPrint = new ImageView(new Image("icons/print.png"));
         imgPrint.setFitHeight(24);
         imgPrint.setFitWidth(24);
 
+        // button to print report in file
         btPrintReport = new Button("    Print Report");
         btPrintReport.setGraphic(imgPrint);
         btPrintReport.setMaxWidth(250);
@@ -239,12 +276,7 @@ public class TRecordGUI extends Application {
         btPrintReport.setOnMouseExited(e -> btPrintReport.setStyle(btStyle));
 
 
-        VBox vBox = new VBox(14);
-        vBox.setPadding(new Insets(5, 5, 5, 5));
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setStyle("-fx-background-color: #ffffff");
-
-
+        //ComboBox for calculations
         calculation = new ComboBox<>();
         calculation.getItems().addAll("Average", "Mode", "Median", "Standard Deviation", "Variance");
         calculation.setPromptText("Select one to calculate:");
@@ -256,16 +288,26 @@ public class TRecordGUI extends Application {
                 "-fx-border-width: 1;" + " -fx-text-fill:#000000; ");
 
 
+        // label for display the result
         lblCalculation = new Label();
         lblCalculation.setStyle("-fx-background-color: #ffffff; -fx-border-width: 0px0px3px0px; " +
                 " -fx-border-color:#000000; -fx-font-weight: BOLd;-fx-font-size:17; ");
         lblCalculation.setMaxWidth(240);
+
+        // VBox to add all buttons
+        VBox vBox = new VBox(14);
+        vBox.setPadding(new Insets(5, 5, 5, 5));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setStyle("-fx-background-color: #ffffff");
+
 
         vBox.getChildren().addAll(btAddNewRecord, btRemoveRecord, btPrintReport,
                 btStatistic, btTopTen, calculation, lblCalculation);
 
         return vBox;
     }
+
+    //************************************************************************************************
 
     /**
      * To display search block
@@ -291,13 +333,13 @@ public class TRecordGUI extends Application {
         btSearch.setMinWidth(45);
         btSearch.setContentDisplay(ContentDisplay.LEFT);
         btSearch.setGraphic(imgSearch);
-        //   btSearch.setOnAction(e -> SearchRecord.searchRecord());
         btSearch.setStyle(btStyle);
 
         // To change the design of the button when placing a mouse arrow on it
         btSearch.setOnMouseEntered(e -> {
             btSearch.setStyle(styleHover);
         });
+
         // To change the design of the button when the mouse arrow is removed from it
         btSearch.setOnMouseExited(e -> {
             btSearch.setStyle(btStyle);
@@ -311,6 +353,8 @@ public class TRecordGUI extends Application {
 
         return hBox;
     }
+
+    //************************************************************************************************
 
     /**
      * To display canter components ( search block and table view and total number records block)l
@@ -348,11 +392,13 @@ public class TRecordGUI extends Application {
         vBox.setAlignment(Pos.CENTER_LEFT);
         vBox.setStyle("-fx-background-color: #ffffff;");
 
-        // to set components of the vBox
+        // to set components of the vBox (search block and table view and totalNumber records
         vBox.getChildren().addAll(search(), tRecordTableView(), hBox);
 
         return vBox;
     }
+
+    //************************************************************************************************
 
     /**
      * To set all components
@@ -364,12 +410,13 @@ public class TRecordGUI extends Application {
         pane.setPadding(new Insets(10, 10, 10, 10));
         pane.setStyle("-fx-background-color: #ffffff;");
 
-        // Palestinian Ministry Of Education Logo
+        // icon Palestinian Ministry Of Education Logo
         ImageView logo = new ImageView(new Image("icons/logo.png"));
         logo.setFitHeight(370);
         logo.setFitWidth(450);
 
-        ImageView graduate = new ImageView(new Image("icons/graduates.png"));
+        // icon graduate
+        ImageView graduate = new ImageView(new Image("icons/graduate.png"));
         graduate.setFitHeight(280);
         graduate.setFitWidth(480);
 
@@ -377,12 +424,6 @@ public class TRecordGUI extends Application {
         VBox VLogo = new VBox();
         VLogo.getChildren().addAll(logo, graduate);
         VLogo.setAlignment(Pos.CENTER);
-
-        HBox hBox = new HBox(10);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(5, 5, 5, 5));
-        hBox.setStyle("-fx-background-color: #ffffff;");
-
 
         // welcome label
         Label lblWelcome = new Label("Welcome To The Academic Record For Tawjihi\n    In The Palestinian Ministry Of Education");
@@ -392,6 +433,12 @@ public class TRecordGUI extends Application {
         lblWelcome.setStyle("-fx-background-color: #05dfd7; -fx-border-radius:50;" +
                 " -fx-background-radius:50; -fx-text-fill: #000000; ");
         lblWelcome.setMinWidth(1400);
+
+        // HBox for label welcome
+        HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setPadding(new Insets(5, 5, 5, 5));
+        hBox.setStyle("-fx-background-color: #ffffff;");
 
         hBox.getChildren().addAll(lblWelcome);
         hBox.setMargin(lblWelcome, new Insets(2, 0, 10, 0));
@@ -404,13 +451,14 @@ public class TRecordGUI extends Application {
         return pane;
     }
 
+    //************************************************************************************************
 
     /**
      * to view data in table view
      */
     public static void uploadListToTable(LinkedList<TRecord> list) {
         if (!list.isEmpty()) {
-            recordTableView.getItems().clear();
+            recordTableView.getItems().clear(); // clear data from table
             Node<TRecord> curr = list.getHead();
             int count = 0;
             while (curr != null) {
@@ -673,6 +721,8 @@ public class TRecordGUI extends Application {
         });
     }
 
+    //************************************************************************************************
+
     /**
      * Actions for add new record
      */
@@ -686,20 +736,26 @@ public class TRecordGUI extends Application {
             } else {
                 // checking if the  new record exists if not, and add it to the records
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    // add new record to the west bank scientific list
                     NewRecord.addNewRecord(Calculations.westBankScientificList, "Scientific");
 
                 } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    // add new record to the west bank literary list
                     NewRecord.addNewRecord(Calculations.westBankLiteraryList, "Literary");
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    // add new record to the gaza scientific list
                     NewRecord.addNewRecord(Calculations.gazaScientific, "Scientific");
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    // add new record to the gaza literary list
                     NewRecord.addNewRecord(Calculations.gazaLiterary, "Literary");
                 }
             }
         });
     }
+
+    //************************************************************************************************
 
     /**
      * Actions for remove exist record
@@ -714,20 +770,26 @@ public class TRecordGUI extends Application {
             } else {
                 // Checking whether the record to be deleted exists  or not, and removing it from the records if it exists
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    // delete this record from the west bank scientific list
                     RemoveRecord.removeRecord(Calculations.westBankScientificList);
 
                 } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    // delete this record from the west bank literary list
                     RemoveRecord.removeRecord(Calculations.westBankLiteraryList);
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    // delete this record from the gaza scientific list
                     RemoveRecord.removeRecord(Calculations.gazaScientific);
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    // delete this record from the gaza literary list
                     RemoveRecord.removeRecord(Calculations.gazaLiterary);
                 }
             }
         });
     }
+
+    //************************************************************************************************
 
     /**
      * Actions for print report button
@@ -741,20 +803,26 @@ public class TRecordGUI extends Application {
                 Massage.displayMassage("", " Please select the the branch ");
             } else {
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    // print report to the west bank scientific list
                     PrintReport.writeDataInFile(Calculations.westBankScientificList, "West Bank", "Scientific");
 
                 } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    // print report to the west bank literary list
                     PrintReport.writeDataInFile(Calculations.westBankLiteraryList, "West Bank", "Literary");
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    // print report to the gaza scientific list
                     PrintReport.writeDataInFile(Calculations.gazaScientific, "Gaza", "Scientific");
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    // print report to the gaza literary list
                     PrintReport.writeDataInFile(Calculations.gazaLiterary, "Gaza", "Literary");
                 }
             }
         });
     }
+
+    //************************************************************************************************
 
     /**
      * Actions for top ten button
@@ -768,20 +836,26 @@ public class TRecordGUI extends Application {
                 Massage.displayMassage("", " Please select the the branch ");
             } else {
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
+                    // view top ten grades to the west bank scientific list
                     ViewTopTen.TopTenRecords(Calculations.westBankScientificList);
 
                 } else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                    // view top ten grades to the west bank literary list
                     ViewTopTen.TopTenRecords(Calculations.westBankLiteraryList);
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                    // view top ten grades to the gaza scientific list
                     ViewTopTen.TopTenRecords(Calculations.gazaScientific);
 
                 } else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                    // view top ten grades to the gaza literary list
                     ViewTopTen.TopTenRecords(Calculations.gazaLiterary);
                 }
             }
         });
     }
+
+    //************************************************************************************************
 
     /**
      * Actions for statistic button
@@ -794,6 +868,7 @@ public class TRecordGUI extends Application {
             } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
                 Massage.displayMassage("", " Please select the the branch ");
             } else {
+                // get number of student >= specific grade and there percentage
                 if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                     Statistic.statAboveGrade(Calculations.westBankScientificList);
 
@@ -810,6 +885,8 @@ public class TRecordGUI extends Application {
         });
     }
 
+    //************************************************************************************************
+
     /**
      * Actions on CompoBox calculations
      */
@@ -823,6 +900,7 @@ public class TRecordGUI extends Application {
                 Massage.displayMassage("", " Please select the the branch ");
                 calculation.setPromptText("Select one to calculate:"); // return to the promptText
             } else {
+                // Calculate average for this list
                 if (calculation.getValue().equals("Average")) {
                     float avg = 0.0F;
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
@@ -839,7 +917,8 @@ public class TRecordGUI extends Application {
                     }
                     if (avg != 0.0F) lblCalculation.setText(" " + String.format("%.2f", avg));
 
-                } else if (calculation.getValue().equals("Mode")) {
+                } // calculate mode for this list
+                else if (calculation.getValue().equals("Mode")) {
                     float mode = 0.0F;
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                         mode = Calculations.calculateMode(Calculations.westBankScientificList);
@@ -855,7 +934,8 @@ public class TRecordGUI extends Application {
                     }
                     if (mode != 0.0F) lblCalculation.setText(" " + String.format("%.2f", mode));
 
-                } else if (calculation.getValue().equals("Median")) {
+                } //calculate median for this list
+                else if (calculation.getValue().equals("Median")) {
                     float median = 0.0F;
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                         median = Calculations.calculateMedian(Calculations.westBankScientificList);
@@ -871,7 +951,8 @@ public class TRecordGUI extends Application {
                     }
                     if (median != 0.0F) lblCalculation.setText(" " + String.format("%.2f", median));
 
-                } else if (calculation.getValue().equals("Standard Deviation")) {
+                } // calculate stander deviation fot this list
+                else if (calculation.getValue().equals("Standard Deviation")) {
                     float sd = 0.0F;
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                         sd = Calculations.calculateStandardDeviation(Calculations.westBankScientificList);
@@ -887,7 +968,8 @@ public class TRecordGUI extends Application {
                     }
                     if (sd != 0.0F) lblCalculation.setText(" " + String.format("%.2f", sd));
 
-                } else if (calculation.getValue().equals("Variance")) {
+                }// calculate variance for this list
+                else if (calculation.getValue().equals("Variance")) {
                     float variance = 0.0F;
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
                         variance = Calculations.calculateVariance(Calculations.westBankScientificList);
