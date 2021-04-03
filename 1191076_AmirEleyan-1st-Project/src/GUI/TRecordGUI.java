@@ -584,6 +584,7 @@ public class TRecordGUI extends Application {
 
         rbLiterary.setOnAction(e -> {
             if (WestAndGaza.getValue() == null) {// The region has not been selected
+
                 Massage.displayMassage("", "Please select the region");
                 rbLiterary.setSelected(false);// set radioButton literary false
 
@@ -609,6 +610,7 @@ public class TRecordGUI extends Application {
         // Scientific radio button
         rbScience.setOnAction(e -> {
             if (WestAndGaza.getValue() == null) { // The region has not been selected
+
                 Massage.displayMassage("", "Please select the region");
                 rbScience.setSelected(false);
 
@@ -639,7 +641,9 @@ public class TRecordGUI extends Application {
      */
     private void SearchButtonController() {
         btSearch.setOnAction(e -> {
+
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", "Please select the region");
 
@@ -647,72 +651,31 @@ public class TRecordGUI extends Application {
                 Massage.displayMassage("", "Please select the the branch");
 
             } else if (!txtSearch.getText().trim().isEmpty()) { // the text filed has data
-                TRecord temp;
                 if (CheckTextFiled.isSeatNumber(txtSearch)) { // The seat number is valid
                     // West Bank scientific branch
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
-                        // no data in list west bank scientific
-                        if (Calculations.westBankScientificList.isEmpty()) {
-                            Massage.displayMassage("Error", " There is no records to search from them ");
-                        } else {
-                            // Search for this records in list scientific in west bank
-                            temp = Calculations.westBankScientificList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
-                            if (temp == null) { // this records does not exist
-                                Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nscientific on West Bank ");
-                            } else {
-                                SearchRecord.searchRecord(temp);
-                            }
-                        }
-
-                    } // West Bank literary branch
+                        SearchRecord.searchRecord(txtSearch.getText(), Calculations.westBankScientificList, "Scientific", "West Bank");
+                    }
+                    // West Bank literary branch
                     else if (WestAndGaza.getValue().equals("West Bank") && rbLiterary.isSelected()) {
+                        SearchRecord.searchRecord(txtSearch.getText(), Calculations.westBankLiteraryList, "Literary", "West Bank");
 
-                        if (Calculations.westBankLiteraryList.isEmpty()) { // no data in list west bank literary
-                            Massage.displayMassage("Error", " There is no records to search from them ");
-                        } else {
-                            // Search for this records in list literary in west bank
-                            temp = Calculations.westBankLiteraryList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
-                            if (temp == null) { // this records does not exist
-                                Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nliterary on West Bank ");
-                            } else {
-                                SearchRecord.searchRecord(temp);
-                            }
-                        }
                     }// Gaza scientific branch
                     else if (WestAndGaza.getValue().equals("Gaza") && rbScience.isSelected()) {
+                        SearchRecord.searchRecord(txtSearch.getText(), Calculations.gazaScientific, "Scientific", "Gaza");
 
-                        if (Calculations.gazaScientific.isEmpty()) { // no data in list gaza scientific
-                            Massage.displayMassage("Error", " There is no records to search from them ");
-                        } else {
-                            // Search for this records in list scientific in gaza
-                            temp = Calculations.gazaScientific.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
-                            if (temp == null) { // this records does not exist
-                                Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nscientific on Gaza ");
-                            } else {
-                                SearchRecord.searchRecord(temp);
-                            }
-                        }
                     }// Gaza literary branch
                     else if (WestAndGaza.getValue().equals("Gaza") && rbLiterary.isSelected()) {
+                        SearchRecord.searchRecord(txtSearch.getText(), Calculations.gazaLiterary, "Literary", "Gaza");
 
-                        if (Calculations.gazaLiterary.isEmpty()) { // no data in list gaza literary
-                            Massage.displayMassage("Error", " There is no records to search from them ");
-                        } else {
-                            // Search for this records in list literary in gaza
-                            temp = Calculations.gazaLiterary.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
-                            if (temp == null) { // this records does not exist
-                                Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nliterary on Gaza ");
-                            } else {
-                                SearchRecord.searchRecord(temp);
-                            }
-                        }
                     }
                 } else {
                     Massage.displayMassage("Error", " The set number is invalid ");
+                    txtSearch.clear(); // clear data in search textFiled
                 }
-                txtSearch.clear(); // clear data in search textFiled
             }
         });
+
     }
 
     //************************************************************************************************
@@ -722,8 +685,10 @@ public class TRecordGUI extends Application {
      */
     private void NewRecordButton() {
         btAddNewRecord.setOnAction(e -> {
+
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -758,8 +723,10 @@ public class TRecordGUI extends Application {
      */
     private void RemoveRecordButton() {
         btRemoveRecord.setOnAction(e -> {
+
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -794,8 +761,10 @@ public class TRecordGUI extends Application {
      */
     private void PrintReportButton() {
         btPrintReport.setOnAction(e -> {
+
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -829,8 +798,10 @@ public class TRecordGUI extends Application {
      */
     private void TopTenButton() {
         btTopTen.setOnAction(e -> {
+
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -864,8 +835,10 @@ public class TRecordGUI extends Application {
      */
     private void StatisticButton() {
         btStatistic.setOnAction(e -> {
+
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -898,13 +871,16 @@ public class TRecordGUI extends Application {
         calculation.setOnAction(e -> {
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
+
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
                 calculation.setPromptText("Select one to calculate:"); // return to the promptText
+
             } else if (!rbScience.isSelected() && !rbLiterary.isSelected()) { //The branch has not been selected
                 Massage.displayMassage("", " Please select the the branch ");
                 calculation.setPromptText("Select one to calculate:"); // return to the promptText
             } else {
+
                 // Calculate average for this list
                 if (calculation.getValue().equals("Average")) {
                     float avg = 0.0F;

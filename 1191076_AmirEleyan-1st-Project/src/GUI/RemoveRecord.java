@@ -24,14 +24,13 @@ public abstract class RemoveRecord {
 
     public static void removeRecord(LinkedList<TRecord> list) {
 
-
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Remove Record");
         if (list.isEmpty()) { // list is empty (does not have records)
             Massage.displayMassage("Error", " There are no records to remove from them ");
-            window.close();
         } else {
+
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Remove Record");
 
             // style for label
             String styleLbl = "-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:14; ";
