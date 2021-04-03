@@ -22,20 +22,20 @@ import linkedList.LinkedList;
 import linkedList.TRecord;
 
 public abstract class Statistic {
-    private static Label lblGrade;
-    protected static TextField txtGrade;
+    private static TextField txtGrade;
     protected static Text txtStat;
     protected static int total;
 
     public static void statAboveGrade(LinkedList<TRecord> list) {
 
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Statistic");
-        if (list.isEmpty()) {
+        if (list.isEmpty()) {// no data in the list
             Massage.displayMassage("Warning", " There are no records for statistic ");
-            window.close();
         } else {
+
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("Statistic");
+
             // style for textFiled
             String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
                     " -fx-border-color: #000000; -fx-font-size:17; -fx-text-fill: #000000;";
@@ -63,7 +63,7 @@ public abstract class Statistic {
             pane.setPadding(new Insets(5, 5, 5, 5));
 
             //Arrange components
-            lblGrade = new Label("\nGrade ");
+            Label lblGrade = new Label("\nGrade ");
             lblGrade.setStyle(styleLbl);
 
             txtGrade = new TextField();

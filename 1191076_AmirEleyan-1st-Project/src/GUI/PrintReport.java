@@ -22,7 +22,7 @@ public abstract class PrintReport {
     public static void writeDataInFile(LinkedList<TRecord> list, String region, String branch) {
         //List is Empty
         if (list.isEmpty()) {
-            Massage.displayMassage("Error", " There is no data to print it in file ");
+            Massage.displayMassage("Error", " There are no records to print her report on file ");
         } else {
             File file;
             PrintWriter printData;

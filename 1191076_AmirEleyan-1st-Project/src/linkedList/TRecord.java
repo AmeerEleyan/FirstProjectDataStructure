@@ -96,13 +96,13 @@ public class TRecord implements Comparable<TRecord> {
     // Compare two object with them depends on the grade descending
     @Override
     public int compareTo(TRecord o) {
-        return ((this.grade > o.grade) ? -1 : (this.grade == o.grade) ? 0 : 1);
+        return ((this.grade < o.grade) ? -1 : (this.grade == o.grade) ? 0 : 1);
     }
 
     // return data of this record as string
     @Override
     public String toString() {
-        return "Student: " + this.seatNum + " ," + this.grade + " ," + this.branch + '\n';
+        return this.seatNum + " ," + this.grade + " ," + this.branch + '\n';
     }
 
 

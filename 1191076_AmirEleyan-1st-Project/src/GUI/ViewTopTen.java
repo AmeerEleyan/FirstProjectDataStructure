@@ -28,13 +28,14 @@ public abstract class ViewTopTen {
 
     public static void TopTenRecords(LinkedList<TRecord> list) {
 
-        Stage window = new Stage();
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("TOP TEN STUDENTS");
-        if (list.isEmpty()) {
+        if (list.isEmpty()) { // no data in the list
             Massage.displayMassage("Error", " There are no records to display Top Ten Grads ");
-            window.close();
         } else {
+
+            Stage window = new Stage();
+            window.initModality(Modality.APPLICATION_MODAL);
+            window.setTitle("TOP TEN STUDENTS");
+
             // Style for buttons
             String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
                     "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +

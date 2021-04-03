@@ -82,12 +82,12 @@ public abstract class Calculations {
             }
             if (counter != 0) return mode;
             else {
-                Massage.displayMassage("", " There is no Mode in this records ");
+                Massage.displayMassage("", " There are no Mode in this records ");
                 return 0;
             }
         } else {
             Massage.displayMassage("Error", " There are no records to calculate its Mode ");
-            return -1.0F;
+            return 0;
         }
     }
 
@@ -155,6 +155,7 @@ public abstract class Calculations {
             if (var != 0) return (float) Math.pow(var, 2);
             else return 0.0F;
         } else {
+            Massage.displayMassage("Error", " There are no records to calculate its Variance ");
             return 0.0F;
         }
     }

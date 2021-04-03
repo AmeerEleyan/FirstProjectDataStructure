@@ -647,7 +647,7 @@ public class TRecordGUI extends Application {
                 Massage.displayMassage("", "Please select the the branch");
 
             } else if (!txtSearch.getText().trim().isEmpty()) { // the text filed has data
-
+                TRecord temp;
                 if (CheckTextFiled.isSeatNumber(txtSearch)) { // The seat number is valid
                     // West Bank scientific branch
                     if (WestAndGaza.getValue().equals("West Bank") && rbScience.isSelected()) {
@@ -656,7 +656,7 @@ public class TRecordGUI extends Application {
                             Massage.displayMassage("Error", " There is no records to search from them ");
                         } else {
                             // Search for this records in list scientific in west bank
-                            TRecord temp = Calculations.westBankScientificList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
+                            temp = Calculations.westBankScientificList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
                             if (temp == null) { // this records does not exist
                                 Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nscientific on West Bank ");
                             } else {
@@ -671,7 +671,7 @@ public class TRecordGUI extends Application {
                             Massage.displayMassage("Error", " There is no records to search from them ");
                         } else {
                             // Search for this records in list literary in west bank
-                            TRecord temp = Calculations.westBankLiteraryList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
+                            temp = Calculations.westBankLiteraryList.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
                             if (temp == null) { // this records does not exist
                                 Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nliterary on West Bank ");
                             } else {
@@ -685,7 +685,7 @@ public class TRecordGUI extends Application {
                             Massage.displayMassage("Error", " There is no records to search from them ");
                         } else {
                             // Search for this records in list scientific in gaza
-                            TRecord temp = Calculations.gazaScientific.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
+                            temp = Calculations.gazaScientific.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
                             if (temp == null) { // this records does not exist
                                 Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nscientific on Gaza ");
                             } else {
@@ -699,7 +699,7 @@ public class TRecordGUI extends Application {
                             Massage.displayMassage("Error", " There is no records to search from them ");
                         } else {
                             // Search for this records in list literary in gaza
-                            TRecord temp = Calculations.gazaLiterary.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
+                            temp = Calculations.gazaLiterary.search(new TRecord(Long.parseLong(txtSearch.getText().trim())));
                             if (temp == null) { // this records does not exist
                                 Massage.displayMassage("Warning", txtSearch.getText() + " Does not exist in branch\nliterary on Gaza ");
                             } else {

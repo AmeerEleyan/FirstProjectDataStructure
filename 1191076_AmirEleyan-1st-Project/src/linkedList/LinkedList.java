@@ -116,15 +116,16 @@ public class LinkedList<T extends Comparable<T>> implements Listable<T> {
                 Node<T> newNode = new Node<>(element);
                 Node<T> current = this.head;
                 Node<T> previous = null;
-                if (element.compareTo(current.getData()) < 0) { // data for element less than data of head
+                // sort descending
+                if (element.compareTo(current.getData()) > 0) { // data for element larger than data of head
                     insertAtFirst(element);
                 } else {
-                    // data for element larger than data of head
-                    while ((current != null) && (element.compareTo(current.getData()) >= 0)) {
+                    // data for element less than data of head
+                    while ((current != null) && (element.compareTo(current.getData()) <= 0)) {
                         previous = current;
                         current = current.getNext();
                     }
-                    //The current reached the end of the list and the element larger than current
+                    //The current reached the end of the list and the element less than current
                     previous.setNext(newNode);
                     if (current == null) this.tail = newNode;
                     newNode.setNext(current);
