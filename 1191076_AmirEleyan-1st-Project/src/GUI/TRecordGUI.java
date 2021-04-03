@@ -66,7 +66,6 @@ public class TRecordGUI extends Application {
         uploadDataFromFile();
         Controllers();
         primaryStage.show();
-        Massage.displayMassage("Success", " The data has been uploaded successfully ");
     }
 
     //************************************************************************************************
@@ -165,7 +164,6 @@ public class TRecordGUI extends Application {
         // first column -> setNumber
         TableColumn<TRecord, Long> setNumber = new TableColumn<>("Set Number");
         setNumber.setMinWidth(280);
-        setNumber.setEditable(false);
         setNumber.setSortable(false);
         setNumber.setResizable(false);
         setNumber.setCellValueFactory(new PropertyValueFactory<>("seatNum"));
@@ -173,7 +171,6 @@ public class TRecordGUI extends Application {
         //Second column -> branch
         TableColumn<TRecord, String> branch = new TableColumn<>("Branch");
         branch.setMinWidth(150);
-        branch.setEditable(false);
         branch.setSortable(false);
         branch.setResizable(false);
         branch.setCellValueFactory(new PropertyValueFactory<>("branch"));
@@ -181,7 +178,6 @@ public class TRecordGUI extends Application {
         //third column -> grade
         TableColumn<TRecord, Float> grade = new TableColumn<>("Grade");
         grade.setMinWidth(150);
-        grade.setEditable(false);
         grade.setSortable(false);
         grade.setResizable(false);
         grade.setCellValueFactory(new PropertyValueFactory<>("grade"));
@@ -468,10 +464,7 @@ public class TRecordGUI extends Application {
             }
             txtTotalNumber.setText(count + "");
         } else {
-            Massage.displayMassage("Data", " There is no data to display ");
-            rbLiterary.setSelected(false);
-            rbScience.setSelected(false);
-
+            Massage.displayMassage("Data", " There is no records to display ");
         }
     }
 
@@ -486,18 +479,23 @@ public class TRecordGUI extends Application {
         try {
             input = new Scanner(file); // instance of scanner for read data from file
             if (file.length() == 0) {
-                throw new IOException("  There's No data in file " + fileName + "  "); // no data in file
+                throw new IOException("  There's No records in file " + fileName + "  "); // no data in file
             } else {
                 TRecord student; // temp of records
                 int line = 1; // represent line on the file to display in which line has problem If that happens
+
                 while (input.hasNext()) { // read line of data
                     try {
+
                         student = new TRecord(input.nextLine()); // create new record
+
                         if (student.isLiterary())
                             literaryLinkedList.addBySort(student); // this record is from literary branch
                         else if (student.isScientific())
                             scientificLinkedList.addBySort(student); // this record is from scientific branch
+
                         line++; // increment the line by one
+
                     } catch (Exception ex) {
                         // the record in the file has a problem
                         // e.g. he does not have a grade or The data arrangement is not in the right place
@@ -571,7 +569,6 @@ public class TRecordGUI extends Application {
             txtTotalNumber.clear(); // clear data in textFiled totalNumber
             txtSearch.clear(); // clear data in textField search
             lblCalculation.setText(""); // clear data in labelCalculation
-            calculation.setPromptText("Select one to calculate:"); // return to the promptText
             rbScience.setSelected(false); // set radioButton scientific false
             rbLiterary.setSelected(false);// set radioButton literary false
         });
@@ -596,7 +593,6 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear();// clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
-                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.westBankLiteraryList); // upload west bank literary list to table view to display
 
             }// Select Gaza and literary
@@ -605,7 +601,6 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear();// clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
-                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.gazaLiterary);// upload gaza literary list to table view to display
 
             }
@@ -623,7 +618,6 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear(); // clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
-                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.westBankScientificList);// upload gaza scientific list to table view to display
 
             }// Select Gaza and scientific
@@ -632,7 +626,6 @@ public class TRecordGUI extends Application {
                 recordTableView.getItems().clear(); // clear all data in table view
                 txtTotalNumber.clear();// clear data in textFiled totalNumber
                 lblCalculation.setText(""); // clear data from label for calculations
-                calculation.setPromptText("Select one to calculate:"); // return to the promptText
                 uploadListToTable(Calculations.gazaScientific);// upload gaza scientific list to table view to display
 
             }
@@ -646,6 +639,7 @@ public class TRecordGUI extends Application {
      */
     private void SearchButtonController() {
         btSearch.setOnAction(e -> {
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", "Please select the region");
 
@@ -728,6 +722,8 @@ public class TRecordGUI extends Application {
      */
     private void NewRecordButton() {
         btAddNewRecord.setOnAction(e -> {
+            txtSearch.clear(); // clear data in textField search
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -762,6 +758,8 @@ public class TRecordGUI extends Application {
      */
     private void RemoveRecordButton() {
         btRemoveRecord.setOnAction(e -> {
+            txtSearch.clear(); // clear data in textField search
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -796,6 +794,8 @@ public class TRecordGUI extends Application {
      */
     private void PrintReportButton() {
         btPrintReport.setOnAction(e -> {
+            txtSearch.clear(); // clear data in textField search
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -829,6 +829,8 @@ public class TRecordGUI extends Application {
      */
     private void TopTenButton() {
         btTopTen.setOnAction(e -> {
+            txtSearch.clear(); // clear data in textField search
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -862,6 +864,8 @@ public class TRecordGUI extends Application {
      */
     private void StatisticButton() {
         btStatistic.setOnAction(e -> {
+            txtSearch.clear(); // clear data in textField search
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
 
@@ -892,7 +896,8 @@ public class TRecordGUI extends Application {
      */
     private void ComboBoxCalculations() {
         calculation.setOnAction(e -> {
-            lblCalculation.setText("");
+            txtSearch.clear(); // clear data in textField search
+            lblCalculation.setText(""); // clear data in labelCalculation
             if (WestAndGaza.getValue() == null) { // The region has not been selected
                 Massage.displayMassage("", " Please select the region ");
                 calculation.setPromptText("Select one to calculate:"); // return to the promptText

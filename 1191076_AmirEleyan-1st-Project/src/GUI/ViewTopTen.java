@@ -28,60 +28,58 @@ public abstract class ViewTopTen {
 
     public static void TopTenRecords(LinkedList<TRecord> list) {
 
-        // style for label
-        String styleLbl = "-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight: BOLd; -fx-font-size:14; ";
-
-        // style for textField
-        String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px; -fx-border-color:" +
-                " #000000; -fx-font-size:17; -fx-text-fill: #000000;";
-
-        // Style for buttons
-        String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +
-                "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
-
-        // Style for hover buttons
-        String styleHoverBt = "-fx-background-color: #ffffff; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +
-                "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
-
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("TOP TEN STUDENTS");
+        if (list.isEmpty()) {
+            Massage.displayMassage("Error", " There are no records to display Top Ten Grads ");
+            window.close();
+        } else {
+            // Style for buttons
+            String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
+                    "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +
+                    "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
-        //VBox
-        VBox vBox = new VBox(15);
-        vBox.setPadding(new Insets(5, 5, 10, 5));
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setStyle("-fx-background-color: #ffffff");
+            // Style for hover buttons
+            String styleHoverBt = "-fx-background-color: #ffffff; -fx-border-radius:25; -fx-background-radius:25; " +
+                    "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:16;" +
+                    "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
-        // Button for close the window
-        Button btClose = new Button("Close");
-        btClose.setMinWidth(90);
-        btClose.setStyle(styleBt);
-        btClose.setOnMouseEntered(e -> btClose.setStyle(styleHoverBt));
-        btClose.setOnMouseExited(e -> btClose.setStyle(styleBt));
-        btClose.setOnAction(e -> window.close());
 
-        // Label for top ten student
-        Label lblTopTen = new Label("Top Ten Students");
-        lblTopTen.setFont(Font.font("Times New Roman", FontWeight.BOLD, 36));
-        lblTopTen.setPadding(new Insets(5, 0, 15, 0));
-        lblTopTen.setAlignment(Pos.CENTER);
-        lblTopTen.setStyle("-fx-background-color: #05dfd7; -fx-border-radius:50;" +
-                " -fx-background-radius:50; -fx-text-fill: #000000; ");
-        lblTopTen.setMinWidth(600);
+            //VBox
+            VBox vBox = new VBox(15);
+            vBox.setPadding(new Insets(5, 5, 10, 5));
+            vBox.setAlignment(Pos.CENTER);
+            vBox.setStyle("-fx-background-color: #ffffff;");
 
-        // get the top ten students for this list
-        Calculations.topTenGrads(list, Calculations.topTen);
+            // Button for close the window
+            Button btClose = new Button("Close");
+            btClose.setMinWidth(90);
+            btClose.setStyle(styleBt);
+            btClose.setOnMouseEntered(e -> btClose.setStyle(styleHoverBt));
+            btClose.setOnMouseExited(e -> btClose.setStyle(styleBt));
+            btClose.setOnAction(e -> window.close());
 
-        vBox.getChildren().addAll(lblTopTen, tRecordTableView(Calculations.topTen), btClose);
+            // Label for top ten student
+            Label lblTopTen = new Label("Top Ten Students");
+            lblTopTen.setFont(Font.font("Times New Roman", FontWeight.BOLD, 36));
+            lblTopTen.setPadding(new Insets(5, 0, 15, 0));
+            lblTopTen.setAlignment(Pos.CENTER);
+            lblTopTen.setStyle("-fx-background-color: #05dfd7; -fx-border-radius:50;" +
+                    " -fx-background-radius:50; -fx-text-fill: #000000; ");
+            lblTopTen.setMinWidth(600);
 
-        window.setScene(new Scene(vBox));
-        window.setMinWidth(450);
-        window.setMinHeight(250);
-        window.setResizable(false);
-        window.show();
+
+            // get the top ten students for this list
+            Calculations.topTenGrads(list, Calculations.topTen);
+            vBox.getChildren().addAll(lblTopTen, tRecordTableView(Calculations.topTen), btClose);
+
+            window.setScene(new Scene(vBox));
+            window.setMinWidth(450);
+            window.setMinHeight(250);
+            window.setResizable(false);
+            window.show();
+        }
 
     }
 
@@ -100,21 +98,18 @@ public abstract class ViewTopTen {
 
         TableColumn<TRecord, Long> setNumber = new TableColumn<>("Set Number"); // first column (setNumber)
         setNumber.setMinWidth(280);
-        setNumber.setEditable(false);
         setNumber.setSortable(false);
         setNumber.setResizable(false);
         setNumber.setCellValueFactory(new PropertyValueFactory<>("seatNum"));
 
         TableColumn<TRecord, String> branch = new TableColumn<>("Branch");// second column (branch)
         branch.setMinWidth(150);
-        branch.setEditable(false);
         branch.setSortable(false);
         branch.setResizable(false);
         branch.setCellValueFactory(new PropertyValueFactory<>("branch"));
 
         TableColumn<TRecord, Float> grade = new TableColumn<>("Grade");
         grade.setMinWidth(150);
-        grade.setEditable(false);
         grade.setSortable(false);
         grade.setResizable(false);
         grade.setCellValueFactory(new PropertyValueFactory<>("grade")); // third  column(grade)
@@ -128,8 +123,6 @@ public abstract class ViewTopTen {
                 recordTableView.getItems().add(curr.getData()); // upload data to the table
                 curr = curr.getNext();
             }
-        } else {
-            Massage.displayMassage("Data", " There is no data to display ");
         }
 
         return recordTableView;

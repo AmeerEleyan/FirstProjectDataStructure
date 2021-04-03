@@ -37,9 +37,10 @@ public abstract class Calculations {
             }
 
             return sum / counter;
+        } else {
+            Massage.displayMassage("Error", " There are no records to calculate its Average ");
+            return 0.0F;
         }
-        Massage.displayMassage("Error", " There are no data to calculate its Average ");
-        return 0.0F;
     }
 
     /**
@@ -81,12 +82,13 @@ public abstract class Calculations {
             }
             if (counter != 0) return mode;
             else {
-                Massage.displayMassage("", " There is no Mode in this data ");
+                Massage.displayMassage("", " There is no Mode in this records ");
                 return 0;
             }
+        } else {
+            Massage.displayMassage("Error", " There are no records to calculate its Mode ");
+            return -1.0F;
         }
-        Massage.displayMassage("Error", " There are no data to calculate its Mode ");
-        return -1.0F;
     }
 
     /**
@@ -106,15 +108,15 @@ public abstract class Calculations {
                 current = current.getNext();
             }
 
-            System.out.println(current.getData() + "\n");
             if (length % 2 != 0) {
                 return current.getData().getGrade();
             } else {
                 return ((previous.getData().getGrade() + current.getData().getGrade()) / 2);
             }
+        } else {
+            Massage.displayMassage("Error", " There are no records to calculate its Median ");
+            return 0.0F;
         }
-        Massage.displayMassage("Error", " There are no data to calculate its Median ");
-        return 0.0F;
     }
 
     /**
@@ -132,10 +134,16 @@ public abstract class Calculations {
                 sum += (float) Math.pow((currentForSum.getData().getGrade() - average), 2.0D);
                 currentForSum = currentForSum.getNext();
             }
-            return ((float) Math.sqrt((sum / (TRecordLinkedList.length() - 1))));
+            if (sum != 0) return ((float) Math.sqrt((sum / (TRecordLinkedList.length() - 1))));
+            else {
+                Massage.displayMassage("warning", " Please provide at least two grade. ");
+                return 0.0F;
+            }
+        } else {
+            Massage.displayMassage("Error", " There are no records to calculate its Stander Deviation ");
+            return 0.0F;
         }
-        Massage.displayMassage("Error", " There are no data to calculate its Stander Deviation ");
-        return 0.0F;
+
     }
 
     /**
@@ -144,9 +152,9 @@ public abstract class Calculations {
     public static float calculateVariance(LinkedList<TRecord> TRecordLinkedList) {
         if (TRecordLinkedList.getHead() != null) {
             float var = calculateStandardDeviation(TRecordLinkedList);
-            return (float) Math.pow(var, 2);
+            if (var != 0) return (float) Math.pow(var, 2);
+            else return 0.0F;
         } else {
-            Massage.displayMassage("Error", " There are no data to calculate its Variance ");
             return 0.0F;
         }
     }
@@ -155,19 +163,18 @@ public abstract class Calculations {
      * Return top ten grades in the records
      */
     public static void topTenGrads(LinkedList<TRecord> listOfData, LinkedList<TRecord> topTen) {
-        topTen.clear();
+        topTen.clear();// clear topTenList
         if (listOfData.getHead() != null) {
             Node<TRecord> previous, current = listOfData.getHead();
-            int count = 0;
+            int counter = 0;
             while (current != null) {
                 previous = current;
                 current = current.getNext();
                 topTen.insertAtLast(previous.getData());
-                count++;
-                if (count >= 10 && (current.getData().getGrade() != previous.getData().getGrade())) break;
+                counter++;
+                if (counter >= 10 && (current.getData().getGrade() != previous.getData().getGrade())) break;
             }
-        } else
-            Massage.displayMassage("Error", " There are no records to display Top Ten Grads ");
+        }
     }
 
     /**
@@ -185,9 +192,10 @@ public abstract class Calculations {
                 current = current.getNext();
             }
             return count;
+        } else {
+            return 0;
         }
-        Massage.displayMassage("Error", " There is no data to statistic ");
-        return 0;
+
     }
 
 }

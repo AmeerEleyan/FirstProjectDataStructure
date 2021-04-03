@@ -32,104 +32,106 @@ public abstract class Statistic {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Statistic");
+        if (list.isEmpty()) {
+            Massage.displayMassage("Warning", " There are no records for statistic ");
+            window.close();
+        } else {
+            // style for textFiled
+            String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
+                    " -fx-border-color: #000000; -fx-font-size:17; -fx-text-fill: #000000;";
 
-        // style for textFiled
-        String styleTxt = "-fx-background-color: #ffffff; -fx-border-width: 0px0px2px0px;" +
-                " -fx-border-color: #000000; -fx-font-size:17; -fx-text-fill: #000000;";
+            // style for label
+            String styleLbl = "-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight:" +
+                    " BOLd; -fx-font-size:16; ";
 
-        // style for label
-        String styleLbl = "-fx-text-fill:#000000; -fx-background-color:#ffffff;-fx-font-weight:" +
-                " BOLd; -fx-font-size:16; ";
+            // Style for buttons
+            String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
+                    "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:17;" +
+                    "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
-        // Style for buttons
-        String styleBt = "-fx-background-color: #05dfd7; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:17;" +
-                "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
+            // Style for hover buttons
+            String styleHoverBt = "-fx-background-color: #ffffff; -fx-border-radius:25; -fx-background-radius:25; " +
+                    "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:17;" +
+                    "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
 
-        // Style for hover buttons
-        String styleHoverBt = "-fx-background-color: #ffffff; -fx-border-radius:25; -fx-background-radius:25; " +
-                "-fx-border-width: 1; -fx-border-color: #000000; -fx-font-weight: BOLd;-fx-font-size:17;" +
-                "-fx-text-fill: #000000; -fx-font-family: 'Times New Roman'; ";
+            // Pane for arrange label and text filed
+            GridPane pane = new GridPane();
+            pane.setStyle("-fx-background-color: #ffffff;");
+            pane.setAlignment(Pos.CENTER);
+            pane.setVgap(15);
+            pane.setHgap(8);
+            pane.setPadding(new Insets(5, 5, 5, 5));
 
-        // Pane for arrange label and text filed
-        GridPane pane = new GridPane();
-        pane.setStyle("-fx-background-color: #ffffff;");
-        pane.setAlignment(Pos.CENTER);
-        pane.setVgap(15);
-        pane.setHgap(8);
-        pane.setPadding(new Insets(5, 5, 5, 5));
+            //Arrange components
+            lblGrade = new Label("\nGrade ");
+            lblGrade.setStyle(styleLbl);
 
-        //Arrange components
-        lblGrade = new Label("\nGrade ");
-        lblGrade.setStyle(styleLbl);
+            txtGrade = new TextField();
+            txtGrade = new TextField();
+            txtGrade.setPromptText("Enter a specific grade");
+            txtGrade.setMaxWidth(180);
+            txtGrade.setStyle(styleTxt);
 
-        txtGrade = new TextField();
-        txtGrade = new TextField();
-        txtGrade.setPromptText("Enter a specific grade");
-        txtGrade.setMaxWidth(180);
-        txtGrade.setStyle(styleTxt);
+            txtStat = new Text();
+            txtStat.setStyle(styleTxt);
 
-        txtStat = new Text();
-        txtStat.setStyle(styleTxt);
-
-        pane.add(lblGrade, 0, 0);
-        pane.add(txtGrade, 1, 0);
+            pane.add(lblGrade, 0, 0);
+            pane.add(txtGrade, 1, 0);
 
 
-        // HBox
-        HBox hBox = new HBox(50);
-        hBox.setAlignment(Pos.CENTER);
-        hBox.setPadding(new Insets(5, 5, 5, 5));
-        hBox.setStyle("-fx-background-color: #ffffff;");
+            // HBox
+            HBox hBox = new HBox(50);
+            hBox.setAlignment(Pos.CENTER);
+            hBox.setPadding(new Insets(5, 5, 5, 5));
+            hBox.setStyle("-fx-background-color: #ffffff;");
 
-        // Button fot close window
-        Button btCancel = new Button("Cancel");
-        btCancel.setMinWidth(90);
-        btCancel.setStyle(styleBt);
-        btCancel.setOnMouseEntered(e -> btCancel.setStyle(styleHoverBt));
-        btCancel.setOnMouseExited(e -> btCancel.setStyle(styleBt));
-        btCancel.setOnAction(e -> window.close());
+            // Button fot close window
+            Button btCancel = new Button("Cancel");
+            btCancel.setMinWidth(90);
+            btCancel.setStyle(styleBt);
+            btCancel.setOnMouseEntered(e -> btCancel.setStyle(styleHoverBt));
+            btCancel.setOnMouseExited(e -> btCancel.setStyle(styleBt));
+            btCancel.setOnAction(e -> window.close());
 
-        // Button for calculate
-        Button btCalculate = new Button("Calculate");
-        btCalculate.setMinWidth(90);
-        btCalculate.setStyle(styleBt);
-        btCalculate.setOnMouseEntered(e -> btCalculate.setStyle(styleHoverBt));
-        btCalculate.setOnMouseExited(e -> btCalculate.setStyle(styleBt));
+            // Button for calculate
+            Button btCalculate = new Button("Calculate");
+            btCalculate.setMinWidth(90);
+            btCalculate.setStyle(styleBt);
+            btCalculate.setOnMouseEntered(e -> btCalculate.setStyle(styleHoverBt));
+            btCalculate.setOnMouseExited(e -> btCalculate.setStyle(styleBt));
 
-        btCalculate.setOnAction(e -> {
-            if (!txtGrade.getText().trim().isEmpty()) { // the testField has data
-                if (CheckTextFiled.isGrade(txtGrade)) { // valid grade
-                    if (list.isEmpty()) { // no data in list
-                        Massage.displayMassage("Warning", " There's no data to calculate ");
-                    } else {
+
+            btCalculate.setOnAction(e -> {
+                if (!txtGrade.getText().trim().isEmpty()) { // the testField has data
+                    if (CheckTextFiled.isGrade(txtGrade)) { // valid grade
                         // the calculations
                         total = Calculations.numberOfRecordAboveAGrade(list, Float.parseFloat(txtGrade.getText().trim()));
                         txtStat.setText("The number of students who obtained an mark\n" + txtGrade.getText() + " or more: " + total +
                                 ", and their percentage: " + String.format("%.2f", ((float) total / list.length()) * 100) + "%");
+                    } else {
+                        Massage.displayMassage("Warning", " The grade is invalid ");
                     }
-                } else {
-                    Massage.displayMassage("Warning", " The grade is invalid ");
                 }
-            }
-        });
+            });
 
 
-        // add the components to the HBox
-        hBox.getChildren().addAll(btCalculate, btCancel);
+            // add the components to the HBox
+            hBox.getChildren().addAll(btCalculate, btCancel);
 
-        // VBox
-        VBox vBox = new VBox(20);
-        vBox.setAlignment(Pos.CENTER);
-        vBox.setPadding(new Insets(5, 5, 5, 5));
-        vBox.setStyle("-fx-background-color: #ffffff;");
-        vBox.getChildren().addAll(pane, txtStat, hBox);
+            // VBox
+            VBox vBox = new VBox(20);
+            vBox.setAlignment(Pos.CENTER);
+            vBox.setPadding(new Insets(5, 5, 5, 5));
+            vBox.setStyle("-fx-background-color: #ffffff;");
+            vBox.getChildren().addAll(pane, txtStat, hBox);
 
 
-        window.setScene(new Scene(vBox));
-        window.setMinWidth(500);
-        window.setMinHeight(280);
-        window.setResizable(false);
-        window.show();
+            window.setScene(new Scene(vBox));
+            window.setMinWidth(500);
+            window.setMinHeight(280);
+            window.setResizable(false);
+            window.show();
+        }
+
     }
 }

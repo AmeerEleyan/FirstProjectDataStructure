@@ -1,43 +1,55 @@
 
-			******Report on Literary students in West Bank******
+			******Report on Literary students in Gaza******
 
 
 The top ten students are:
 
-1- Student: 26007281 ,99.5 ,Literary
+1- Student: 35120617 ,99.3 ,Literary
 
-2- Student: 18015705 ,99.3 ,Literary
+2- Student: 35120334 ,99.1 ,Literary
 
-3- Student: 12022709 ,99.3 ,Literary
+3- Student: 32124463 ,98.9 ,Literary
 
-4- Student: 18016165 ,99.2 ,Literary
+4- Student: 32124830 ,98.9 ,Literary
 
-5- Student: 26006768 ,99.1 ,Literary
+5- Student: 38112738 ,98.9 ,Literary
 
-6- Student: 18015743 ,99.1 ,Literary
+6- Student: 32124318 ,98.7 ,Literary
 
-7- Student: 14029778 ,99.1 ,Literary
+7- Student: 34131236 ,98.7 ,Literary
 
-8- Student: 14029634 ,99.1 ,Literary
+8- Student: 35120258 ,98.7 ,Literary
 
-9- Student: 14029516 ,99.1 ,Literary
+9- Student: 35121167 ,98.7 ,Literary
 
-10- Student: 13019616 ,99.1 ,Literary
+10- Student: 32124722 ,98.6 ,Literary
 
-11- Student: 12024187 ,99.1 ,Literary
+11- Student: 32124932 ,98.6 ,Literary
+
+12- Student: 32125052 ,98.6 ,Literary
+
+13- Student: 34131983 ,98.6 ,Literary
+
+14- Student: 35120152 ,98.6 ,Literary
+
+15- Student: 35120214 ,98.6 ,Literary
+
+16- Student: 35121528 ,98.6 ,Literary
+
+17- Student: 36117515 ,98.6 ,Literary
 
 
 
 
-The average is: 73.33
+The average is: 73.39
 
-The Mode is: 73.60
+The Mode is: 76.70
 
-The median is: 72.90
+The median is: 72.70
 
-The stander deviation is: 12.06
+The stander deviation is: 11.44
 
-The variance is: 145.44
+The variance is: 130.78
 
-The number of students who obtained an mark 65.2 or more: 13236
-And their percentage: 70.76%
+The number of students who obtained an mark
+90 or more: 1216, and their percentage: 9.85%
